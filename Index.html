@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lance Studios</title>
+    <title>Lance Studios Dashboard</title>
     <link rel="icon" type="image/png" href="Assets/lancestudios.png">
     <style>
         /* Theme Variables */
@@ -112,7 +112,7 @@
         .theme-btn svg { display: none; width: 24px; height: 24px; }
         .theme-btn svg.active { display: block; }
 
-        /* Message Me */
+        /* Hire Me Button */
         .message-btn {
             background-color: transparent;
             color: var(--text-color);
@@ -124,12 +124,15 @@
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
         }
         .message-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
 
         /* Sections */
         .section {
             padding-top: 120px;
+            scroll-margin-top: 120px; 
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -180,9 +183,15 @@
         .section-title { 
             margin-left: 15vw; 
             font-size: 2rem; 
-            margin-bottom: 40px; 
+            margin-bottom: 10px; 
             margin-top: 20px;
             min-height: 2.4rem; 
+        }
+        .section-subtitle {
+            margin-left: 15vw;
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
         }
         .cursor {
             display: inline-block;
@@ -201,6 +210,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            margin-bottom: 30px;
         }
         .carousel-item {
             position: absolute;
@@ -241,7 +251,7 @@
         .prevBtn { left: 5%; }
         .nextBtn { right: 5%; }
 
-        .carousel-info { text-align: center; margin-top: 20px; margin-bottom: 20px; }
+        .carousel-info { text-align: center; margin-top: 10px; margin-bottom: 40px; }
         .carousel-info h3 { margin: 0; font-size: 1.5rem; }
         .carousel-info p { margin: 5px 0 0 0; font-size: 1rem; opacity: 0.8; }
 
@@ -250,7 +260,7 @@
             min-height: auto;
             justify-content: flex-start;
             padding-top: 150px;
-            padding-bottom: 20px; /* Binawasan ang padding sa baba para mas malapit sa Background */
+            padding-bottom: 40px; 
         }
         .about-content {
             display: flex;
@@ -299,17 +309,52 @@
             text-align: justify; 
         }
 
+        /* Profile Skills */
+        .skill-tags {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 70%;
+            margin: 50px auto 0 auto; 
+            flex-wrap: wrap;
+        }
+        .skill-tag {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid var(--text-color);
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        .skill-tag:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+        .skill-tag svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         /* Background Section */
         #background {
             min-height: auto;
-            padding-top: 60px; /* Mas malapit na sa profile */
-            padding-bottom: 150px; /* Pinalaki ang espasyo sa baba para malayo sa About footer */
+            padding-top: 60px; 
+            padding-bottom: 50px; 
         }
         
         .background-container {
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            gap: 20px; 
             width: 70%;
             margin: 0 auto;
         }
@@ -322,7 +367,7 @@
             padding-bottom: 5px;
         }
         
-        /* Universal Timeline Design (For 1 column) */
+        /* Universal Timeline Design */
         .timeline {
             position: relative;
             padding-left: 60px;
@@ -334,6 +379,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
+            background-array: var(--text-color);
             background-color: var(--text-color);
             opacity: 0.3;
         }
@@ -407,6 +453,95 @@
             opacity: 0.9;
         }
 
+        /* Hire Me / Contact Section */
+        #contact {
+            min-height: auto;
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 70%;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .contact-left {
+            flex: 1;
+        }
+
+        .contact-left .big-title {
+            font-size: 5.5rem;
+            font-weight: bold;
+            line-height: 1;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .contact-right {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 2px solid var(--text-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .card-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .card-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            opacity: 0.7;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .card-value {
+            font-size: 1rem;
+            font-weight: bold;
+            word-break: break-all;
+        }
+
         /* About Section (Footer) */
         .footer-section {
             background-color: var(--footer-bg);
@@ -445,7 +580,7 @@
             flex-direction: column; 
             gap: 10px; 
             flex: 1;
-            align-items: flex-start; /* Naka-left align na ulit ito */
+            align-items: flex-start; 
             text-align: left;
         }
         .developed-by-label {
@@ -465,7 +600,7 @@
         }
         .dev-text h3 { margin: 0 0 10px 0; font-size: 1.2rem; line-height: 1;}
 
-        /* Solid Icons */
+        /* Solid Icons for footer */
         .social-links { display: flex; gap: 10px; margin-top: 10px; justify-content: flex-start;}
         .social-links a {
             display: flex;
@@ -501,12 +636,13 @@
 
         /* Mobile Adjustments */
         @media (max-width: 1200px) {
-            .floating-header, .footer-content-wrapper, .footer-bottom-line, .background-container, .about-content { width: 85%; }
-            .section-title { margin-left: 10vw; }
+            .floating-header, .footer-content-wrapper, .footer-bottom-line, .background-container, .about-content, .skill-tags, .contact-container { width: 85%; }
+            .section-title, .section-subtitle { margin-left: 10vw; }
+            .contact-left .big-title { font-size: 4rem; }
         }
 
         @media (max-width: 768px) {
-            .floating-header, .footer-content-wrapper, .footer-bottom-line, .background-container, .about-content { width: 95%; }
+            .floating-header, .footer-content-wrapper, .footer-bottom-line, .background-container, .about-content, .skill-tags, .contact-container { width: 95%; }
             .floating-header { top: 10px; padding: 0 10px; }
             .header-center { display: none; }
             .scrolling-name { font-size: 4rem; }
@@ -515,6 +651,14 @@
             .carousel-item { width: 200px; height: 200px; }
             .about-content { flex-direction: column; text-align: center; }
             
+            .contact-container { flex-direction: column; text-align: center; }
+            .contact-left .big-title { font-size: 3rem; }
+            .contact-right { width: 100%; max-width: 100%; }
+            .contact-card { text-align: left; }
+
+            .skill-tags { flex-direction: column; width: 100%; }
+            .skill-tag { width: 100%; justify-content: center; }
+
             .footer-content-wrapper { flex-direction: column; text-align: left; gap: 30px; }
             .footer-left { flex-direction: column; text-align: center; }
             .footer-left .social-links { justify-content: center; }
@@ -540,7 +684,7 @@
         </a>
 
         <nav class="header-center">
-            <a href="#work">Work</a>
+            <a href="#works">Works</a>
             <a href="#profile">Profile</a>
             <a href="#background">Background</a>
             <a href="#about">About</a>
@@ -563,14 +707,13 @@
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
             </button>
-            <button class="message-btn" id="messageBtn">Message Me</button>
+            <a href="#contact" class="message-btn">Hire Me</a>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="section hero-section">
         <div class="profile-img-container">
-            <!-- Gumamit na tayo ng .png dito para transparent background -->
             <img src="Assets/lance.png" alt="Lance Harvey B. Borras">
         </div>
         <div class="marquee-container">
@@ -585,37 +728,29 @@
         </div>
     </section>
 
-    <!-- Work Section (Dating Experience) -->
-    <section id="work" class="section" style="min-height: auto; padding-bottom: 20px;">
-        <h2 class="section-title typewriter-title" data-text="Posters"></h2>
-        <div class="carousel-wrapper" id="poster-carousel">
+    <!-- Works Section (Pinagsamang Posters, Lanyards, at Logos) -->
+    <section id="works" class="section" style="min-height: auto; padding-bottom: 20px;">
+        <h2 class="section-title typewriter-title" data-text="Works"></h2>
+        <p class="section-subtitle">A curated collection of creative designs and original visual assets crafted by Lance Harvey B. Borras.</p>
+        
+        <div class="carousel-wrapper" id="works-carousel">
             <button class="nav-btn prevBtn">&lt;</button>
             <img class="carousel-item" src="Assets/TrustinGod.png" alt="Trustin God">
-            <img class="carousel-item" src="Assets/Codesortium.png" alt="Codesortium">
-            <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occcupational Safety">
-            <img class="carousel-item" src="Assets/LogicUnlocked.png" alt="Logic Unlocked">
+            <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occupational Safety">
             <img class="carousel-item" src="Assets/CodeQuest.jpg" alt="Code Quest">
-            <img class="carousel-item" src="Assets/Azure.jpg" alt="Azure">
-            <button class="nav-btn nextBtn">&gt;</button>
-        </div>
-        <div class="carousel-info">
-            <h3 id="poster-title"></h3>
-            <p id="poster-type"></p>
-        </div>
-
-        <h2 class="section-title typewriter-title" data-text="Lanyard"></h2>
-        <div class="carousel-wrapper" id="lanyard-carousel">
-            <button class="nav-btn prevBtn">&lt;</button>
-            <img class="carousel-item" src="Assets/Lanyard/CLICKER.png" alt="CLICKER">
             <img class="carousel-item" src="Assets/Lanyard/MAROON V2.png" alt="MAROON V2">
             <img class="carousel-item" src="Assets/Lanyard/SUNRISE v2.png" alt="SUNRISE v2">
             <img class="carousel-item" src="Assets/Lanyard/SUNSET.png" alt="SUNSET">
             <img class="carousel-item" src="Assets/Lanyard/UNIVERSITY.png" alt="UNIVERSITY">
+            <img class="carousel-item" src="Assets/Logo/JPCS.png" alt="JPCS-QCU Logo">
+            <img class="carousel-item" src="Assets/Logo/Glory.png" alt="Glory in the Highest Bible School">
+            <img class="carousel-item" src="Assets/Azure.jpg" alt="Azure">
+            <img class="carousel-item" src="Assets/Goodness.png" alt="Christmas Party 2025">
             <button class="nav-btn nextBtn">&gt;</button>
         </div>
         <div class="carousel-info">
-            <h3 id="lanyard-title"></h3>
-            <p id="lanyard-type"></p>
+            <h3 id="works-title"></h3>
+            <p id="works-type"></p>
         </div>
     </section>
 
@@ -623,7 +758,6 @@
     <section id="profile" class="section">
         <h2 class="section-title typewriter-title" data-text="Profile"></h2>
         <div class="about-content">
-            <!-- Nananatiling .jpg sa Profile at About -->
             <img src="Assets/lance.jpg" alt="Lance Harvey" class="about-pic">
             <div class="about-text">
                 <div class="name-badge-wrapper">
@@ -637,9 +771,25 @@
                 </p>
             </div>
         </div>
+
+        <!-- 3 Rounded Rectangles para sa Skills -->
+        <div class="skill-tags">
+            <div class="skill-tag">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="8" cy="10" r="1.5"></circle><circle cx="12" cy="7.5" r="1.5"></circle><circle cx="16" cy="10" r="1.5"></circle><path d="M12 22a5 5 0 0 0 5-5H7a5 5 0 0 0 5 5z"></path></svg>
+                Visual Artist
+            </div>
+            <div class="skill-tag">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                UI/UX Designer
+            </div>
+            <div class="skill-tag">
+                <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                Frontend Developer
+            </div>
+        </div>
     </section>
 
-    <!-- Background Section (1 Column Layout) -->
+    <!-- Background Section -->
     <section id="background" class="section">
         <h2 class="section-title typewriter-title" data-text="Background"></h2>
         <div class="background-container">
@@ -648,23 +798,6 @@
             <div>
                 <h3 class="bg-category-title">Experience</h3>
                 <div class="timeline">
-                    
-                    <!-- NCMB Intern -->
-                    <div class="timeline-item">
-                        <div class="timeline-logo"><img src="Assets/Logo/NCMB.png" alt="NCMB"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <h4>Intern, Frontend Developer</h4>
-                                <span>September 2026 – Present</span>
-                            </div>
-                            <div class="org-subheader">
-                                <h5>National Conciliation and Mediation Board</h5>
-                                <span>860 Quezon Avenue, Brgy. Paligsahan, Quezon City</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- JPCS Head -->
                     <div class="timeline-item">
                         <div class="timeline-logo"><img src="Assets/Logo/JPCS.png" alt="JPCS"></div>
                         <div class="timeline-content">
@@ -685,6 +818,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Education Sub-section -->
             <div>
                 <h3 class="bg-category-title">Education</h3>
@@ -708,36 +842,54 @@
                                 <h4>Metro Manila College</h4>
                                 <span>2021 - 2023</span>
                             </div>
-                            <p>Graduated as Science, Technology, Engineering and Mathematics (STEM) Student.</p>
-                            <p>Graduated the Senior High School with Honors</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-logo"><img src="Assets/Logo/CSBN.png" alt="CSBN"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <h4>Colegio de San Bartolome de Novaliches</h4>
-                                <span>2017 - 2021</span>
-                            </div>
-                            <p>Graduated the Junior High School with Honors.<br>Member of Graphics Arts Club.</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-logo"><img src="Assets/Logo/FCAN.png" alt="FCAN"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <h4>Faith Chirstian Academy of Novaliches</h4>
-                                <span>2011 - 2017</span>
-                            </div>
-                            <p>Graduated the Elementary with Honors.</p>
+                            <p>Graduated as Science, Technology, Engineering and Mathematics (STEM) Student and Graduated the Senior High School with Honors.</p>
                         </div>
                     </div>
 
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- Hire Me / Contact Section -->
+    <section id="contact" class="section">
+        <div class="contact-container">
+            <div class="contact-left">
+                <h1 class="big-title">LET'S <br> WORK<br>TOGETHER</h1>
+            </div>
+            
+            <div class="contact-right">
+                <a href="mailto:borras.lanceharvey.belleca@gmail.com" class="contact-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </div>
+                    <div class="card-text">
+                        <span class="card-label">EMAIL</span>
+                        <span class="card-value">borras.lanceharvey.belleca@gmail.com</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/lanceeyboo" target="_blank" class="contact-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </div>
+                    <div class="card-text">
+                        <span class="card-label">GITHUB</span>
+                        <span class="card-value">github.com/lanceeyboo</span>
+                    </div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/lance-harvey-borras-a0b102389/?isSelfProfile=true" target="_blank" class="contact-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </div>
+                    <div class="card-text">
+                        <span class="card-label">LINKEDIN</span>
+                        <span class="card-value">linkedin.com/in/lance-harvey-borras-a0b102389</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -758,11 +910,14 @@
                         <a href="https://www.facebook.com/edu.lanceeborras" target="_blank" title="Personal Facebook">
                             <svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
                         </a>
-                        <a href="mailto:borras.lanceharvey.belleca@gmail.com" title="Personal Email">
-                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <a href="https://github.com/lanceeyboo" target="_blank" title="GitHub">
+                            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                         </a>
                         <a href="https://www.linkedin.com/in/lance-harvey-borras-a0b102389/?isSelfProfile=true" target="_blank" title="LinkedIn">
                             <svg viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v14h5v-14zm7.982 0h-4.968v14h4.969v-7.39c0-4.6 6.029-5.056 6.029 0v7.39h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-3.155z"/></svg>
+                        </a>
+                        <a href="tel:09102512362" title="Telephone Number">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                         </a>
                     </div>
                 </div>
@@ -805,23 +960,20 @@
             window.scrollTo(0, 0);
         };
 
-        // Poster metadata
-        const postersData = [
+        // Pinagsamang Works metadata (Posters, Lanyards, at Logos)
+        const worksData = [
             { title: 'Trustin God', subtitle: 'Church Event' },
-            { title: 'Codesortium', subtitle: 'Organization Event' },
             { title: 'Occcupational Safety', subtitle: 'Organization Event' },
-            { title: 'Logic Unlocked', subtitle: 'Organization Event' },
             { title: 'Code Quest', subtitle: 'Organization Event' },
-            { title: 'Azure', subtitle: 'Organization Event' }
-        ];
-
-        // Lanyard metadata
-        const lanyardsData = [
-            { title: 'CLICKER', subtitle: 'Lanyard for JPCS-QCU' },
             { title: 'MAROON V2', subtitle: 'Lanyard for JPCS-QCU' },
             { title: 'SUNRISE v2', subtitle: 'Lanyard for JPCS-QCU' },
             { title: 'SUNSET', subtitle: 'Lanyard for JPCS-QCU' },
-            { title: 'UNIVERSITY', subtitle: 'Lanyard for JPCS-QCU' }
+            { title: 'UNIVERSITY', subtitle: 'Lanyard for JPCS-QCU' },
+            { title: 'JPCS-QCU', subtitle: 'Logo Seal' },
+            { title: 'Glory in the Highest Bible School', subtitle: 'Logo seal' },
+            { title: 'Azure', subtitle: 'Organization Event' },
+            { title: 'Christmas Party 2025', subtitle: 'Holiday Poster' }
+            
         ];
 
         // Reusable Carousel Function
@@ -864,8 +1016,7 @@
             updateCarousel();
         }
 
-        setupCarousel('poster-carousel', postersData, 'poster-title', 'poster-type');
-        setupCarousel('lanyard-carousel', lanyardsData, 'lanyard-title', 'lanyard-type');
+        setupCarousel('works-carousel', worksData, 'works-title', 'works-type');
 
         // Typewriter Animation Logic
         const observer = new IntersectionObserver((entries) => {
@@ -893,11 +1044,6 @@
         }, { threshold: 0.5 });
 
         document.querySelectorAll('.typewriter-title').forEach(el => observer.observe(el));
-
-        // Message Button Alert
-        document.getElementById('messageBtn').addEventListener('click', function() {
-            alert('Lalagyan natin ito ng contact form or email popup sa susunod!');
-        });
 
         // Dark Mode Logic with Expanding Circle Animation
         const themeBtn = document.getElementById('themeToggleBtn');
