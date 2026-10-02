@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lance Studios Dashboard</title>
+    <title>Lance Studios</title>
     <link rel="icon" type="image/png" href="Assets/lancestudios.png">
     <style>
         /* Theme Variables */
@@ -27,7 +27,12 @@
             --footer-bg: #1a1a1a;
         }
 
-        /* Base Styles */
+        /* Base Styles & Scroll Snapping */
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        
         body, html {
             margin: 0;
             padding: 0;
@@ -35,7 +40,6 @@
             color: var(--text-color);
             font-family: 'Courier New', Courier, monospace;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
         /* Floating Header */
@@ -44,7 +48,7 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 70%;
+            width: 75%;
             height: 80px;
             background-color: var(--header-bg);
             border-radius: 10px;
@@ -52,7 +56,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
+            padding: 0 25px;
             box-sizing: border-box;
             z-index: 1000;
             border: 1px solid var(--header-border);
@@ -60,7 +64,7 @@
         }
 
         .header-left-link { text-decoration: none; color: inherit; }
-        .header-left { display: flex; align-items: center; gap: 15px; }
+        .header-left { display: flex; align-items: center; gap: 12px; }
 
         .logo-box {
             width: 45px;
@@ -76,25 +80,25 @@
         }
         .logo-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
         
-        .company-name { font-size: 1.2rem; font-weight: bold; margin: 0; white-space: nowrap; }
+        .company-name { font-size: 1.1rem; font-weight: bold; margin: 0; white-space: nowrap; }
 
+        /* Centered Header Menu - Responsive na para hindi magkabanggaan */
         .header-center {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
             gap: 20px;
+            align-items: center;
         }
         .header-center a {
             color: var(--text-color);
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: opacity 0.3s;
+            white-space: nowrap;
         }
         .header-center a:hover { opacity: 0.6; text-decoration: underline; }
 
-        .header-right { display: flex; align-items: center; gap: 15px; }
+        .header-right { display: flex; align-items: center; gap: 12px; }
 
         /* Dark Mode Toggle */
         .theme-btn {
@@ -109,7 +113,7 @@
             transition: transform 0.3s;
         }
         .theme-btn:hover { transform: scale(1.1); }
-        .theme-btn svg { display: none; width: 24px; height: 24px; }
+        .theme-btn svg { display: none; width: 22px; height: 22px; }
         .theme-btn svg.active { display: block; }
 
         /* Hire Me Button */
@@ -119,79 +123,48 @@
             border: 2px solid var(--text-color);
             font-family: inherit;
             font-weight: bold;
-            padding: 8px 15px;
+            padding: 7px 12px;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
             text-decoration: none;
             display: inline-block;
+            font-size: 0.95rem;
         }
         .message-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
 
-        /* Sections */
+        /* --- Full Screen Centered Sections --- */
         .section {
-            padding-top: 120px;
-            scroll-margin-top: 120px; 
+            min-height: 100vh;
+            width: 100vw;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
+            justify-content: center; 
+            align-items: center;     
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
             position: relative;
+            padding: 100px 20px 40px 20px; 
         }
 
-        /* Hero */
-        .hero-section { justify-content: flex-end; align-items: center; overflow: hidden; padding-bottom: 0; min-height: 100vh; }
-        
-        .profile-img-container {
-            position: relative;
-            z-index: 10; 
-            width: 650px;
-            max-width: 90%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: -20px;
+        /* Typewriter Titles (Left-aligned relative to 70% container) */
+        .section-title-wrapper {
+            width: 70%;
+            text-align: left;
+            margin: 0 auto;
         }
-        .profile-img-container img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 98%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 98%);
-        }
-
-        /* Marquee */
-        .marquee-container {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1; 
-            display: flex;
-            width: 100%;
-            user-select: none;
-        }
-        .marquee-content {
-            flex-shrink: 0;
-            display: flex;
-            justify-content: space-around;
-            min-width: 100%;
-            animation: scroll-left 25s linear infinite;
-        }
-        .scrolling-name { font-size: 7rem; font-weight: bold; padding: 0 40px; white-space: nowrap; }
-        @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-100%); } }
-
-        /* Typewriter Titles */
         .section-title { 
-            margin-left: 15vw; 
-            font-size: 2rem; 
-            margin-bottom: 10px; 
-            margin-top: 20px;
+            font-size: 2.2rem; 
+            margin-bottom: 5px; 
             min-height: 2.4rem; 
+            margin-top: 0;
         }
         .section-subtitle {
-            margin-left: 15vw;
             font-size: 1rem;
             opacity: 0.8;
-            margin-bottom: 30px;
+            margin-bottom: 25px; 
         }
         .cursor {
             display: inline-block;
@@ -201,25 +174,150 @@
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* Carousel */
+        /* Vertical Name (Right Side) */
+        .vertical-name {
+            position: fixed;
+            right: 20px;
+            bottom: 30px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-weight: bold;
+            letter-spacing: 4px;
+            font-size: 1rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            z-index: 900;
+        }
+
+        /* --- 4 PEEKING EYES ANIMATION --- */
+        .peeking-eye {
+            position: fixed;
+            width: 250px; 
+            height: auto;
+            z-index: 10000; 
+            pointer-events: none;
+        }
+        
+        #peek-top {
+            top: -300px;
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+            animation: peek-top-anim 16s infinite;
+        }
+        @keyframes peek-top-anim {
+            0%, 25%, 100% { top: -300px; }
+            5%, 20% { top: -30px; } 
+        }
+
+        #peek-right {
+            right: -300px;
+            top: 20%;
+            transform: rotate(-90deg);
+            animation: peek-right-anim 16s infinite;
+            animation-delay: 4s;
+        }
+        @keyframes peek-right-anim {
+            0%, 25%, 100% { right: -300px; }
+            5%, 20% { right: -50px; } 
+        }
+
+        #peek-bottom {
+            bottom: -300px;
+            right: 15%; 
+            animation: peek-bottom-anim 16s infinite;
+            animation-delay: 8s;
+        }
+        @keyframes peek-bottom-anim {
+            0%, 25%, 100% { bottom: -300px; }
+            5%, 20% { bottom: -10px; }
+        }
+
+        #peek-left {
+            left: -300px;
+            bottom: 20%;
+            transform: rotate(90deg);
+            animation: peek-left-anim 16s infinite;
+            animation-delay: 12s;
+        }
+        @keyframes peek-left-anim {
+            0%, 25%, 100% { left: -300px; }
+            5%, 20% { left: -50px; }
+        }
+
+        /* --- Hero Section --- */
+        .hero-content {
+            display: flex;
+            width: 70%;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            z-index: 10;
+        }
+
+        .typing-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .typing-text-container {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            line-height: 1.2;
+            margin: 0;
+            text-align: left;
+        }
+
+        #hero-typewriter {
+            white-space: pre-wrap;
+        }
+
+        .hero-cursor {
+            display: inline-block;
+            font-weight: bold;
+            animation: blink 1s step-end infinite;
+        }
+
+        .profile-img-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            max-width: 600px; 
+        }
+        .profile-img-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 98%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 98%);
+        }
+
+        /* --- Works Carousel --- */
+        .works-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .carousel-wrapper {
             position: relative;
             width: 100%;
-            height: 350px;
+            max-width: 1000px;
+            height: 350px; 
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 25px; 
         }
         .carousel-item {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 300px; 
+            height: 300px; 
             transition: all 0.5s ease-in-out;
-            box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
-            object-fit: cover;
-            border: 2px solid var(--text-color);
+            object-fit: contain; 
         }
         .item-center { transform: translateX(-50%) scale(1); z-index: 3; opacity: 1; left: 50%; }
         .item-left-1 { transform: translateX(-120%) scale(0.85); z-index: 2; opacity: 0.5; left: 50%; }
@@ -251,29 +349,74 @@
         .prevBtn { left: 5%; }
         .nextBtn { right: 5%; }
 
-        .carousel-info { text-align: center; margin-top: 10px; margin-bottom: 40px; }
-        .carousel-info h3 { margin: 0; font-size: 1.5rem; }
-        .carousel-info p { margin: 5px 0 0 0; font-size: 1rem; opacity: 0.8; }
-
-        /* Profile Layout */
-        #profile {
-            min-height: auto;
-            justify-content: flex-start;
-            padding-top: 150px;
-            padding-bottom: 40px; 
+        .carousel-info { 
+            text-align: center; 
+            width: 70%; 
+            max-width: 900px;
         }
+        .carousel-info h3 { margin: 0; font-size: 1.8rem; }
+        .carousel-info p.highlight-type { 
+            margin: 5px 0 15px 0; 
+            font-size: 1.1rem; 
+            font-weight: bold;
+            opacity: 0.7; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .work-description {
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-align: justify;
+        }
+
+        /* Shared Icon Circle */
+        .icon-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            flex-shrink: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .icon-circle svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .icon-circle svg.fill-icon {
+            fill: currentColor;
+            stroke: none;
+        }
+
+        .skill-tag:hover .icon-circle,
+        .contact-card:hover .icon-circle,
+        .resume-link:hover .icon-circle {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* --- Profile Section --- */
         .about-content {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 50px;
+            gap: 50px; 
             width: 70%;
-            margin: 0 auto;
             max-width: 1000px;
-            padding-top: 20px;
+            margin-bottom: 40px;
         }
         .about-pic {
-            width: 250px;
+            width: 250px; 
             height: 250px;
             border-radius: 50%;
             border: 3px solid var(--text-color);
@@ -291,7 +434,7 @@
             gap: 8px; 
         }
         .name-badge-wrapper h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin: 0;
             line-height: 1; 
         }
@@ -316,16 +459,15 @@
             align-items: center;
             gap: 20px;
             width: 70%;
-            margin: 50px auto 0 auto; 
             flex-wrap: wrap;
         }
         .skill-tag {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             border: 2px solid var(--text-color);
             border-radius: 10px;
-            padding: 12px 20px;
+            padding: 12px 25px 12px 15px; 
             font-weight: bold;
             font-size: 1.1rem;
             transition: all 0.3s;
@@ -334,40 +476,25 @@
             background-color: var(--text-color);
             color: var(--bg-color);
         }
-        .skill-tag svg {
-            width: 20px;
-            height: 20px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
 
-        /* Background Section */
-        #background {
-            min-height: auto;
-            padding-top: 60px; 
-            padding-bottom: 50px; 
-        }
-        
+        /* --- Background Section --- */
         .background-container {
             display: flex;
             flex-direction: column;
-            gap: 20px; 
+            justify-content: center;
+            gap: 30px; 
             width: 70%;
             margin: 0 auto;
         }
-
         .bg-category-title {
             font-size: 1.5rem;
             margin-bottom: 30px;
             border-bottom: 2px solid var(--text-color);
             display: inline-block;
             padding-bottom: 5px;
+            margin-top: 0;
         }
         
-        /* Universal Timeline Design */
         .timeline {
             position: relative;
             padding-left: 60px;
@@ -375,11 +502,10 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 24px; 
+            left: 24px;
             top: 0;
             bottom: 0;
             width: 2px;
-            background-array: var(--text-color);
             background-color: var(--text-color);
             opacity: 0.3;
         }
@@ -387,11 +513,14 @@
             position: relative;
             margin-bottom: 60px;
         }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
         .timeline-logo {
             position: absolute;
-            left: -60px;
+            left: -60px; 
             top: -5px;
-            width: 50px;
+            width: 50px; 
             height: 50px;
             background-color: var(--bg-color);
             border-radius: 50%;
@@ -423,6 +552,7 @@
             opacity: 0.8;
             white-space: nowrap;
             margin-left: 15px;
+            font-size: 1rem;
             text-align: right;
         }
         .org-subheader {
@@ -432,10 +562,11 @@
             margin-bottom: 10px;
         }
         .org-subheader h5 { margin: 0; font-size: 1rem; font-weight: normal; font-style: italic; opacity: 0.9;}
-        .org-subheader span { margin-left: 20px; opacity: 0.9; text-align: right;}
+        .org-subheader span { margin-left: 20px; font-size: 0.95rem; opacity: 0.9; text-align: right;}
         
         .timeline-content p {
             margin: 0;
+            font-size: 1rem;
             line-height: 1.5;
             text-align: justify;
             opacity: 0.9;
@@ -448,37 +579,54 @@
         }
         .org-bullets li {
             margin-bottom: 10px;
+            font-size: 1rem;
             line-height: 1.5;
             text-align: justify;
             opacity: 0.9;
         }
 
-        /* Hire Me / Contact Section */
-        #contact {
-            min-height: auto;
-            padding-top: 100px;
-            padding-bottom: 100px;
-        }
-
+        /* --- Hire Me / Contact Section --- */
         .contact-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             width: 70%;
-            margin: 0 auto;
-            gap: 40px;
+            gap: 80px; 
         }
 
         .contact-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             flex: 1;
         }
 
         .contact-left .big-title {
-            font-size: 5.5rem;
+            font-size: 5rem;
             font-weight: bold;
-            line-height: 1;
-            margin: 0;
+            line-height: 1.1;
+            margin: 0 0 30px 0;
             text-transform: uppercase;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .resume-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 20px 10px 10px;
+            border: 2px solid var(--text-color);
+            border-radius: 30px;
+            transition: all 0.3s;
         }
 
         .contact-right {
@@ -486,40 +634,18 @@
             flex-direction: column;
             gap: 15px;
             flex: 1;
-            max-width: 500px;
         }
 
         .contact-card {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 20px; 
             border: 2px solid var(--text-color);
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px;
             text-decoration: none;
             color: var(--text-color);
             transition: all 0.3s;
-        }
-
-        .contact-card:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-        }
-
-        .card-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .card-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
         }
 
         .card-text {
@@ -542,72 +668,59 @@
             word-break: break-all;
         }
 
-        /* About Section (Footer) */
+        /* --- Footer Section --- */
         .footer-section {
+            scroll-snap-align: start; 
             background-color: var(--footer-bg);
             border-top: 1px solid var(--text-color);
-            padding: 60px 0 20px 0; 
+            padding: 60px 0 30px 0; 
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
         }
-        .footer-content-wrapper {
-            width: 70%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .footer-left { display: flex; align-items: center; gap: 20px; flex: 1; }
-        .footer-profile-pic {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--text-color);
-        }
-        .footer-info .name-badge-wrapper h3 { font-size: 1.5rem; }
         
-        .footer-vertical-divider {
-            width: 2px;
-            height: 100px;
-            background-color: var(--text-color);
-            margin: 0 40px;
-            opacity: 0.3;
+        .footer-content-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
-        .footer-right { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
-            flex: 1;
-            align-items: flex-start; 
-            text-align: left;
-        }
         .developed-by-label {
             font-size: 0.9rem;
             font-weight: bold;
             opacity: 0.7;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 10px;
         }
-        .dev-info { display: flex; align-items: center; gap: 15px; }
+        
+        .dev-info { 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            gap: 15px; 
+        }
+        
         .footer-logo {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--text-color);
         }
-        .dev-text h3 { margin: 0 0 10px 0; font-size: 1.2rem; line-height: 1;}
+        
+        .dev-text h3 { margin: 0 0 15px 0; font-size: 1.5rem; line-height: 1;}
 
-        /* Solid Icons for footer */
-        .social-links { display: flex; gap: 10px; margin-top: 10px; justify-content: flex-start;}
+        .social-links { display: flex; gap: 15px; justify-content: center;}
         .social-links a {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: 1px solid var(--text-color);
             color: var(--text-color);
@@ -616,8 +729,8 @@
         }
         .social-links a:hover { background-color: var(--text-color); color: var(--bg-color); }
         .social-links a svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
         }
 
@@ -634,39 +747,63 @@
             text-align: center;
         }
 
-        /* Mobile Adjustments */
+        /* --- RESPONSIVE MEDIA QUERIES PARA SA HEADER AT MOBILE --- */
+        @media (max-width: 1050px) {
+            .header-center { gap: 10px; }
+            .header-center a { font-size: 0.85rem; }
+            .company-name { font-size: 0.95rem; }
+        }
+
+        @media (max-width: 850px) {
+            /* Kapag napakaliit na o naka-portrait phone, magiging icon-only o i-aadjust ang header para hindi magkabanggaan */
+            .header-center { display: none; } /* O kaya maaari ding itago kapag sobrang sikip na tulad sa mobile */
+        }
+
         @media (max-width: 1200px) {
-            .floating-header, .footer-content-wrapper, .footer-bottom-line, .background-container, .about-content, .skill-tags, .contact-container { width: 85%; }
-            .section-title, .section-subtitle { margin-left: 10vw; }
+            .hero-content { flex-direction: column; text-align: center; }
+            .typing-text-container { font-size: 3rem; text-align: center; }
             .contact-left .big-title { font-size: 4rem; }
+            .contact-container { gap: 40px; }
+            .vertical-name { display: none; }
         }
 
         @media (max-width: 768px) {
-            .floating-header, .footer-content-wrapper, .footer-bottom-line, .background-container, .about-content, .skill-tags, .contact-container { width: 95%; }
-            .floating-header { top: 10px; padding: 0 10px; }
-            .header-center { display: none; }
-            .scrolling-name { font-size: 4rem; }
-            .profile-img-container { width: 400px; }
-            .company-name { display: none; }
-            .carousel-item { width: 200px; height: 200px; }
-            .about-content { flex-direction: column; text-align: center; }
+            html { scroll-snap-type: none; }
+            .section { min-height: auto; padding: 120px 10px 40px 10px; }
+            .floating-header { top: 10px; width: 95%; padding: 0 15px; }
+            .section-title-wrapper { width: 95%; }
             
-            .contact-container { flex-direction: column; text-align: center; }
+            /* Mobile Peeking Eyes Animation Adjustments */
+            .peeking-eye { width: 140px; }
+            
+            #peek-top { animation: peek-top-mobile 16s infinite; }
+            @keyframes peek-top-mobile { 0%, 25%, 100% { top: -200px; } 5%, 20% { top: -20px; } }
+            
+            #peek-right { animation: peek-right-mobile 16s infinite; animation-delay: 4s; }
+            @keyframes peek-right-mobile { 0%, 25%, 100% { right: -200px; } 5%, 20% { right: -30px; } }
+            
+            #peek-bottom { animation: peek-bottom-mobile 16s infinite; animation-delay: 8s; }
+            @keyframes peek-bottom-mobile { 0%, 25%, 100% { bottom: -200px; } 5%, 20% { bottom: -10px; } }
+            
+            #peek-left { animation: peek-left-mobile 16s infinite; animation-delay: 12s; }
+            @keyframes peek-left-mobile { 0%, 25%, 100% { left: -200px; } 5%, 20% { left: -30px; } }
+
+            .typing-text-container { font-size: 2.2rem; }
+            .profile-img-container { max-width: 300px; }
+            .company-name { display: block; font-size: 0.85rem; } /* Ibinabalik sa mobile kung sakaling gusto mo makita */
+            .carousel-item { width: 200px; height: 200px; }
+            .about-content { flex-direction: column; text-align: center; gap: 20px; width: 95%;}
+            .contact-container { flex-direction: column; text-align: center; width: 95%;}
+            .contact-left { align-items: center; }
             .contact-left .big-title { font-size: 3rem; }
+            .download-buttons { justify-content: center; }
             .contact-right { width: 100%; max-width: 100%; }
             .contact-card { text-align: left; }
-
-            .skill-tags { flex-direction: column; width: 100%; }
-            .skill-tag { width: 100%; justify-content: center; }
-
-            .footer-content-wrapper { flex-direction: column; text-align: left; gap: 30px; }
-            .footer-left { flex-direction: column; text-align: center; }
-            .footer-left .social-links { justify-content: center; }
-            .footer-vertical-divider { width: 100%; height: 2px; margin: 10px 0; }
-            .footer-right, .dev-info { align-items: flex-start; text-align: left; }
-            .name-badge-wrapper { justify-content: center; }
+            .skill-tags { flex-direction: column; width: 95%; }
+            .skill-tag { width: 100%; justify-content: flex-start; }
             .timeline-header, .org-subheader { flex-direction: column; align-items: flex-start; gap: 5px; }
             .timeline-header span, .org-subheader span { margin-left: 0; text-align: left; }
+            .background-container { width: 95%; }
         }
     </style>
 </head>
@@ -683,11 +820,11 @@
             </div>
         </a>
 
+        <!-- Naka-ayos na header menu na may Works, Profile, at Background -->
         <nav class="header-center">
             <a href="#works">Works</a>
             <a href="#profile">Profile</a>
             <a href="#background">Background</a>
-            <a href="#about">About</a>
         </nav>
 
         <div class="header-right">
@@ -711,52 +848,66 @@
         </div>
     </header>
 
+    <!-- Patayong Pangalan -->
+    <div class="vertical-name">Lance Harvey B. Borras</div>
+    
+    <!-- 4 PEEKING EYES ANIMATION -->
+    <img src="Assets/MATA.png" id="peek-top" class="peeking-eye" alt="Peeking Eye Top">
+    <img src="Assets/MATA.png" id="peek-right" class="peeking-eye" alt="Peeking Eye Right">
+    <img src="Assets/MATA.png" id="peek-bottom" class="peeking-eye" alt="Peeking Eye Bottom">
+    <img src="Assets/MATA.png" id="peek-left" class="peeking-eye" alt="Peeking Eye Left">
+
     <!-- Hero Section -->
-    <section id="home" class="section hero-section">
-        <div class="profile-img-container">
-            <img src="Assets/lance.png" alt="Lance Harvey B. Borras">
-        </div>
-        <div class="marquee-container">
-            <div class="marquee-content">
-                <span class="scrolling-name">Lance Harvey B. Borras</span>
-                <span class="scrolling-name">Lance Harvey B. Borras</span>
+    <section id="home" class="section">
+        <div class="hero-content">
+            <div class="typing-wrapper">
+                <h1 class="typing-text-container"><span id="hero-typewriter"></span><span class="hero-cursor">|</span></h1>
             </div>
-            <div class="marquee-content" aria-hidden="true">
-                <span class="scrolling-name">Lance Harvey B. Borras</span>
-                <span class="scrolling-name">Lance Harvey B. Borras</span>
+            <div class="profile-img-container">
+                <img src="Assets/lance.png" alt="Lance Harvey B. Borras">
             </div>
         </div>
     </section>
 
-    <!-- Works Section (Pinagsamang Posters, Lanyards, at Logos) -->
-    <section id="works" class="section" style="min-height: auto; padding-bottom: 20px;">
-        <h2 class="section-title typewriter-title" data-text="Works"></h2>
-        <p class="section-subtitle">A curated collection of creative designs and original visual assets crafted by Lance Harvey B. Borras.</p>
-        
-        <div class="carousel-wrapper" id="works-carousel">
-            <button class="nav-btn prevBtn">&lt;</button>
-            <img class="carousel-item" src="Assets/TrustinGod.png" alt="Trustin God">
-            <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occupational Safety">
-            <img class="carousel-item" src="Assets/CodeQuest.jpg" alt="Code Quest">
-            <img class="carousel-item" src="Assets/Lanyard/MAROON V2.png" alt="MAROON V2">
-            <img class="carousel-item" src="Assets/Lanyard/SUNRISE v2.png" alt="SUNRISE v2">
-            <img class="carousel-item" src="Assets/Lanyard/SUNSET.png" alt="SUNSET">
-            <img class="carousel-item" src="Assets/Lanyard/UNIVERSITY.png" alt="UNIVERSITY">
-            <img class="carousel-item" src="Assets/Logo/JPCS.png" alt="JPCS-QCU Logo">
-            <img class="carousel-item" src="Assets/Logo/Glory.png" alt="Glory in the Highest Bible School">
-            <img class="carousel-item" src="Assets/Azure.jpg" alt="Azure">
-            <img class="carousel-item" src="Assets/Goodness.png" alt="Christmas Party 2025">
-            <button class="nav-btn nextBtn">&gt;</button>
+    <!-- Works Section -->
+    <section id="works" class="section">
+        <div class="section-title-wrapper">
+            <h2 class="section-title typewriter-title" data-text="Works"></h2>
+            <p class="section-subtitle">These are some artworks created by Lance Harvey B. Borras.</p>
         </div>
-        <div class="carousel-info">
-            <h3 id="works-title"></h3>
-            <p id="works-type"></p>
+        
+        <div class="works-container">
+            <div class="carousel-wrapper" id="works-carousel">
+                <button class="nav-btn prevBtn">&lt;</button>
+                <img class="carousel-item" src="Assets/TrustinGod.png" alt="Trustin God">
+                <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occupational Safety">
+                <img class="carousel-item" src="Assets/CodeQuest.jpg" alt="Code Quest">
+                <img class="carousel-item" src="Assets/Lanyard/MAROON V2.png" alt="MAROON V2">
+                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v2.png" alt="SUNRISE v2">
+                <img class="carousel-item" src="Assets/Lanyard/UNIVERSITY.png" alt="UNIVERSITY">
+                <img class="carousel-item" src="Assets/Lanyard/SUNSET.png" alt="SUNSET">
+                <img class="carousel-item" src="Assets/Lanyard/MAROON V1.jpg" alt="MAROON V1">
+                <img class="carousel-item" src="Assets/Lanyard/SUNRISE V1.jpg" alt="SUNRISE V1">
+                <img class="carousel-item" src="Assets/Logo/JPCS.png" alt="JPCS-QCU Logo">
+                <img class="carousel-item" src="Assets/Logo/Glory.png" alt="Glory in the Highest Bible School">
+                <img class="carousel-item" src="Assets/Azure.jpg" alt="Azure">
+                <img class="carousel-item" src="Assets/Goodness.png" alt="Goodness of God">
+                <button class="nav-btn nextBtn">&gt;</button>
+            </div>
+            <div class="carousel-info">
+                <h3 id="works-title"></h3>
+                <p id="works-type" class="highlight-type"></p>
+                <p id="works-desc" class="work-description"></p>
+            </div>
         </div>
     </section>
 
     <!-- Profile Section -->
     <section id="profile" class="section">
-        <h2 class="section-title typewriter-title" data-text="Profile"></h2>
+        <div class="section-title-wrapper">
+            <h2 class="section-title typewriter-title" data-text="Profile"></h2>
+        </div>
+        
         <div class="about-content">
             <img src="Assets/lance.jpg" alt="Lance Harvey" class="about-pic">
             <div class="about-text">
@@ -771,30 +922,35 @@
                 </p>
             </div>
         </div>
-
-        <!-- 3 Rounded Rectangles para sa Skills -->
         <div class="skill-tags">
             <div class="skill-tag">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="8" cy="10" r="1.5"></circle><circle cx="12" cy="7.5" r="1.5"></circle><circle cx="16" cy="10" r="1.5"></circle><path d="M12 22a5 5 0 0 0 5-5H7a5 5 0 0 0 5 5z"></path></svg>
+                <div class="icon-circle">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="8" cy="10" r="1.5"></circle><circle cx="12" cy="7.5" r="1.5"></circle><circle cx="16" cy="10" r="1.5"></circle><path d="M12 22a5 5 0 0 0 5-5H7a5 5 0 0 0 5 5z"></path></svg>
+                </div>
                 Visual Artist
             </div>
             <div class="skill-tag">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                <div class="icon-circle">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                </div>
                 UI/UX Designer
             </div>
             <div class="skill-tag">
-                <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                <div class="icon-circle">
+                    <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
                 Frontend Developer
             </div>
         </div>
     </section>
 
-    <!-- Background Section -->
+    <!-- Background Section (1 Column) -->
     <section id="background" class="section">
-        <h2 class="section-title typewriter-title" data-text="Background"></h2>
+        <div class="section-title-wrapper">
+            <h2 class="section-title typewriter-title" data-text="Background"></h2>
+        </div>
+        
         <div class="background-container">
-            
-            <!-- Experience Sub-section -->
             <div>
                 <h3 class="bg-category-title">Experience</h3>
                 <div class="timeline">
@@ -819,11 +975,9 @@
                 </div>
             </div>
 
-            <!-- Education Sub-section -->
             <div>
                 <h3 class="bg-category-title">Education</h3>
                 <div class="timeline">
-                    
                     <div class="timeline-item">
                         <div class="timeline-logo"><img src="Assets/Logo/QCU.png" alt="QCU"></div>
                         <div class="timeline-content">
@@ -842,13 +996,11 @@
                                 <h4>Metro Manila College</h4>
                                 <span>2021 - 2023</span>
                             </div>
-                            <p>Graduated as Science, Technology, Engineering and Mathematics (STEM) Student and Graduated the Senior High School with Honors.</p>
+                            <p>Graduated as Science, Technology, Engineering and Mathematics (STEM) Student.<br>Graduated the Senior High School with Honors.</p>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -856,12 +1008,38 @@
     <section id="contact" class="section">
         <div class="contact-container">
             <div class="contact-left">
-                <h1 class="big-title">LET'S <br> WORK<br>TOGETHER</h1>
+                <h1 class="big-title">LET'S<br>WORK<br>TOGETHER</h1>
+                
+                <div class="download-buttons">
+                    <a href="Assets/Borras-Resume.pdf" download class="resume-link">
+                        <div class="icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        </div>
+                        <span>Resume</span>
+                    </a>
+                    
+                    <a href="Assets/Borras-Porfolio.pdf" download class="resume-link">
+                        <div class="icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        </div>
+                        <span>Portfolio</span>
+                    </a>
+                </div>
             </div>
             
             <div class="contact-right">
+                <a href="https://www.facebook.com/edu.lanceeborras" target="_blank" class="contact-card">
+                    <div class="icon-circle">
+                        <svg class="fill-icon" viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
+                    </div>
+                    <div class="card-text">
+                        <span class="card-label">FACEBOOK</span>
+                        <span class="card-value">facebook.com/edu.lanceeborras</span>
+                    </div>
+                </a>
+
                 <a href="mailto:borras.lanceharvey.belleca@gmail.com" class="contact-card">
-                    <div class="card-icon">
+                    <div class="icon-circle">
                         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     </div>
                     <div class="card-text">
@@ -871,7 +1049,7 @@
                 </a>
 
                 <a href="https://github.com/lanceeyboo" target="_blank" class="contact-card">
-                    <div class="card-icon">
+                    <div class="icon-circle">
                         <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     </div>
                     <div class="card-text">
@@ -881,8 +1059,8 @@
                 </a>
 
                 <a href="https://www.linkedin.com/in/lance-harvey-borras-a0b102389/?isSelfProfile=true" target="_blank" class="contact-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    <div class="icon-circle">
+                        <svg class="fill-icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                     </div>
                     <div class="card-text">
                         <span class="card-label">LINKEDIN</span>
@@ -893,23 +1071,16 @@
         </div>
     </section>
 
-    <!-- About Section (Footer Style) -->
+    <!-- Footer -->
     <section id="about" class="footer-section">
         <div class="footer-content-wrapper">
             
-            <div class="footer-left">
-                <img src="Assets/lance.jpg" alt="Lance Harvey" class="footer-profile-pic">
-                <div class="footer-info">
-                    <div class="name-badge-wrapper">
-                        <h3>Lance Harvey B. Borras</h3>
-                        <svg viewBox="0 0 24 24" class="blue-check">
-                            <path d="M22.5 12.5l-2.4 2.8.5 3.7-3.6.8-2 3.1-3.6-1.5-3.6 1.5-2-3.1-3.6-.8.5-3.7-2.4-2.8 2.4-2.8-.5-3.7 3.6-.8 2-3.1 3.6 1.5 3.6-1.5 2 3.1 3.6.8-.5 3.7 2.4 2.8zm-9.3 4.2l5.7-5.7-1.4-1.4-4.3 4.3-2.1-2.1-1.4 1.4 3.5 3.5z"/>
-                        </svg>
-                    </div>
+            <span class="developed-by-label">DEVELOPED BY</span>
+            <div class="dev-info">
+                <img src="Assets/lancestudios.png" alt="Lance Studios Logo" class="footer-logo">
+                <div class="dev-text">
+                    <h3>Lance Studios</h3>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/edu.lanceeborras" target="_blank" title="Personal Facebook">
-                            <svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
-                        </a>
                         <a href="https://github.com/lanceeyboo" target="_blank" title="GitHub">
                             <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                         </a>
@@ -919,26 +1090,9 @@
                         <a href="tel:09102512362" title="Telephone Number">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                         </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-vertical-divider"></div>
-
-            <div class="footer-right">
-                <span class="developed-by-label">DEVELOPED BY</span>
-                <div class="dev-info">
-                    <img src="Assets/lancestudios.png" alt="Lance Studios Logo" class="footer-logo">
-                    <div class="dev-text">
-                        <h3>Lance Studios</h3>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/TheLanceStudios/" target="_blank" title="Lance Studios Facebook">
-                                <svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
-                            </a>
-                            <a href="mailto:thelancestudios@gmail.com" title="Lance Studios Email">
-                                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                            </a>
-                        </div>
+                        <a href="mailto:thelancestudios@gmail.com" title="Lance Studios Email">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -952,7 +1106,6 @@
     </section>
 
     <script>
-        // PAGE LOAD FIX
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
@@ -960,24 +1113,110 @@
             window.scrollTo(0, 0);
         };
 
-        // Pinagsamang Works metadata (Posters, Lanyards, at Logos)
-        const worksData = [
-            { title: 'Trustin God', subtitle: 'Church Event' },
-            { title: 'Occcupational Safety', subtitle: 'Organization Event' },
-            { title: 'Code Quest', subtitle: 'Organization Event' },
-            { title: 'MAROON V2', subtitle: 'Lanyard for JPCS-QCU' },
-            { title: 'SUNRISE v2', subtitle: 'Lanyard for JPCS-QCU' },
-            { title: 'SUNSET', subtitle: 'Lanyard for JPCS-QCU' },
-            { title: 'UNIVERSITY', subtitle: 'Lanyard for JPCS-QCU' },
-            { title: 'JPCS-QCU', subtitle: 'Logo Seal' },
-            { title: 'Glory in the Highest Bible School', subtitle: 'Logo seal' },
-            { title: 'Azure', subtitle: 'Organization Event' },
-            { title: 'Christmas Party 2025', subtitle: 'Holiday Poster' }
+        const heroTextArray = [
+            "Welcome to \nthe website \nof Lance HArvey b. borras",
+            "Welcome to \nLance Studios"
+        ];
+        let heroTextIndex = 0;
+        let heroCharIndex = 0;
+        let heroIsDeleting = false;
+
+        function heroTypeEffect() {
+            const currentText = heroTextArray[heroTextIndex];
+            const typewriterElement = document.getElementById("hero-typewriter");
             
+            if (heroIsDeleting) {
+                heroCharIndex--;
+            } else {
+                heroCharIndex++;
+            }
+
+            typewriterElement.textContent = currentText.substring(0, heroCharIndex);
+
+            let typingSpeed = heroIsDeleting ? 40 : 100;
+
+            if (!heroIsDeleting && heroCharIndex === currentText.length) {
+                typingSpeed = 2500; 
+                heroIsDeleting = true;
+            } else if (heroIsDeleting && heroCharIndex === 0) {
+                heroIsDeleting = false;
+                heroTextIndex = (heroTextIndex + 1) % heroTextArray.length;
+                typingSpeed = 500; 
+            }
+
+            setTimeout(heroTypeEffect, typingSpeed);
+        }
+        setTimeout(heroTypeEffect, 1000);
+
+        const worksData = [
+            { 
+                title: 'Trust In God', 
+                subtitle: 'Daily Vacation Bible School 2026',
+                desc: "Designed for the Glory in the Highest Christian Ministry's Daily Vacation Bible School (DVBS) 2026, this poster promotes a five-day educational children's event. The artwork visually communicates the program's core biblical teachings, focusing on the six days of creation, the story of Adam and Eve, and the origin of the first sin."
+            },
+            { 
+                title: 'Occupational Safety', 
+                subtitle: 'Organization Event',
+                desc: "This promotional material was created for an organizational seminar focused on cybersecurity. The event educated students on essential digital safety practices, specifically detailing how to protect personal artworks, websites, and applications from hackers and malicious software."
+            },
+            { 
+                title: 'Code Quest 2025', 
+                subtitle: 'Organization Event',
+                desc: "A promotional design for a programming competition held in celebration of the 31st Anniversary of Quezon City University. The event highlighted the technical expertise and coding talents of the students from the College of Computer Studies. The artwork features an original concept by Haimie A. Jamael, which was formally refined and improved by Lance Harvey B. Borras."
+            },
+            { 
+                title: 'Maroon v2', 
+                subtitle: 'Lanyard Designs for JPCS-QCU',
+                desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026."
+            },
+            { 
+                title: 'Sunrise v2', 
+                subtitle: 'Lanyard Designs for JPCS-QCU',
+                desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026."
+            },
+            { 
+                title: 'University', 
+                subtitle: 'Lanyard Designs for JPCS-QCU',
+                desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026."
+            },
+            { 
+                title: 'Sunset', 
+                subtitle: 'Lanyard Designs for JPCS-QCU',
+                desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026."
+            },
+            { 
+                title: 'Maroon v1', 
+                subtitle: 'Lanyard Designs for JPCS-QCU',
+                desc: "The first two-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Unlocking the Power of Azure event on November 23, 2024."
+            },
+            { 
+                title: 'Sunrise v1', 
+                subtitle: 'Lanyard Designs for JPCS-QCU',
+                desc: "The first two-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Unlocking the Power of Azure event on November 23, 2024."
+            },
+            { 
+                title: 'JPCS-QCU', 
+                subtitle: 'Logo Seal',
+                desc: "As a founding member of the organization, Lance Harvey B. Borras designed the official logo seal for the Junior Philippine Computer Society - QCU Chapter. The creative process was guided by his mentor, Mr. George Warren Asuncion, with collaborative assistance from his colleague in the Visual Arts Department, Mr. Wyn M. Guiñarez."
+            },
+            { 
+                title: 'Glory in the Highest Bible School', 
+                subtitle: 'Logo Seal',
+                desc: "Initiated by Pastor Bernabe Perez, a former student of the institution, this project involved creating the official logo seal for the newly established Glory in the Highest Bible School. Lance Harvey B. Borras developed the emblem to establish a strong visual identity that reflects the school's foundational mission."
+            },
+            { 
+                title: 'Azure', 
+                subtitle: 'Organization Event',
+                desc: "Developed for the inaugural event of JPCS-QCU. For this collaborative project, Lance Harvey B. Borras designed a custom cloud icon featuring an integrated Azure logo, which served as a central visual asset. The complete event poster utilizing this asset was laid out and designed by Rafael B. Codiñera."
+            },
+            { 
+                title: 'Goodness of God', 
+                subtitle: 'Christmas Party 2025',
+                desc: "A celebratory poster designed by Lance Harvey B. Borras for the 2025 Christmas gathering of the Bible study group he leads. The artwork captures the festive spirit of the season while emphasizing the central theme of divine goodness."
+            }
         ];
 
-        // Reusable Carousel Function
-        function setupCarousel(wrapperId, data, titleId, subtitleId) {
+        function setupCarousel(wrapperId, data, titleId, subtitleId, descId) {
             let currentIndex = 0;
             const wrapper = document.getElementById(wrapperId);
             const items = wrapper.querySelectorAll('.carousel-item');
@@ -997,10 +1236,24 @@
                     else if (diff === -2) item.classList.add('item-left-2');
                     else if (diff === 2) item.classList.add('item-right-2');
                     else item.classList.add('item-hidden');
+
+                    item.onclick = function() {
+                        if (diff !== 0) {
+                            currentIndex = index;
+                            updateCarousel();
+                        }
+                    };
+
+                    if (diff !== 0 && Math.abs(diff) <= 2) {
+                        item.style.cursor = 'pointer';
+                    } else {
+                        item.style.cursor = 'default';
+                    }
                 });
 
                 document.getElementById(titleId).innerText = data[currentIndex].title;
                 document.getElementById(subtitleId).innerText = data[currentIndex].subtitle;
+                document.getElementById(descId).innerText = data[currentIndex].desc;
             }
 
             wrapper.querySelector('.nextBtn').addEventListener('click', () => {
@@ -1016,9 +1269,8 @@
             updateCarousel();
         }
 
-        setupCarousel('works-carousel', worksData, 'works-title', 'works-type');
+        setupCarousel('works-carousel', worksData, 'works-title', 'works-type', 'works-desc');
 
-        // Typewriter Animation Logic
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !entry.target.classList.contains('typed')) {
@@ -1045,7 +1297,6 @@
 
         document.querySelectorAll('.typewriter-title').forEach(el => observer.observe(el));
 
-        // Dark Mode Logic with Expanding Circle Animation
         const themeBtn = document.getElementById('themeToggleBtn');
         const sunIcon = document.getElementById('sunIcon');
         const moonIcon = document.getElementById('moonIcon');
@@ -1073,7 +1324,6 @@
             overlay.style.transition = 'transform 0.6s ease-in-out, opacity 0.5s ease';
             
             document.body.appendChild(overlay);
-
             void overlay.offsetWidth;
             
             overlay.style.transform = 'translate(-50%, -50%) scale(500)';
