@@ -40,6 +40,13 @@
             overflow-x: hidden;
         }
 
+        /* Prevent image selection and dragging to deter casual asset theft */
+        img {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
         /* Floating Header */
         .floating-header {
             position: fixed;
@@ -913,7 +920,7 @@
         <a href="#home" class="header-left-link" id="logoLink">
             <div class="header-left">
                 <div class="logo-box">
-                    <img src="Assets/lancestudios.png" alt="Lance Studios Logo">
+                    <img src="Assets/lancestudios.png" alt="Lance Studios Logo" draggable="false">
                 </div>
                 <h1 class="company-name">Lance Studios</h1>
             </div>
@@ -955,10 +962,10 @@
     </nav>
 
     <!-- 4 Peeking Eyes Animation -->
-    <img src="Assets/MATA.png" id="peek-top" class="peeking-eye" alt="Peeking Eye Top">
-    <img src="Assets/MATA.png" id="peek-right" class="peeking-eye" alt="Peeking Eye Right">
-    <img src="Assets/MATA.png" id="peek-bottom" class="peeking-eye" alt="Peeking Eye Bottom">
-    <img src="Assets/MATA.png" id="peek-left" class="peeking-eye" alt="Peeking Eye Left">
+    <img src="Assets/MATA.png" id="peek-top" class="peeking-eye" alt="Peeking Eye Top" draggable="false">
+    <img src="Assets/MATA.png" id="peek-right" class="peeking-eye" alt="Peeking Eye Right" draggable="false">
+    <img src="Assets/MATA.png" id="peek-bottom" class="peeking-eye" alt="Peeking Eye Bottom" draggable="false">
+    <img src="Assets/MATA.png" id="peek-left" class="peeking-eye" alt="Peeking Eye Left" draggable="false">
 
     <!-- Hero Section -->
     <section id="home" class="section">
@@ -967,7 +974,7 @@
                 <h1 class="typing-text-container"><span id="hero-typewriter"></span><span class="hero-cursor">|</span></h1>
             </div>
             <div class="profile-img-container">
-                <img src="Assets/lance.png" alt="Lance Harvey B. Borras">
+                <img src="Assets/lance.png" alt="Lance Harvey B. Borras" draggable="false">
             </div>
         </div>
     </section>
@@ -990,19 +997,19 @@
         <div class="works-container">
             <div class="carousel-wrapper reveal-item" id="works-carousel" style="--reveal-delay: 0.1s;">
                 <button class="nav-btn prevBtn">&lt;</button>
-                <img class="carousel-item" src="Assets/TrustinGod.png" alt="Trustin God">
-                <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occupational Safety">
-                <img class="carousel-item" src="Assets/CodeQuest.jpg" alt="Code Quest">
-                <img class="carousel-item" src="Assets/Lanyard/MAROON V2.png" alt="MAROON V2">
-                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v2.png" alt="SUNRISE v2">
-                <img class="carousel-item" src="Assets/Lanyard/UNIVERSITY.png" alt="UNIVERSITY">
-                <img class="carousel-item" src="Assets/Lanyard/SUNSET.png" alt="SUNSET">
-                <img class="carousel-item" src="Assets/Lanyard/MAROON v1.jpg" alt="MAROON V1">
-                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v1.jpg" alt="SUNRISE V1">
-                <img class="carousel-item" src="Assets/Logo/JPCS.png" alt="JPCS-QCU Logo">
-                <img class="carousel-item" src="Assets/Logo/Glory.png" alt="Glory in the Highest Bible School">
-                <img class="carousel-item" src="Assets/Azure.jpg" alt="Azure">
-                <img class="carousel-item" src="Assets/Goodness.png" alt="Goodness of God">
+                <img class="carousel-item" src="Assets/TrustinGod.png" alt="Trustin God" draggable="false">
+                <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occupational Safety" draggable="false">
+                <img class="carousel-item" src="Assets/CodeQuest.jpg" alt="Code Quest" draggable="false">
+                <img class="carousel-item" src="Assets/Lanyard/MAROON V2.png" alt="MAROON V2" draggable="false">
+                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v2.png" alt="SUNRISE v2" draggable="false">
+                <img class="carousel-item" src="Assets/Lanyard/UNIVERSITY.png" alt="UNIVERSITY" draggable="false">
+                <img class="carousel-item" src="Assets/Lanyard/SUNSET.png" alt="SUNSET" draggable="false">
+                <img class="carousel-item" src="Assets/Lanyard/MAROON v1.jpg" alt="MAROON V1" draggable="false">
+                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v1.jpg" alt="SUNRISE V1" draggable="false">
+                <img class="carousel-item" src="Assets/Logo/JPCS.png" alt="JPCS-QCU Logo" draggable="false">
+                <img class="carousel-item" src="Assets/Logo/Glory.png" alt="Glory in the Highest Bible School" draggable="false">
+                <img class="carousel-item" src="Assets/Azure.jpg" alt="Azure" draggable="false">
+                <img class="carousel-item" src="Assets/Goodness.png" alt="Goodness of God" draggable="false">
                 <button class="nav-btn nextBtn">&gt;</button>
             </div>
             <div class="carousel-info">
@@ -1026,7 +1033,7 @@
         </div>
 
         <div class="about-content reveal-item">
-            <img src="Assets/lance.jpg" alt="Lance Harvey" class="about-pic">
+            <img src="Assets/lance.jpg" alt="Lance Harvey" class="about-pic" draggable="false">
             <div class="about-text">
                 <div class="name-badge-wrapper">
                     <h3>Lance Harvey B. Borras</h3>
@@ -1072,7 +1079,7 @@
                 <h3 class="bg-category-title">Experience</h3>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-logo"><img src="Assets/Logo/JPCS.png" alt="JPCS"></div>
+                        <div class="timeline-logo"><img src="Assets/Logo/JPCS.png" alt="JPCS" draggable="false"></div>
                         <div class="timeline-content">
                             <div class="timeline-header">
                                 <h4>Founding Head, Visual Arts Department</h4>
@@ -1096,7 +1103,7 @@
                 <h3 class="bg-category-title">Education</h3>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-logo"><img src="Assets/Logo/QCU.png" alt="QCU"></div>
+                        <div class="timeline-logo"><img src="Assets/Logo/QCU.png" alt="QCU" draggable="false"></div>
                         <div class="timeline-content">
                             <div class="timeline-header">
                                 <h4>Quezon City University</h4>
@@ -1107,7 +1114,7 @@
                     </div>
 
                     <div class="timeline-item">
-                        <div class="timeline-logo"><img src="Assets/Logo/MMC.png" alt="MMC"></div>
+                        <div class="timeline-logo"><img src="Assets/Logo/MMC.png" alt="MMC" draggable="false"></div>
                         <div class="timeline-content">
                             <div class="timeline-header">
                                 <h4>Metro Manila College</h4>
@@ -1193,7 +1200,7 @@
         <div class="footer-content-wrapper reveal-item">
             <span class="developed-by-label">DEVELOPED BY</span>
             <div class="dev-info">
-                <img src="Assets/lancestudios.png" alt="Lance Studios Logo" class="footer-logo">
+                <img src="Assets/lancestudios.png" alt="Lance Studios Logo" class="footer-logo" draggable="false">
                 <div class="dev-text">
                     <h3>Lance Studios</h3>
                     <div class="social-links">
@@ -1509,6 +1516,20 @@
             } else {
                 applyThemeToggle();
             }
+        });
+
+        // Disable right-click context menu to deter casual image saving
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Block common devtools and view-source keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            const k = e.key.toLowerCase();
+            const blocked =
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (k === 'i' || k === 'c' || k === 'j')) ||
+                (e.metaKey && e.altKey && (k === 'i' || k === 'c' || k === 'j' || k === 'u')) ||
+                (e.ctrlKey && k === 'u');
+            if (blocked) e.preventDefault();
         });
     </script>
 </body>
