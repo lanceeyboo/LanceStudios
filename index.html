@@ -160,12 +160,16 @@
         .theme-btn svg { display: none; width: 22px; height: 22px; }
         .theme-btn svg.active { display: block; }
 
-        /* Ripple overlay for theme transition */
-        .theme-ripple {
-            position: fixed;
-            z-index: 9999;
-            pointer-events: none;
-            will-change: clip-path;
+        /* Circular ripple theme transition via View Transitions API */
+        ::view-transition-old(root) {
+            animation: none;
+        }
+        ::view-transition-new(root) {
+            animation: theme-ripple 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes theme-ripple {
+            from { clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%)); }
+            to { clip-path: circle(var(--ripple-r, 150vmax) at var(--ripple-x, 50%) var(--ripple-y, 50%)); }
         }
 
         /* Hire Me Button */
@@ -206,6 +210,7 @@
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition-delay: var(--reveal-delay, 0s);
             will-change: transform, opacity;
         }
         .reveal-item.revealed {
@@ -256,7 +261,7 @@
         }
         @keyframes peek-top-anim {
             0%, 25%, 100% { transform: translateX(-50%) rotate(180deg) translateY(0); }
-            5%, 20% { transform: translateX(-50%) rotate(180deg) translateY(270px); }
+            5%, 20% { transform: translateX(-50%) rotate(180deg) translateY(-270px); }
         }
 
         #peek-right {
@@ -267,8 +272,8 @@
             animation-delay: 4s;
         }
         @keyframes peek-right-anim {
-            0%, 25%, 100% { transform: rotate(-90deg) translateX(0); }
-            5%, 20% { transform: rotate(-90deg) translateX(-250px); }
+            0%, 25%, 100% { transform: rotate(-90deg) translateY(0); }
+            5%, 20% { transform: rotate(-90deg) translateY(-250px); }
         }
 
         #peek-bottom {
@@ -290,8 +295,8 @@
             animation-delay: 12s;
         }
         @keyframes peek-left-anim {
-            0%, 25%, 100% { transform: rotate(90deg) translateX(0); }
-            5%, 20% { transform: rotate(90deg) translateX(250px); }
+            0%, 25%, 100% { transform: rotate(90deg) translateY(0); }
+            5%, 20% { transform: rotate(90deg) translateY(-250px); }
         }
 
         /* Hero Section */
@@ -861,13 +866,13 @@
             #peek-top { animation: peek-top-mobile 16s infinite; }
             @keyframes peek-top-mobile {
                 0%, 25%, 100% { transform: translateX(-50%) rotate(180deg) translateY(0); }
-                5%, 20% { transform: translateX(-50%) rotate(180deg) translateY(180px); }
+                5%, 20% { transform: translateX(-50%) rotate(180deg) translateY(-180px); }
             }
 
             #peek-right { animation: peek-right-mobile 16s infinite; animation-delay: 4s; }
             @keyframes peek-right-mobile {
-                0%, 25%, 100% { transform: rotate(-90deg) translateX(0); }
-                5%, 20% { transform: rotate(-90deg) translateX(-170px); }
+                0%, 25%, 100% { transform: rotate(-90deg) translateY(0); }
+                5%, 20% { transform: rotate(-90deg) translateY(-170px); }
             }
 
             #peek-bottom { animation: peek-bottom-mobile 16s infinite; animation-delay: 8s; }
@@ -878,8 +883,8 @@
 
             #peek-left { animation: peek-left-mobile 16s infinite; animation-delay: 12s; }
             @keyframes peek-left-mobile {
-                0%, 25%, 100% { transform: rotate(90deg) translateX(0); }
-                5%, 20% { transform: rotate(90deg) translateX(170px); }
+                0%, 25%, 100% { transform: rotate(90deg) translateY(0); }
+                5%, 20% { transform: rotate(90deg) translateY(-170px); }
             }
 
             .typing-text-container { font-size: 2.2rem; }
@@ -982,8 +987,8 @@
             <p class="section-subtitle">These are some artworks created by Lance Harvey B. Borras.</p>
         </div>
 
-        <div class="works-container reveal-item">
-            <div class="carousel-wrapper" id="works-carousel">
+        <div class="works-container">
+            <div class="carousel-wrapper reveal-item" id="works-carousel" style="--reveal-delay: 0.1s;">
                 <button class="nav-btn prevBtn">&lt;</button>
                 <img class="carousel-item" src="Assets/TrustinGod.png" alt="Trustin God">
                 <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occupational Safety">
@@ -1001,10 +1006,10 @@
                 <button class="nav-btn nextBtn">&gt;</button>
             </div>
             <div class="carousel-info">
-                <h3 id="works-title"></h3>
-                <p id="works-type" class="highlight-type"></p>
-                <p id="works-desc" class="work-description"></p>
-                <a id="works-link" href="#" target="_blank" class="resume-link" style="margin-top: 25px;">
+                <h3 id="works-title" class="reveal-item" style="--reveal-delay: 0.2s;"></h3>
+                <p id="works-type" class="highlight-type reveal-item" style="--reveal-delay: 0.3s;"></p>
+                <p id="works-desc" class="work-description reveal-item" style="--reveal-delay: 0.4s;"></p>
+                <a id="works-link" href="#" target="_blank" class="resume-link reveal-item" style="margin-top: 25px; --reveal-delay: 0.5s;">
                     <div class="icon-circle">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </div>
@@ -1469,61 +1474,41 @@
             }
         });
 
-        // Dark mode with circular ripple transition using clip-path
+        // Dark mode with circular ripple via View Transitions API
         const themeBtn = document.getElementById('themeToggleBtn');
         const sunIcon = document.getElementById('sunIcon');
         const moonIcon = document.getElementById('moonIcon');
         const body = document.body;
 
+        function applyThemeToggle() {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                moonIcon.classList.remove('active');
+                sunIcon.classList.add('active');
+            } else {
+                sunIcon.classList.remove('active');
+                moonIcon.classList.add('active');
+            }
+        }
+
         themeBtn.addEventListener('click', () => {
             const rect = themeBtn.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
-
-            const isDark = body.classList.contains('dark-mode');
-            const newBg = isDark ? '#ffffff' : '#0f0f0f';
-
             const maxRadius = Math.hypot(
                 Math.max(x, window.innerWidth - x),
                 Math.max(y, window.innerHeight - y)
             );
 
-            const overlay = document.createElement('div');
-            overlay.className = 'theme-ripple';
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100vw';
-            overlay.style.height = '100vh';
-            overlay.style.backgroundColor = newBg;
-            overlay.style.clipPath = 'circle(0px at ' + x + 'px ' + y + 'px)';
-            overlay.style.transition = 'clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            overlay.style.zIndex = '9998';
-            overlay.style.pointerEvents = 'none';
+            document.documentElement.style.setProperty('--ripple-x', x + 'px');
+            document.documentElement.style.setProperty('--ripple-y', y + 'px');
+            document.documentElement.style.setProperty('--ripple-r', maxRadius + 'px');
 
-            document.body.appendChild(overlay);
-
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    overlay.style.clipPath = 'circle(' + maxRadius + 'px at ' + x + 'px ' + y + 'px)';
-                });
-            });
-
-            setTimeout(() => {
-                body.classList.toggle('dark-mode');
-
-                if (body.classList.contains('dark-mode')) {
-                    moonIcon.classList.remove('active');
-                    sunIcon.classList.add('active');
-                } else {
-                    sunIcon.classList.remove('active');
-                    moonIcon.classList.add('active');
-                }
-
-                overlay.style.opacity = '0';
-                overlay.style.transition = 'opacity 0.3s';
-                setTimeout(() => overlay.remove(), 300);
-            }, 600);
+            if (document.startViewTransition) {
+                document.startViewTransition(applyThemeToggle);
+            } else {
+                applyThemeToggle();
+            }
         });
     </script>
 </body>
