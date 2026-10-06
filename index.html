@@ -343,6 +343,40 @@
             animation: blink 1s step-end infinite;
         }
 
+        /* Scroll indicator - mobile only, hidden on desktop */
+        .scroll-indicator {
+            display: none;
+            position: absolute;
+            left: 20px;
+            bottom: 15%;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+            z-index: 10;
+            animation: scroll-bounce 2.5s ease-in-out infinite;
+        }
+        .scroll-indicator span {
+            writing-mode: vertical-rl;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            color: var(--text-color);
+        }
+        .scroll-indicator svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-color);
+            opacity: 0.7;
+        }
+        @keyframes scroll-bounce {
+            0% { transform: translateY(0); }
+            15% { transform: translateY(20px); }
+            100% { transform: translateY(0); }
+        }
+
         .profile-img-container {
             flex: 1;
             display: flex;
@@ -795,8 +829,10 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
-            width: 90%;
+            width: 75%;
             margin: 0 auto;
+            padding: 0 25px;
+            box-sizing: border-box;
             font-size: 0.9rem;
             opacity: 0.8;
         }
@@ -825,6 +861,7 @@
             html { scroll-snap-type: none; }
             .section { min-height: auto; padding: 120px 10px 40px 10px; }
             .floating-header { top: 10px; width: 95%; padding: 0 15px; }
+            .footer-simple { width: 95%; padding: 0 15px; }
             /* Hidden at the top of the page on mobile; JS removes the class on scroll */
             .floating-header.header-hidden {
                 transform: translateX(-50%) translateY(-140px);
@@ -859,7 +896,8 @@
                 5%, 20% { transform: rotate(90deg) translateY(-170px); }
             }
 
-            .typing-text-container { font-size: 2.2rem; }
+            .typing-text-container { font-size: 2.2rem; min-height: 4.8em; }
+            .scroll-indicator { display: flex; }
             .profile-img-container { max-width: 300px; }
             .company-name { display: block; font-size: 0.85rem; }
             .carousel-item { width: 200px; height: 200px; }
@@ -934,6 +972,10 @@
 
     <!-- Hero Section -->
     <section id="home" class="section">
+        <div class="scroll-indicator">
+            <span>Scroll down</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+        </div>
         <div class="hero-content reveal-item">
             <div class="typing-wrapper">
                 <h1 class="typing-text-container"><span id="hero-typewriter"></span><span class="hero-cursor">|</span></h1>
