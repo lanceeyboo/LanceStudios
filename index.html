@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lance Studios</title>
     <link rel="icon" type="image/png" href="Assets/lancestudios.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Main font -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Fallback font for Tungsten -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         :root {
+            --font-main: 'Merriweather', serif;
+            --accent-blue: #0284c7;
             --bg-color: #ffffff;
             --text-color: #000000;
             --header-bg: rgba(255, 255, 255, 0.95);
             --header-border: #000000;
-            --logo-box-bg: #000000;
-            --logo-border: #000000;
+            --logo-box-bg: var(--accent-blue);
+            --logo-border: var(--accent-blue);
             --footer-bg: #f9f9f9;
         }
 
@@ -24,6 +32,7 @@
             --logo-box-bg: #ffffff;
             --logo-border: #ffffff;
             --footer-bg: #1a1a1a;
+            --accent-blue: #38bdf8;
         }
 
         html {
@@ -36,7 +45,7 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Courier New', Courier, monospace;
+            font-family: var(--font-main);
             overflow-x: hidden;
         }
 
@@ -306,41 +315,145 @@
             5%, 20% { transform: rotate(90deg) translateY(-250px); }
         }
 
-        /* Hero Section */
-        .hero-content {
-            display: flex;
-            width: 70%;
-            justify-content: space-between;
-            align-items: center;
-            gap: 40px;
-            z-index: 10;
-        }
-
-        .typing-wrapper {
-            flex: 1;
+        /* Hero Section - Updated Layout */
+        .hero-stack {
+            position: relative;
+            height: 100vh; 
+            width: 100vw;
             display: flex;
             align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        .typing-text-container {
-            font-size: 3.5rem;
-            text-transform: uppercase;
-            font-weight: bold;
-            line-height: 1.2;
+        /* Layer 1: Background PORTFOLIO text */
+        .hero-bg-portfolio {
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            font-family: 'Tungsten', 'Bebas Neue', sans-serif;
+            font-size: clamp(12rem, 38vw, 32rem);
+            font-weight: normal;
+            color: var(--accent-blue);
             margin: 0;
+            line-height: 1;
+            pointer-events: none;
+            text-align: center;
+            width: 100%;
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
+        }
+
+        /* Layer 2: Centered profile photo */
+        .hero-photo-layer {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            height: 88vh;
+            width: auto;
+            pointer-events: none;
+        }
+        .hero-photo-layer img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 98%);
+            mask-image: linear-gradient(to bottom, black 60%, transparent 98%);
+        }
+
+        /* Layer 3: Bottom Left content group */
+        .hero-bottom-left {
+            position: absolute;
+            bottom: 25%;
+            left: 12.5%;
+            z-index: 3;
             text-align: left;
-            /* Reserve three lines so the typing effect never shifts the layout */
-            min-height: 3.6em;
+            color: var(--text-color);
+            max-width: 450px;
         }
-
-        #hero-typewriter {
-            white-space: pre-wrap;
+        .hero-welcome-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin: 0 0 5px 0;
+            opacity: 0.85;
         }
-
+        .hero-typed-line {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin: 0;
+            min-height: 1.2em;
+            white-space: nowrap;
+        }
         .hero-cursor {
             display: inline-block;
             font-weight: bold;
             animation: blink 1s step-end infinite;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-top: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Layer 5: Bottom-right floating role box */
+        .hero-bottom-right {
+            position: absolute;
+            bottom: 25%;
+            right: 12.5%;
+            z-index: 3;
+            background-color: var(--bg-color);
+            border: 2px solid var(--text-color);
+            border-radius: 15px;
+            padding: 20px 25px;
+            text-align: right;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .hero-looking-for {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin: 0 0 5px 0;
+            font-weight: 300;
+        }
+        .hero-role-typed {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 900;
+            margin: 0;
+            color: var(--accent-blue);
+            min-height: 1.2em;
+            white-space: nowrap;
+        }
+
+        /* Layer 4: CTA button inside the bottom-left container */
+        .cta-btn {
+            position: relative;
+            display: inline-block;
+            z-index: 4;
+            pointer-events: auto;
+            padding: 14px 40px;
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            background-color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        .cta-btn:hover {
+            background-color: transparent;
+            color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
         }
 
         /* Scroll indicator - mobile only, hidden on desktop */
@@ -377,52 +490,7 @@
             100% { transform: translateY(0); }
         }
 
-        .profile-img-container {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            position: relative;
-            max-width: 600px;
-        }
-        .profile-img-container img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 98%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 98%);
-        }
 
-        /* Scrolling Name Divider */
-        .scrolling-name-container {
-            width: 100vw;
-            overflow: hidden;
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            padding: 15px 0;
-            display: flex;
-            align-items: center;
-            scroll-snap-align: center;
-        }
-
-        .scrolling-name-track {
-            display: flex;
-            white-space: nowrap;
-            animation: scrollText 25s linear infinite;
-            will-change: transform;
-        }
-
-        .scrolling-name-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            padding-right: 50px;
-        }
-
-        @keyframes scrollText {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
 
         /* Works Carousel */
         .works-container {
@@ -435,27 +503,31 @@
             position: relative;
             width: 100%;
             max-width: 1000px;
-            height: 350px;
+            height: 380px;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             margin-bottom: 25px;
+            perspective: 1200px;
+            transform-style: preserve-3d;
         }
         .carousel-item {
             position: absolute;
             width: 300px;
             height: 300px;
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            left: 50%;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out, z-index 0.5s step-end;
             object-fit: contain;
             will-change: transform, opacity;
+            border: none;
+            outline: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
-        .item-center { transform: translateX(-50%) scale(1); z-index: 3; opacity: 1; left: 50%; }
-        .item-left-1 { transform: translateX(-120%) scale(0.85); z-index: 2; opacity: 0.5; left: 50%; }
-        .item-right-1 { transform: translateX(20%) scale(0.85); z-index: 2; opacity: 0.5; left: 50%; }
-        .item-left-2 { transform: translateX(-190%) scale(0.7); z-index: 1; opacity: 0.3; left: 50%; }
-        .item-right-2 { transform: translateX(90%) scale(0.7); z-index: 1; opacity: 0.3; left: 50%; }
-        .item-hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) scale(0.5); left: 50%; }
+        .dark-mode .carousel-item { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); }
+        .item-center { transform: translateX(-50%) translateZ(0) rotateY(0deg) scale(1); z-index: 3; opacity: 1; }
+        .item-left-1 { transform: translateX(-120%) translateZ(-100px) rotateY(15deg) scale(0.85); z-index: 2; opacity: 0.6; }
+        .item-right-1 { transform: translateX(20%) translateZ(-100px) rotateY(-15deg) scale(0.85); z-index: 2; opacity: 0.6; }
+        .item-hidden { opacity: 0; z-index: 1; pointer-events: none; transform: translateX(-50%) translateZ(-300px); }
 
         .nav-btn {
             position: absolute;
@@ -477,8 +549,8 @@
             transition: all 0.3s;
         }
         .nav-btn:hover { background: var(--text-color); color: var(--bg-color); }
-        .prevBtn { left: 5%; }
-        .nextBtn { right: 5%; }
+        .prevBtn { left: 0; }
+        .nextBtn { right: 0; }
 
         .carousel-info {
             text-align: center;
@@ -851,8 +923,7 @@
         }
 
         @media (max-width: 1200px) {
-            .hero-content { flex-direction: column; text-align: center; }
-            .typing-text-container { font-size: 3rem; text-align: center; }
+            .hero-photo-layer { height: 75vh; width: auto; }
             .contact-left .big-title { font-size: 4rem; }
             .contact-container { gap: 40px; }
         }
@@ -896,11 +967,25 @@
                 5%, 20% { transform: rotate(90deg) translateY(-170px); }
             }
 
-            .typing-text-container { font-size: 2.2rem; min-height: 4.8em; }
             .scroll-indicator { display: flex; }
-            .profile-img-container { max-width: 300px; }
+            
+            /* Mobile adjustments for the new Hero layout */
+            .hero-stack { height: 100vh; }
+            .hero-bg-portfolio { top: 35%; font-size: clamp(8rem, 32vw, 15rem); }
+            .hero-photo-layer { height: 65vh; bottom: 5%; width: auto; }
+            .hero-bottom-left { bottom: 10%; left: 5%; width: 90%; max-width: 100%; text-align: left; }
+            .hero-welcome-text { font-size: 1rem; margin-bottom: 2px; }
+            .hero-typed-line { font-size: clamp(1.6rem, 7vw, 2.4rem); min-height: 1.4em; }
+            .hero-description { font-size: 0.95rem; margin-bottom: 20px; }
+            .hero-bottom-right { bottom: -5%; right: 5%; left: 5%; text-align: center; padding: 15px; }
+            .hero-role-typed { font-size: 1.5rem; }
+            .cta-btn { padding: 12px 32px; font-size: 1rem; }
+            
             .company-name { display: block; font-size: 0.85rem; }
+            .carousel-wrapper { height: 260px; }
             .carousel-item { width: 200px; height: 200px; }
+            .item-left-1 { transform: translateX(-105%) translateZ(-80px) rotateY(12deg) scale(0.85); }
+            .item-right-1 { transform: translateX(5%) translateZ(-80px) rotateY(-12deg) scale(0.85); }
             .about-content { flex-direction: column; text-align: center; gap: 20px; width: 95%;}
             .contact-container { flex-direction: column; text-align: center; width: 95%;}
             .contact-left { align-items: center; }
@@ -925,7 +1010,8 @@
                 <div class="logo-box">
                     <img src="Assets/lancestudios.png" alt="Lance Studios Logo" draggable="false">
                 </div>
-                <h1 class="company-name">Lance Studios</h1>
+                <!-- Updated Name Here -->
+                <h1 class="company-name">Lance Harvey B. Borras</h1>
             </div>
         </a>
 
@@ -970,29 +1056,37 @@
     <img src="Assets/MATA.png" id="peek-bottom" class="peeking-eye" alt="Peeking Eye Bottom" draggable="false">
     <img src="Assets/MATA.png" id="peek-left" class="peeking-eye" alt="Peeking Eye Left" draggable="false">
 
-    <!-- Hero Section -->
+    <!-- Hero Section: Updated Layered Layout -->
     <section id="home" class="section">
         <div class="scroll-indicator">
             <span>Scroll down</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
         </div>
-        <div class="hero-content reveal-item">
-            <div class="typing-wrapper">
-                <h1 class="typing-text-container"><span id="hero-typewriter"></span><span class="hero-cursor">|</span></h1>
-            </div>
-            <div class="profile-img-container">
+        <div class="hero-stack reveal-item">
+            <!-- Layer 1: Background PORTFOLIO -->
+            <h1 class="hero-bg-portfolio">PORTFOLIO</h1>
+
+            <!-- Layer 2: Profile photo -->
+            <div class="hero-photo-layer">
                 <img src="Assets/lance.png" alt="Lance Harvey B. Borras" draggable="false">
+            </div>
+
+            <!-- Layer 3: Bottom-left content group -->
+            <div class="hero-bottom-left">
+                <p class="hero-welcome-text">Welcome to</p>
+                <p class="hero-typed-line"><span id="hero-typewriter"></span><span class="hero-cursor">|</span></p>
+                <p class="hero-description">Creative developer crafting digital experiences that blend visual artistry with clean, functional code.</p>
+                <button class="cta-btn" id="cta-start-btn">Let's Start</button>
+            </div>
+
+            <!-- Layer 4: Bottom-right floating role box -->
+            <div class="hero-bottom-right">
+                <p class="hero-looking-for">Currently looking for</p>
+                <p class="hero-role-typed"><span id="role-typewriter"></span><span class="hero-cursor">|</span></p>
             </div>
         </div>
     </section>
 
-    <!-- Scrolling Name Divider -->
-    <div class="scrolling-name-container">
-        <div class="scrolling-name-track">
-            <span class="scrolling-name-text">LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS •</span>
-            <span class="scrolling-name-text">LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS • LANCE HARVEY B. BORRAS •</span>
-        </div>
-    </div>
 
     <!-- Works Section -->
     <section id="works" class="section">
@@ -1220,18 +1314,20 @@
             window.scrollTo(0, 0);
         };
 
-        // Hero typewriter effect
-        const heroTextArray = [
-            "Welcome to \nthe website \nof Lance HArvey b. borras",
-            "Welcome to \nLance Studios"
-        ];
+        // Hero typewriter alternating between the two phrases
+        const heroPhrases = ["Lance's Website", "Lance Studios"];
+        const heroTypewriterElement = document.getElementById("hero-typewriter");
         let heroTextIndex = 0;
         let heroCharIndex = 0;
         let heroIsDeleting = false;
 
+        // Render plain text without the blue accent
+        function renderHeroText(text) {
+            heroTypewriterElement.textContent = text;
+        }
+
         function heroTypeEffect() {
-            const currentText = heroTextArray[heroTextIndex];
-            const typewriterElement = document.getElementById("hero-typewriter");
+            const currentText = heroPhrases[heroTextIndex];
 
             if (heroIsDeleting) {
                 heroCharIndex--;
@@ -1239,7 +1335,7 @@
                 heroCharIndex++;
             }
 
-            typewriterElement.textContent = currentText.substring(0, heroCharIndex);
+            renderHeroText(currentText.substring(0, heroCharIndex));
 
             let typingSpeed = heroIsDeleting ? 40 : 100;
 
@@ -1248,13 +1344,18 @@
                 heroIsDeleting = true;
             } else if (heroIsDeleting && heroCharIndex === 0) {
                 heroIsDeleting = false;
-                heroTextIndex = (heroTextIndex + 1) % heroTextArray.length;
+                heroTextIndex = (heroTextIndex + 1) % heroPhrases.length;
                 typingSpeed = 500;
             }
 
             setTimeout(heroTypeEffect, typingSpeed);
         }
         setTimeout(heroTypeEffect, 1000);
+
+        // CTA button smooth-scrolls to the Work Gallery section
+        document.getElementById('cta-start-btn').addEventListener('click', () => {
+            document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
+        });
 
         // Works carousel data
         const worksData = [
@@ -1348,17 +1449,20 @@
             function updateCarousel() {
                 items.forEach((item, index) => {
                     let diff = index - currentIndex;
-                    if (diff < -2) diff += totalItems;
-                    if (diff > 2) diff -= totalItems;
+                    if (diff < -1) diff += totalItems;
+                    if (diff > 1) diff -= totalItems;
 
                     item.className = 'carousel-item';
 
-                    if (diff === 0) item.classList.add('item-center');
-                    else if (diff === -1) item.classList.add('item-left-1');
-                    else if (diff === 1) item.classList.add('item-right-1');
-                    else if (diff === -2) item.classList.add('item-left-2');
-                    else if (diff === 2) item.classList.add('item-right-2');
-                    else item.classList.add('item-hidden');
+                    if (diff === 0) {
+                        item.classList.add('item-center');
+                    } else if (diff === -1) {
+                        item.classList.add('item-left-1');
+                    } else if (diff === 1) {
+                        item.classList.add('item-right-1');
+                    } else {
+                        item.classList.add('item-hidden');
+                    }
 
                     item.onclick = function() {
                         if (diff !== 0) {
@@ -1368,11 +1472,7 @@
                         }
                     };
 
-                    if (diff !== 0 && Math.abs(diff) <= 2) {
-                        item.style.cursor = 'pointer';
-                    } else {
-                        item.style.cursor = 'default';
-                    }
+                    item.style.cursor = (diff !== 0 && Math.abs(diff) === 1) ? 'pointer' : 'default';
                 });
 
                 document.getElementById(titleId).innerText = data[currentIndex].title;
@@ -1539,6 +1639,39 @@
 
         // Disable right-click context menu to deter casual image saving
         document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Right-box role typewriter cycling through available positions
+        const rolePhrases = ["Graphic Designer?", "Frontend Developer?", "Visual Artist?", "UI/UX Designer?", "AI Full Stack Developer?"];
+        const roleTypewriterElement = document.getElementById("role-typewriter");
+        let roleTextIndex = 0;
+        let roleCharIndex = 0;
+        let roleIsDeleting = false;
+
+        function roleTypeEffect() {
+            const currentText = rolePhrases[roleTextIndex];
+
+            if (roleIsDeleting) {
+                roleCharIndex--;
+            } else {
+                roleCharIndex++;
+            }
+
+            roleTypewriterElement.textContent = currentText.substring(0, roleCharIndex);
+
+            let typingSpeed = roleIsDeleting ? 40 : 100;
+
+            if (!roleIsDeleting && roleCharIndex === currentText.length) {
+                typingSpeed = 2000;
+                roleIsDeleting = true;
+            } else if (roleIsDeleting && roleCharIndex === 0) {
+                roleIsDeleting = false;
+                roleTextIndex = (roleTextIndex + 1) % rolePhrases.length;
+                typingSpeed = 500;
+            }
+
+            setTimeout(roleTypeEffect, typingSpeed);
+        }
+        setTimeout(roleTypeEffect, 1000);
 
         // Block common devtools and view-source keyboard shortcuts
         document.addEventListener('keydown', (e) => {

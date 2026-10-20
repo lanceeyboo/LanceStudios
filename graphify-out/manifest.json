@@ -1,0 +1,212 @@
+{
+  ".vscode/launch.json": {
+    "mtime": 1790855753.7757351,
+    "seen": 1792119108.7010388,
+    "ast_hash": "e8497cc8ab0cfbc70bcae172b7c456f4",
+    "semantic_hash": ""
+  },
+  ".vscode/settings.json": {
+    "mtime": 1790855512.603185,
+    "seen": 1792119108.7010388,
+    "ast_hash": "19751b2a32e46d1ba1477f357123a898",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1790084552.7862236,
+    "seen": 1792119108.7010388,
+    "ast_hash": "05654d21b2a1032b009638f8687c0774",
+    "semantic_hash": ""
+  },
+  "Index.html": {
+    "mtime": 1792120107.1569803,
+    "seen": 1792120113.0732164,
+    "ast_hash": "4b410701f260749eb1dc23dc4320f7f5",
+    "semantic_hash": ""
+  },
+  "Assets/Borras-Porfolio.pdf": {
+    "mtime": 1790907058.1631632,
+    "seen": 1792119108.7010388,
+    "ast_hash": "ef5abd245d47105ef72c962c6017ac83",
+    "semantic_hash": ""
+  },
+  "Assets/Borras-Resume.pdf": {
+    "mtime": 1787670111.3188388,
+    "seen": 1792119108.7010388,
+    "ast_hash": "ab2b9dd7741e2f078b14db8cdac46a90",
+    "semantic_hash": ""
+  },
+  "Assets/Azure.jpg": {
+    "mtime": 1790855512.6064837,
+    "seen": 1792119108.7010388,
+    "ast_hash": "d1908c621d4f41bfa790db8f24432978",
+    "semantic_hash": ""
+  },
+  "Assets/CodeQuest.jpg": {
+    "mtime": 1790855512.6223416,
+    "seen": 1792119108.7010388,
+    "ast_hash": "fef44fb02ff373f21246148c087cd1ba",
+    "semantic_hash": ""
+  },
+  "Assets/Goodness.png": {
+    "mtime": 1765985918.0,
+    "seen": 1792119108.7010388,
+    "ast_hash": "cf76448ae4d0f144b1ef0594e1e8b1a4",
+    "semantic_hash": ""
+  },
+  "Assets/Lanyard/MAROON v1.jpg": {
+    "mtime": 1731414142.0,
+    "seen": 1792119108.7010388,
+    "ast_hash": "21956bf361d2bb0d7f0519e0f4f55b12",
+    "semantic_hash": ""
+  },
+  "Assets/Lanyard/MAROON v2.png": {
+    "mtime": 1790855512.7727334,
+    "seen": 1792119108.7010388,
+    "ast_hash": "bfcecfcc18d20288a6a2ea5d56a4d2f1",
+    "semantic_hash": ""
+  },
+  "Assets/Lanyard/SUNRISE v1.jpg": {
+    "mtime": 1731414112.0,
+    "seen": 1792119108.7010388,
+    "ast_hash": "539b121ca576c6f74c7a79b3fc2fe10f",
+    "semantic_hash": ""
+  },
+  "Assets/Lanyard/SUNRISE v2.png": {
+    "mtime": 1790855512.8355093,
+    "seen": 1792119108.7010388,
+    "ast_hash": "6987ba7073c08373368104f0b38a0175",
+    "semantic_hash": ""
+  },
+  "Assets/Lanyard/SUNSET.png": {
+    "mtime": 1790855512.8955915,
+    "seen": 1792119108.7010388,
+    "ast_hash": "5c3f2c5940bfaf1b36455d77e5fa016a",
+    "semantic_hash": ""
+  },
+  "Assets/Lanyard/UNIVERSITY.png": {
+    "mtime": 1790855512.9545777,
+    "seen": 1792119108.7010388,
+    "ast_hash": "8ffc8c5d0fdbf6ef950d141b8187e0f3",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/CSBN.png": {
+    "mtime": 1790855512.9928522,
+    "seen": 1792119108.7010388,
+    "ast_hash": "46f46b8f4d3baff6f11a46c26e24c1ec",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/FCAN.png": {
+    "mtime": 1790855512.9944675,
+    "seen": 1792119108.7010388,
+    "ast_hash": "a1ad1a1c7f5a3e858c763299f5bb7c89",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/Glory.png": {
+    "mtime": 1736005012.0,
+    "seen": 1792119108.7010388,
+    "ast_hash": "6142296a1bafe72ed63e4da88deac5bd",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/JPCS.png": {
+    "mtime": 1790855513.0020022,
+    "seen": 1792119108.7010388,
+    "ast_hash": "fa5c3a97d099415f0665c41557473a72",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/MMC.png": {
+    "mtime": 1790855513.0230985,
+    "seen": 1792119108.7010388,
+    "ast_hash": "3dab88028b99bdc8695bfd6c7b0f9388",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/NCMB.png": {
+    "mtime": 1790855513.0316799,
+    "seen": 1792119108.7010388,
+    "ast_hash": "e37906b2ae96992433a87afcf5c78fe0",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/QCU.png": {
+    "mtime": 1790855513.0456965,
+    "seen": 1792119108.7010388,
+    "ast_hash": "31f83732a1e43845d7ad60d5b42dd7a0",
+    "semantic_hash": ""
+  },
+  "Assets/MATA.png": {
+    "mtime": 1790910186.1390855,
+    "seen": 1792119108.7010388,
+    "ast_hash": "4a75ffa52c2d4cfda62aa3d98dfad7ff",
+    "semantic_hash": ""
+  },
+  "Assets/OcccupationalSafety.png": {
+    "mtime": 1790855513.050735,
+    "seen": 1792119108.7010388,
+    "ast_hash": "7369ad03f4a3f8d70caeb40f969864ce",
+    "semantic_hash": ""
+  },
+  "Assets/TrustinGod.png": {
+    "mtime": 1790855513.0584836,
+    "seen": 1792119108.7010388,
+    "ast_hash": "99ea9409a57487f535b70cef175a5f6f",
+    "semantic_hash": ""
+  },
+  "Assets/lance.jpg": {
+    "mtime": 1790855513.0670724,
+    "seen": 1792119108.7010388,
+    "ast_hash": "a920a3223754f6f7517ae71574a2de1f",
+    "semantic_hash": ""
+  },
+  "Assets/lance.png": {
+    "mtime": 1790911292.6523783,
+    "seen": 1792119108.7010388,
+    "ast_hash": "f2f3457c50a46a320cfb509963181e16",
+    "semantic_hash": ""
+  },
+  "Assets/lancestudios.png": {
+    "mtime": 1790855513.0901203,
+    "seen": 1792119108.7010388,
+    "ast_hash": "c1b661b2f8f11afb669b437444eca70b",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1792480392.722195,
+    "seen": 1792480414.2225566,
+    "ast_hash": "ca2e1a3910519214174b974f3ff8ba92",
+    "semantic_hash": ""
+  },
+  "Assets/Codesortium.png": {
+    "mtime": 1765971200.0,
+    "seen": 1792415275.7893724,
+    "ast_hash": "1428cea0ea721c0063d2469270a798d3",
+    "semantic_hash": ""
+  },
+  "Assets/Lanyard/CLICKER.png": {
+    "mtime": 1792412642.0,
+    "seen": 1792415275.7893724,
+    "ast_hash": "ced4b7481705444f05b4c3b7ff16d5ec",
+    "semantic_hash": ""
+  },
+  "Assets/Logic-Unlocked.png": {
+    "mtime": 1760417786.0,
+    "seen": 1792415275.7893724,
+    "ast_hash": "6f6cf4c5c8f6f1a0c5a9ad0c06477c04",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/BSCS-Entry.png": {
+    "mtime": 1712972488.0,
+    "seen": 1792415275.7893724,
+    "ast_hash": "40bed3c734505ab9391f54a73bdd2e8a",
+    "semantic_hash": ""
+  },
+  "Assets/Recruitment-Poster.jpg": {
+    "mtime": 1726806148.0,
+    "seen": 1792415275.7893724,
+    "ast_hash": "6e4356e98f4ba2a57a65071ea9480381",
+    "semantic_hash": ""
+  },
+  "docs/activity-log.md": {
+    "mtime": 1792480407.9861443,
+    "seen": 1792480414.2225566,
+    "ast_hash": "57116a1208b31445ba38a55e7eca9460",
+    "semantic_hash": ""
+  }
+}
