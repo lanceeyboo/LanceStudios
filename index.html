@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-scroll">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -267,7 +267,11 @@
             z-index: 10000;
             pointer-events: none;
             will-change: transform;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease;
         }
+        .peeking-eye.show-eyes { opacity: 1; visibility: visible; }
 
         #peek-top {
             top: -300px;
@@ -318,12 +322,24 @@
         /* Hero Section - Updated Layout */
         .hero-stack {
             position: relative;
-            height: 100vh; 
+            height: 100vh;
             width: 100vw;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+        }
+
+        /* Staggered entrance triggered after splash dismissal */
+        .hero-stack.animate-in .hero-bottom-left {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.3s;
+        }
+        .hero-stack.animate-in .hero-bottom-right {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.45s;
         }
 
         /* Layer 1: Background PORTFOLIO text */
@@ -341,7 +357,8 @@
             line-height: 1;
             pointer-events: none;
             text-align: center;
-            width: 100%;
+            width: auto;
+            white-space: nowrap;
             -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
             mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
         }
@@ -374,6 +391,9 @@
             text-align: left;
             color: var(--text-color);
             max-width: 450px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .hero-welcome-text {
             font-size: 1.2rem;
@@ -414,6 +434,9 @@
             padding: 20px 25px;
             text-align: right;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .hero-looking-for {
             font-size: 1.1rem;
@@ -999,9 +1022,94 @@
             .timeline-header span, .org-subheader span { margin-left: 0; text-align: left; }
             .background-container { width: 95%; }
         }
+
+        /* Prevent scrolling while splash screen is active */
+        html.no-scroll, body.no-scroll { overflow: hidden !important; height: 100vh !important; }
+
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99999;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease;
+        }
+        /* Fade out animation class */
+        #splash-screen.fade-out { opacity: 0; }
+
+        .splash-card {
+            background-color: var(--bg-color);
+            max-width: 450px;
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        .dark-mode .splash-card { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+
+        .splash-content { text-align: center; }
+        .splash-heading {
+            font-family: 'Tungsten', 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 3px;
+            line-height: 1;
+            margin: 0 0 15px 0;
+        }
+        .splash-heading .title-open { color: var(--text-color); }
+        .splash-heading .title-portfolio { color: var(--accent-blue); }
+        .splash-title { font-size: 1.1rem; line-height: 1.6; font-weight: 400; margin-bottom: 25px; text-align: center; }
+        .splash-btn {
+            background-color: var(--accent-blue);
+            color: #fff;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .splash-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(2, 132, 199, 0.4); }
+
+        .splash-loader { text-align: center; font-weight: bold; font-size: 1.2rem; }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+        .dark-mode .spinner { border: 5px solid rgba(255, 255, 255, 0.1); border-top-color: var(--accent-blue); }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
-<body>
+<body class="no-scroll">
+
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-card">
+            <div class="splash-content" id="splash-content">
+                <h1 class="splash-heading"><span class="title-open">OPEN</span> <span class="title-portfolio">PORTFOLIO</span></h1>
+                <p class="splash-title">This page is created for Lance Harvey B. Borras,<br>do you want to proceed?</p>
+                <button class="splash-btn" id="splash-yes-btn">Yes, I'm sure</button>
+            </div>
+            <div class="splash-loader" id="splash-loader" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading awesomeness...</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Floating Header -->
     <header class="floating-header">
@@ -1062,7 +1170,7 @@
             <span>Scroll down</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
         </div>
-        <div class="hero-stack reveal-item">
+        <div class="hero-stack">
             <!-- Layer 1: Background PORTFOLIO -->
             <h1 class="hero-bg-portfolio">PORTFOLIO</h1>
 
@@ -1081,7 +1189,7 @@
 
             <!-- Layer 4: Bottom-right floating role box -->
             <div class="hero-bottom-right">
-                <p class="hero-looking-for">Currently looking for</p>
+                <p class="hero-looking-for">Are You Currently looking for</p>
                 <p class="hero-role-typed"><span id="role-typewriter"></span><span class="hero-cursor">|</span></p>
             </div>
         </div>
@@ -1682,6 +1790,29 @@
                 (e.metaKey && e.altKey && (k === 'i' || k === 'c' || k === 'j' || k === 'u')) ||
                 (e.ctrlKey && k === 'u');
             if (blocked) e.preventDefault();
+        });
+
+        // Splash screen entry overlay
+        const splashScreen = document.getElementById('splash-screen');
+        const splashContent = document.getElementById('splash-content');
+        const splashLoader = document.getElementById('splash-loader');
+        const splashYesBtn = document.getElementById('splash-yes-btn');
+
+        splashYesBtn.addEventListener('click', () => {
+            splashContent.style.display = 'none';
+            splashLoader.style.display = 'block';
+
+            setTimeout(() => {
+                splashScreen.classList.add('fade-out');
+                document.documentElement.classList.remove('no-scroll');
+                document.body.classList.remove('no-scroll');
+                document.querySelector('.hero-stack').classList.add('animate-in');
+                document.querySelectorAll('.peeking-eye').forEach(eye => eye.classList.add('show-eyes'));
+
+                setTimeout(() => {
+                    splashScreen.remove();
+                }, 800);
+            }, 1500);
         });
     </script>
 </body>
