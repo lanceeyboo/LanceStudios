@@ -515,87 +515,31 @@
 
 
 
-        /* Works Carousel */
-        .works-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Works Section */
+        #works {
+            background-color: var(--accent-blue);
+            color: #ffffff;
         }
-        .carousel-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            height: 380px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 25px;
-            perspective: 1200px;
-            transform-style: preserve-3d;
-        }
-        .carousel-item {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            left: 50%;
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out, z-index 0.5s step-end;
-            object-fit: contain;
-            will-change: transform, opacity;
-            border: none;
-            outline: none;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        .dark-mode .carousel-item { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); }
-        .item-center { transform: translateX(-50%) translateZ(0) rotateY(0deg) scale(1); z-index: 3; opacity: 1; }
-        .item-left-1 { transform: translateX(-120%) translateZ(-100px) rotateY(15deg) scale(0.85); z-index: 2; opacity: 0.6; }
-        .item-right-1 { transform: translateX(20%) translateZ(-100px) rotateY(-15deg) scale(0.85); z-index: 2; opacity: 0.6; }
-        .item-hidden { opacity: 0; z-index: 1; pointer-events: none; transform: translateX(-50%) translateZ(-300px); }
 
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--bg-color);
-            border: 2px solid var(--text-color);
-            color: var(--text-color);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-            font-size: 1.5rem;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        .nav-btn:hover { background: var(--text-color); color: var(--bg-color); }
-        .prevBtn { left: 0; }
-        .nextBtn { right: 0; }
+        /* Works Marquee */
+        .marquee-wrapper { width: 100vw; overflow: hidden; margin-bottom: 20px; display: flex; }
+        .marquee-track { display: flex; gap: 20px; white-space: nowrap; padding: 10px 0; }
+        .scroll-left { animation: scrollLeft 30s linear infinite; }
+        .scroll-right { animation: scrollRight 30s linear infinite; }
+        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        .marquee-item { width: 250px; height: 250px; border-radius: 15px; overflow: hidden; cursor: pointer; transition: transform 0.3s; flex-shrink: 0; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center;}
+        .marquee-item img { width: 100%; height: 100%; object-fit: cover; }
+        .marquee-item:hover { transform: scale(1.05); }
+        .marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
 
-        .carousel-info {
-            text-align: center;
-            width: 70%;
-            max-width: 900px;
-        }
-        .carousel-info h3 { margin: 0; font-size: 1.8rem; }
-        .carousel-info p.highlight-type {
-            margin: 5px 0 15px 0;
-            font-size: 1.1rem;
-            font-weight: bold;
-            opacity: 0.7;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .work-description {
-            margin: 0 auto;
-            font-size: 1rem;
-            line-height: 1.6;
-            opacity: 0.9;
-            text-align: justify;
-        }
+        /* Work Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background: var(--bg-color); color: var(--text-color); width: 90%; max-width: 600px; padding: 30px; border-radius: 15px; position: relative; text-align: center; transform: translateY(20px); transition: transform 0.3s; border: 2px solid var(--text-color); }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; background: none; border: none; color: var(--text-color); }
+        .modal-content .highlight-type { margin: 5px 0 15px 0; font-size: 1.1rem; font-weight: bold; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
 
         /* Shared Icon Circle */
         .icon-circle {
@@ -1005,10 +949,7 @@
             .cta-btn { padding: 12px 32px; font-size: 1rem; }
             
             .company-name { display: block; font-size: 0.85rem; }
-            .carousel-wrapper { height: 260px; }
-            .carousel-item { width: 200px; height: 200px; }
-            .item-left-1 { transform: translateX(-105%) translateZ(-80px) rotateY(12deg) scale(0.85); }
-            .item-right-1 { transform: translateX(5%) translateZ(-80px) rotateY(-12deg) scale(0.85); }
+            .marquee-item { width: 180px; height: 180px; }
             .about-content { flex-direction: column; text-align: center; gap: 20px; width: 95%;}
             .contact-container { flex-direction: column; text-align: center; width: 95%;}
             .contact-left { align-items: center; }
@@ -1203,35 +1144,11 @@
             <p class="section-subtitle">These are some artworks created by Lance Harvey B. Borras.</p>
         </div>
 
-        <div class="works-container">
-            <div class="carousel-wrapper reveal-item" id="works-carousel" style="--reveal-delay: 0.1s;">
-                <button class="nav-btn prevBtn">&lt;</button>
-                <img class="carousel-item" src="Assets/TrustinGod.png" alt="Trustin God" draggable="false">
-                <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occupational Safety" draggable="false">
-                <img class="carousel-item" src="Assets/CodeQuest.jpg" alt="Code Quest" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/MAROON V2.png" alt="MAROON V2" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v2.png" alt="SUNRISE v2" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/UNIVERSITY.png" alt="UNIVERSITY" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/SUNSET.png" alt="SUNSET" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/MAROON v1.jpg" alt="MAROON V1" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v1.jpg" alt="SUNRISE V1" draggable="false">
-                <img class="carousel-item" src="Assets/Logo/JPCS.png" alt="JPCS-QCU Logo" draggable="false">
-                <img class="carousel-item" src="Assets/Logo/Glory.png" alt="Glory in the Highest Bible School" draggable="false">
-                <img class="carousel-item" src="Assets/Azure.jpg" alt="Azure" draggable="false">
-                <img class="carousel-item" src="Assets/Goodness.png" alt="Goodness of God" draggable="false">
-                <button class="nav-btn nextBtn">&gt;</button>
-            </div>
-            <div class="carousel-info">
-                <h3 id="works-title" class="reveal-item" style="--reveal-delay: 0.2s;"></h3>
-                <p id="works-type" class="highlight-type reveal-item" style="--reveal-delay: 0.3s;"></p>
-                <p id="works-desc" class="work-description reveal-item" style="--reveal-delay: 0.4s;"></p>
-                <a id="works-link" href="#" target="_blank" rel="noopener noreferrer" class="resume-link reveal-item" style="margin-top: 25px; --reveal-delay: 0.5s;">
-                    <div class="icon-circle">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </div>
-                    <span>See Full Project</span>
-                </a>
-            </div>
+        <div class="marquee-wrapper reveal-item" style="--reveal-delay: 0.1s;">
+            <div class="marquee-track scroll-left" id="marquee-track-1"></div>
+        </div>
+        <div class="marquee-wrapper reveal-item" style="--reveal-delay: 0.2s;">
+            <div class="marquee-track scroll-right" id="marquee-track-2"></div>
         </div>
     </section>
 
@@ -1414,6 +1331,17 @@
         </div>
     </section>
 
+    <!-- Work Detail Modal -->
+    <div id="work-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close">&times;</button>
+            <h3 id="modal-title"></h3>
+            <p id="modal-subtitle" class="highlight-type"></p>
+            <p id="modal-desc"></p>
+            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="message-btn" style="margin-top: 15px;">See Full Project</a>
+        </div>
+    </div>
+
     <script>
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
@@ -1465,81 +1393,94 @@
             document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Works carousel data
+        // Works marquee data
         const worksData = [
             {
+                img: 'Assets/TrustinGod.png',
                 title: 'Trust In God',
                 subtitle: 'Daily Vacation Bible School 2026',
                 desc: "Designed for the Glory in the Highest Christian Ministry's Daily Vacation Bible School (DVBS) 2026, this poster promotes a five-day educational children's event. The artwork visually communicates the program's core biblical teachings, focusing on the six days of creation, the story of Adam and Eve, and the origin of the first sin.",
                 link: "https://www.facebook.com/photo/?fbid=992733043262730"
             },
             {
+                img: 'Assets/OcccupationalSafety.png',
                 title: 'Occupational Safety',
                 subtitle: 'Organization Event',
                 desc: "This promotional material was created for an organizational seminar focused on cybersecurity. The event educated students on essential digital safety practices, specifically detailing how to protect personal artworks, websites, and applications from hackers and malicious software.",
                 link: "https://www.facebook.com/photo?fbid=122149871888410118"
             },
             {
+                img: 'Assets/CodeQuest.jpg',
                 title: 'Code Quest 2025',
                 subtitle: 'Organization Event',
                 desc: "A promotional design for a programming competition held in celebration of the 31st Anniversary of Quezon City University. The event highlighted the technical expertise and coding talents of the students from the College of Computer Studies. The artwork features an original concept by Haimie A. Jamael, which was formally refined and improved by Lance Harvey B. Borras.",
                 link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0ns1EA2oKqGiEHCJBJJxkKPKR37jUYcBWAJM4RQYrkEyYErzuJMPydUvc9tsS15Y8l"
             },
             {
+                img: 'Assets/Lanyard/MAROON V2.png',
                 title: 'Maroon v2',
                 subtitle: 'Lanyard Designs for JPCS-QCU',
                 desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026.",
                 link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl"
             },
             {
+                img: 'Assets/Lanyard/SUNRISE v2.png',
                 title: 'Sunrise v2',
                 subtitle: 'Lanyard Designs for JPCS-QCU',
                 desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026.",
                 link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl"
             },
             {
+                img: 'Assets/Lanyard/UNIVERSITY.png',
                 title: 'University',
                 subtitle: 'Lanyard Designs for JPCS-QCU',
                 desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026.",
                 link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl"
             },
             {
+                img: 'Assets/Lanyard/SUNSET.png',
                 title: 'Sunset',
                 subtitle: 'Lanyard Designs for JPCS-QCU',
                 desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026.",
                 link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl"
             },
             {
+                img: 'Assets/Lanyard/MAROON v1.jpg',
                 title: 'Maroon v1',
                 subtitle: 'Lanyard Designs for JPCS-QCU',
                 desc: "The first two-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Unlocking the Power of Azure event on November 23, 2024.",
                 link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0eerB8Q9x97PSkLxLqjzuAjajYzYXfE1unn6cGhBmYgVxAVujmD8XECiJZoSpk2S6l"
             },
             {
+                img: 'Assets/Lanyard/SUNRISE v1.jpg',
                 title: 'Sunrise v1',
                 subtitle: 'Lanyard Designs for JPCS-QCU',
                 desc: "The first two-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Unlocking the Power of Azure event on November 23, 2024.",
                 link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0eerB8Q9x97PSkLxLqjzuAjajYzYXfE1unn6cGhBmYgVxAVujmD8XECiJZoSpk2S6l"
             },
             {
+                img: 'Assets/Logo/JPCS.png',
                 title: 'JPCS-QCU',
                 subtitle: 'Logo Seal',
                 desc: "As a founding member of the organization, Lance Harvey B. Borras designed the official logo seal for the Junior Philippine Computer Society - QCU Chapter. The creative process was guided by his mentor, Mr. George Warren Asuncion, with collaborative assistance from his colleague in the Visual Arts Department, Mr. Wyn M. Guiñarez.",
                 link: "https://www.facebook.com/jpcs.qcu"
             },
             {
+                img: 'Assets/Logo/Glory.png',
                 title: 'Glory in the Highest Bible School',
                 subtitle: 'Logo Seal',
                 desc: "Initiated by Pastor Bernabe Perez, a former student of the institution, this project involved creating the official logo seal for the newly established Glory in the Highest Bible School. Lance Harvey B. Borras developed the emblem to establish a strong visual identity that reflects the school's foundational mission.",
                 link: "https://www.facebook.com/profile.php?id=100086925937031"
             },
             {
+                img: 'Assets/Azure.jpg',
                 title: 'Azure',
                 subtitle: 'Organization Event',
                 desc: "Developed for the inaugural event of JPCS-QCU. For this collaborative project, Lance Harvey B. Borras designed a custom cloud icon featuring an integrated Azure logo, which served as a central visual asset. The complete event poster utilizing this asset was laid out and designed by Rafael B. Codiñera.",
                 link: "https://www.facebook.com/photo/?fbid=122118394712410118"
             },
             {
+                img: 'Assets/Goodness.png',
                 title: 'Goodness of God',
                 subtitle: 'Christmas Party 2025',
                 desc: "A celebratory poster designed by Lance Harvey B. Borras for the 2025 Christmas gathering of the Bible study group he leads. The artwork captures the festive spirit of the season while emphasizing the central theme of divine goodness.",
@@ -1547,85 +1488,37 @@
             }
         ];
 
-        // Carousel setup
-        function setupCarousel(wrapperId, data, titleId, subtitleId, descId) {
-            let currentIndex = 0;
-            const wrapper = document.getElementById(wrapperId);
-            const items = wrapper.querySelectorAll('.carousel-item');
-            const totalItems = data.length;
-
-            function updateCarousel() {
-                items.forEach((item, index) => {
-                    let diff = index - currentIndex;
-                    if (diff < -1) diff += totalItems;
-                    if (diff > 1) diff -= totalItems;
-
-                    item.className = 'carousel-item';
-
-                    if (diff === 0) {
-                        item.classList.add('item-center');
-                    } else if (diff === -1) {
-                        item.classList.add('item-left-1');
-                    } else if (diff === 1) {
-                        item.classList.add('item-right-1');
-                    } else {
-                        item.classList.add('item-hidden');
-                    }
-
-                    item.onclick = function() {
-                        if (diff !== 0) {
-                            currentIndex = index;
-                            resetAutoplay();
-                            updateCarousel();
-                        }
-                    };
-
-                    item.style.cursor = (diff !== 0 && Math.abs(diff) === 1) ? 'pointer' : 'default';
-                });
-
-                document.getElementById(titleId).innerText = data[currentIndex].title;
-                document.getElementById(subtitleId).innerText = data[currentIndex].subtitle;
-                document.getElementById(descId).innerText = data[currentIndex].desc;
-                document.getElementById('works-link').href = data[currentIndex].link;
-            }
-
-            function goNext() {
-                currentIndex = (currentIndex + 1) % totalItems;
-                updateCarousel();
-            }
-
-            function goPrev() {
-                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-                updateCarousel();
-            }
-
-            // Manual navigation resets the timer so it does not double-skip
-            function resetAutoplay() {
-                clearInterval(autoplayTimer);
-                autoplayTimer = setInterval(goNext, 5000);
-            }
-
-            let autoplayTimer = setInterval(goNext, 5000);
-
-            wrapper.querySelector('.nextBtn').addEventListener('click', () => { goNext(); resetAutoplay(); });
-            wrapper.querySelector('.prevBtn').addEventListener('click', () => { goPrev(); resetAutoplay(); });
-
-            // Swipe left or right to navigate on touch devices
-            let touchStartX = 0;
-            wrapper.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].clientX;
-            }, { passive: true });
-            wrapper.addEventListener('touchend', (e) => {
-                const deltaX = e.changedTouches[0].clientX - touchStartX;
-                if (Math.abs(deltaX) < 50) return;
-                if (deltaX > 0) goPrev(); else goNext();
-                resetAutoplay();
-            }, { passive: true });
-
-            updateCarousel();
+        // Build marquee tracks from worksData; content is duplicated once so the -50% loop is seamless
+        function buildMarqueeTrack(trackId, data) {
+            const track = document.getElementById(trackId);
+            track.innerHTML = data.map(work =>
+                '<div class="marquee-item" data-title="' + work.title + '" data-subtitle="' + work.subtitle + '" data-desc="' + work.desc + '" data-link="' + work.link + '">' +
+                '<img src="' + work.img + '" alt="' + work.title + '" draggable="false">' +
+                '</div>'
+            ).join('');
+            track.innerHTML += track.innerHTML;
         }
 
-        setupCarousel('works-carousel', worksData, 'works-title', 'works-type', 'works-desc');
+        buildMarqueeTrack('marquee-track-1', worksData.slice(0, 7));
+        buildMarqueeTrack('marquee-track-2', worksData.slice(7));
+
+        // Work modal open and close
+        const workModal = document.getElementById('work-modal');
+
+        document.querySelectorAll('.marquee-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('modal-title').textContent = item.dataset.title;
+                document.getElementById('modal-subtitle').textContent = item.dataset.subtitle;
+                document.getElementById('modal-desc').textContent = item.dataset.desc;
+                document.getElementById('modal-link').href = item.dataset.link;
+                workModal.classList.add('active');
+            });
+        });
+
+        document.querySelector('.close-modal').addEventListener('click', () => workModal.classList.remove('active'));
+        workModal.addEventListener('click', (e) => {
+            if (e.target === workModal) workModal.classList.remove('active');
+        });
 
         // Scroll reveal with IntersectionObserver - resets on exit for replay
         const revealObserver = new IntersectionObserver((entries) => {
