@@ -1,5 +1,16 @@
 # Activity Log
 
+## 2026-10-29 — Work Gallery carousel replaced with marquees and modal
+
+Overhauled the `#works` section in `index.html` per the redesign request.
+
+- `#works` background switched to `var(--accent-blue)` with white text
+- Removed the 3D carousel (HTML, CSS, `setupCarousel` JS, and mobile overrides)
+- Added two infinite marquee tracks (left/right) built from `worksData`, duplicated once for a seamless -50% loop; a third certificate track was skipped until certificate images exist
+- Each `.marquee-item` carries `data-title/subtitle/desc/link`; hover pauses the track
+- Added a `#work-modal` overlay at the end of the body; item click populates and opens it, close button or backdrop click dismisses it
+- Mobile 768px: marquee items shrink to 180px
+
 ## 2026-10-20 — Right-side role box and blue theme (v4)
 
 Added a floating role-typewriter box and updated the color scheme in `index.html`.

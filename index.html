@@ -528,15 +528,23 @@
         .scroll-right { animation: scrollRight 30s linear infinite; }
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
-        .marquee-item { width: 250px; height: 250px; border-radius: 15px; overflow: hidden; cursor: pointer; transition: transform 0.3s; flex-shrink: 0; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center;}
+        .marquee-item { width: 180px; height: 180px; border-radius: 15px; overflow: hidden; cursor: pointer; transition: transform 0.3s; flex-shrink: 0; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center;}
         .marquee-item img { width: 100%; height: 100%; object-fit: cover; }
         .marquee-item:hover { transform: scale(1.05); }
+        .marquee-item.cert-item { width: 270px; height: 190px; }
+        .marquee-item.cert-item img { object-fit: contain; background-color: #ffffff; padding: 5px; }
         .marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
 
         /* Work Modal */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-content { background: var(--bg-color); color: var(--text-color); width: 90%; max-width: 600px; padding: 30px; border-radius: 15px; position: relative; text-align: center; transform: translateY(20px); transition: transform 0.3s; border: 2px solid var(--text-color); }
+        .modal-content { background: var(--bg-color); color: var(--text-color); width: 90%; max-width: 850px; padding: 30px; border-radius: 15px; position: relative; text-align: center; transform: translateY(20px); transition: transform 0.3s; border: 2px solid var(--text-color); }
+        .modal-body { display: flex; gap: 30px; align-items: stretch; text-align: left; }
+        .modal-img-container { flex: 0 0 45%; max-height: 400px; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); }
+        .modal-img-container img { width: 100%; height: 100%; object-fit: contain; }
+        .modal-text-container { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+        #modal-desc { margin-bottom: 25px; line-height: 1.6; }
+        #modal-link { margin-top: auto; align-self: flex-end; }
         .modal-overlay.active .modal-content { transform: translateY(0); }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; background: none; border: none; color: var(--text-color); }
         .modal-content .highlight-type { margin: 5px 0 15px 0; font-size: 1.1rem; font-weight: bold; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
@@ -949,7 +957,10 @@
             .cta-btn { padding: 12px 32px; font-size: 1rem; }
             
             .company-name { display: block; font-size: 0.85rem; }
-            .marquee-item { width: 180px; height: 180px; }
+            .marquee-item { width: 120px; height: 120px; }
+            .marquee-item.cert-item { width: 200px; height: 140px; }
+            .marquee-track { gap: 12px; padding: 5px 0; }
+            .marquee-wrapper { margin-bottom: 12px; }
             .about-content { flex-direction: column; text-align: center; gap: 20px; width: 95%;}
             .contact-container { flex-direction: column; text-align: center; width: 95%;}
             .contact-left { align-items: center; }
@@ -962,6 +973,9 @@
             .timeline-header, .org-subheader { flex-direction: column; align-items: flex-start; gap: 5px; }
             .timeline-header span, .org-subheader span { margin-left: 0; text-align: left; }
             .background-container { width: 95%; }
+            .modal-body { flex-direction: column; }
+            .modal-img-container { height: 250px; max-height: 250px; }
+            #modal-link { align-self: center; }
         }
 
         /* Prevent scrolling while splash screen is active */
@@ -1041,7 +1055,7 @@
     <div id="splash-screen">
         <div class="splash-card">
             <div class="splash-content" id="splash-content">
-                <h1 class="splash-heading"><span class="title-open">OPEN</span> <span class="title-portfolio">PORTFOLIO</span></h1>
+                <h1 class="splash-heading"><span class="title-open">WELCOME TO</span><span class="title-portfolio">  <br>  LANCE'S PORTFOLIO</span></h1>
                 <p class="splash-title">This page is created for Lance Harvey B. Borras,<br>do you want to proceed?</p>
                 <button class="splash-btn" id="splash-yes-btn">Yes, I'm sure</button>
             </div>
@@ -1149,6 +1163,9 @@
         </div>
         <div class="marquee-wrapper reveal-item" style="--reveal-delay: 0.2s;">
             <div class="marquee-track scroll-right" id="marquee-track-2"></div>
+        </div>
+        <div class="marquee-wrapper reveal-item" style="--reveal-delay: 0.3s;">
+            <div class="marquee-track scroll-left" id="marquee-track-3"></div>
         </div>
     </section>
 
@@ -1337,8 +1354,15 @@
             <button class="close-modal" aria-label="Close">&times;</button>
             <h3 id="modal-title"></h3>
             <p id="modal-subtitle" class="highlight-type"></p>
-            <p id="modal-desc"></p>
-            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="message-btn" style="margin-top: 15px;">See Full Project</a>
+            <div class="modal-body">
+                <div class="modal-img-container">
+                    <img id="modal-image" src="" alt="Project image" draggable="false">
+                </div>
+                <div class="modal-text-container">
+                    <p id="modal-desc"></p>
+                    <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="message-btn">See Full Project</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1502,6 +1526,23 @@
         buildMarqueeTrack('marquee-track-1', worksData.slice(0, 7));
         buildMarqueeTrack('marquee-track-2', worksData.slice(7));
 
+        // Certificates data for the 3rd marquee track
+        const certificatesData = [
+            { img: 'Assets/Certificates/26-04-13 JPCS Certicate of Membership 2025-26.jpg', title: 'JPCS Certicate of Membership 2025-26', date: 'April 13, 2026' },
+            { img: 'Assets/Certificates/25-12-18 Codesortium Certificate.jpg', title: 'Codesortium Certificate', date: 'December 18, 2025' },
+            { img: 'Assets/Certificates/25-01-20 Certificate of Participation.jpg', title: 'Certificate of Participation', date: 'January 20, 2025' },
+            { img: 'Assets/Certificates/24-12-22 JPCS Certificate of Membership 2024-25.jpg', title: 'JPCS Certificate of Membership 2024-25', date: 'December 22, 2024' },
+            { img: 'Assets/Certificates/24-03-05 Certificate of Achievement(3rd Placer).jpg', title: 'Certificate of Achievement(3rd Placer)', date: 'March 05, 2024' }
+        ];
+
+        const certTrack = document.getElementById('marquee-track-3');
+        certTrack.innerHTML = certificatesData.map(cert =>
+            '<div class="marquee-item cert-item" data-title="' + cert.title + '" data-subtitle="CERTIFICATE" data-desc="Lance Harvey B. Borras achieved this ' + cert.title + ' last ' + cert.date + '." data-link="#">' +
+            '<img src="' + cert.img + '" alt="' + cert.title + '" draggable="false">' +
+            '</div>'
+        ).join('');
+        certTrack.innerHTML += certTrack.innerHTML;
+
         // Work modal open and close
         const workModal = document.getElementById('work-modal');
 
@@ -1511,6 +1552,8 @@
                 document.getElementById('modal-subtitle').textContent = item.dataset.subtitle;
                 document.getElementById('modal-desc').textContent = item.dataset.desc;
                 document.getElementById('modal-link').href = item.dataset.link;
+                const img = item.querySelector('img');
+                if (img) document.getElementById('modal-image').src = img.src;
                 workModal.classList.add('active');
             });
         });

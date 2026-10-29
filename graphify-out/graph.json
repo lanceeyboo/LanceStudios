@@ -229,7 +229,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section layout rebalance (v1)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L36"
+      "source_location": "L47"
     },
     {
       "id": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v2",
@@ -241,7 +241,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section layout rebalance (v2)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L25"
+      "source_location": "L36"
     },
     {
       "id": "docs_activity_log_2026_10_20_hero_section_typewriter_restored_v3",
@@ -253,7 +253,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section typewriter restored (v3)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L16"
+      "source_location": "L27"
     },
     {
       "id": "docs_activity_log_2026_10_20_right_side_role_box_and_blue_theme_v4",
@@ -264,6 +264,18 @@
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 right-side role box and blue theme (v4)",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L14"
+    },
+    {
+      "id": "docs_activity_log_2026_10_29_work_gallery_carousel_replaced_with_marquees_and_modal",
+      "label": "2026-10-29 \u2014 Work Gallery carousel replaced with marquees and modal",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-10-29 \u2014 work gallery carousel replaced with marquees and modal",
       "source_file": "docs/activity-log.md",
       "source_location": "L3"
     },
@@ -470,29 +482,29 @@
     },
     {
       "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_10_20_right_side_role_box_and_blue_theme_v4",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
       "target": "docs_activity_log_2026_10_20_hero_section_typewriter_restored_v3",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L16",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
       "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v2",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/activity-log.md",
-      "source_location": "L25",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_10_20_right_side_role_box_and_blue_theme_v4",
+      "target": "docs_activity_log_2026_10_29_work_gallery_carousel_replaced_with_marquees_and_modal",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -503,7 +515,7 @@
     },
     {
       "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v1",
+      "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v2",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -511,8 +523,19 @@
       "source_file": "docs/activity-log.md",
       "source_location": "L36",
       "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v1",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L47",
+      "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "aa1fa6648b7c9b81c6bc98a380351166e9612771"
+  "built_at_commit": "39a2f0554e99734d0fb473120e2a91620b4d3cdb"
 }
