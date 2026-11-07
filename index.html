@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lance Studios</title>
-    <link rel="icon" type="image/png" href="Assets/lancestudios.png">
+    <link rel="icon" type="image/png" href="Assets/lancestudios2026.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Main font -->
@@ -43,10 +43,28 @@
         body, html {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-main);
             overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--bg-color);
+        }
+        /* Edge-only fading grid via masked pseudo-element */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-size: 40px 40px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+            z-index: -1;
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 100%);
+            mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 100%);
+        }
+        body.dark-mode::before {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
         }
 
         /* Prevent image selection and dragging to deter casual asset theft */
@@ -342,6 +360,7 @@
             transition-delay: 0.45s;
         }
 
+
         /* Layer 1: Background PORTFOLIO text */
         .hero-bg-portfolio {
             position: absolute;
@@ -513,9 +532,74 @@
             100% { transform: translateY(0); }
         }
 
+        /* Tech Stack Auto-Scrolling Marquee */
+        .tech-marquee-wrapper {
+            width: 100vw;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            border-top: 1px solid rgba(128, 128, 128, 0.2);
+            border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+            padding: 20px 0;
+            margin-top: -10px;
+            position: relative;
+            z-index: 10;
+        }
+        .tech-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: scroll-tech 40s linear infinite;
+        }
+        .tech-marquee-track:hover {
+            animation-play-state: paused;
+        }
+        .tech-group {
+            display: flex;
+            align-items: center;
+        }
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--text-color);
+            white-space: nowrap;
+        }
+        .tech-item img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+        }
+        .dark-mode .tech-item img.mono-icon {
+            filter: brightness(0) invert(1);
+        }
+        .dark-mode .tech-icon-filter {
+            filter: invert(1);
+        }
+        .tech-item svg {
+            height: 28px;
+            width: 28px;
+            flex-shrink: 0;
+        }
+        .tech-dot {
+            margin: 0 35px;
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+        }
+        @keyframes scroll-tech {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @media (max-width: 768px) {
+            .tech-marquee-wrapper { padding: 15px 0; }
+            .tech-item { font-size: 0.95rem; gap: 8px; }
+            .tech-item img { height: 22px; }
+            .tech-item svg { height: 22px; width: 22px; }
+            .tech-dot { margin: 0 20px; }
+        }
 
-
-        /* Works Carousel */
+        /* Works 3D Carousel Gallery */
         .works-container {
             width: 100%;
             display: flex;
@@ -956,12 +1040,6 @@
             .section { min-height: auto; padding: 120px 10px 40px 10px; }
             .floating-header { top: 10px; width: 95%; padding: 0 15px; }
             .footer-simple { width: 95%; padding: 0 15px; }
-            /* Hidden at the top of the page on mobile; JS removes the class on scroll */
-            .floating-header.header-hidden {
-                transform: translateX(-50%) translateY(-140px);
-                opacity: 0;
-                pointer-events: none;
-            }
             .section-title-wrapper { width: 95%; }
 
             .peeking-eye { width: 140px; }
@@ -990,18 +1068,23 @@
                 5%, 20% { transform: rotate(90deg) translateY(-170px); }
             }
 
-            .scroll-indicator { display: flex; }
+            .scroll-indicator, .scroll-down { display: none !important; }
             
+            /* Bring back the menu bar on mobile */
+            header { display: flex !important; flex-direction: row; position: relative; z-index: 100; top: 0; }
+
             /* Mobile adjustments for the new Hero layout */
             .hero-stack { height: 100vh; }
-            .hero-bg-portfolio { top: 35%; font-size: clamp(8rem, 32vw, 15rem); }
-            .hero-photo-layer { height: 65vh; bottom: 5%; width: auto; }
-            .hero-bottom-left { bottom: 10%; left: 5%; width: 90%; max-width: 100%; text-align: left; }
-            .hero-welcome-text { font-size: 1rem; margin-bottom: 2px; }
+            .hero-bg-portfolio { top: 12%; font-size: clamp(8rem, 40vw, 15rem); transform: translate(-50%, 0); }
+            .hero-photo-layer { height: 65vh; bottom: 8%; display: flex; justify-content: center; z-index: 2; }
+            .hero-photo-layer img { object-position: center bottom; }
+            .hero-bottom-left { position: absolute; bottom: 12%; left: 5%; width: auto; max-width: 250px; z-index: 5; text-align: left; padding: 0; }
+            .hero-bottom-right { position: absolute; bottom: 12%; right: 5%; width: auto; max-width: 260px; z-index: 5; text-align: right; padding: 15px; box-sizing: border-box; }
+            .hero-welcome-text { font-size: 0.9rem; }
             .hero-typed-line { font-size: clamp(1.6rem, 7vw, 2.4rem); min-height: 1.4em; }
             .hero-description { font-size: 0.95rem; margin-bottom: 20px; }
-            .hero-bottom-right { bottom: -5%; right: 5%; left: 5%; text-align: center; padding: 15px; }
-            .hero-role-typed { font-size: 1.5rem; }
+            .hero-looking-for { font-size: 0.9rem; text-align: right; }
+            .hero-role-typed { font-size: 1.3rem; white-space: normal; word-break: keep-all; line-height: 1.2; text-align: right; }
             .cta-btn { padding: 12px 32px; font-size: 1rem; }
             
             .company-name { display: block; font-size: 0.85rem; }
@@ -1081,20 +1164,43 @@
         .splash-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(2, 132, 199, 0.4); }
 
         .splash-loader { text-align: center; font-weight: bold; font-size: 1.2rem; }
+        .spinner-container {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .spinner {
-            width: 50px;
-            height: 50px;
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
             border: 5px solid rgba(0, 0, 0, 0.1);
             border-top-color: var(--accent-blue);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 15px auto;
+            box-sizing: border-box;
+            margin: 0;
         }
         .dark-mode .spinner { border: 5px solid rgba(255, 255, 255, 0.1); border-top-color: var(--accent-blue); }
+        .loader-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            z-index: 2;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="no-scroll">
+<body class="no-scroll dark-mode">
 
     <!-- Splash Screen -->
     <div id="splash-screen">
@@ -1105,7 +1211,10 @@
                 <button class="splash-btn" id="splash-yes-btn">Yes, I'm sure</button>
             </div>
             <div class="splash-loader" id="splash-loader" style="display: none;">
-                <div class="spinner"></div>
+                <div class="spinner-container">
+                    <div class="spinner"></div>
+                    <img src="Assets/lancestudios.png" alt="Lance Studios Logo" class="loader-logo">
+                </div>
                 <p>Loading awesomeness...</p>
             </div>
         </div>
@@ -1131,10 +1240,10 @@
 
         <div class="header-right">
             <button class="theme-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode">
-                <svg id="moonIcon" class="active" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
-                <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg id="sunIcon" class="active" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" y1="1" x2="12" y2="3"></line>
                     <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -1171,6 +1280,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
         </div>
         <div class="hero-stack">
+
             <!-- Layer 1: Background PORTFOLIO -->
             <h1 class="hero-bg-portfolio">PORTFOLIO</h1>
 
@@ -1195,6 +1305,51 @@
         </div>
     </section>
 
+    <!-- Tech Stack Auto-Scrolling Marquee -->
+    <div class="tech-marquee-wrapper">
+        <div class="tech-marquee-track">
+            <!-- Group 1 -->
+            <div class="tech-group">
+                <div class="tech-item"><img src="Assets/app/photoshop.png" alt="Photoshop"> Photoshop</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/canva.png" alt="Canva"> Canva</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma"> Figma</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/vscode.png" alt="VS Code"> VS Code</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/visualstudios.webp" alt="Visual Studio"> Visual Studio</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/capcut.png" alt="CapCut"> CapCut</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML"> HTML</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/CSS.png" alt="CSS"> CSS</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript"> JavaScript</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git"> Git</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/github" alt="GitHub" class="mono-icon"> GitHub</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/propresenter.png" alt="ProPresenter"> ProPresenter</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/obs.png" alt="OBS Studio"> OBS Studio</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/Gemini.png" alt="Gemini"> Gemini</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/Chatgpt.png" alt="ChatGPT"> ChatGPT</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/Claude.png" alt="Claude"> Claude</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/DeepSeek.png" alt="DeepSeek"> DeepSeek</div> <span class="tech-dot">&bull;</span>
+            </div>
+            <!-- Group 2 (Duplicate for seamless scroll) -->
+            <div class="tech-group">
+                <div class="tech-item"><img src="Assets/app/photoshop.png" alt="Photoshop"> Photoshop</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/canva.png" alt="Canva"> Canva</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma"> Figma</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/vscode.png" alt="VS Code"> VS Code</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/visualstudios.webp" alt="Visual Studio"> Visual Studio</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/capcut.png" alt="CapCut"> CapCut</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML"> HTML</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/CSS.png" alt="CSS"> CSS</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript"> JavaScript</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git"> Git</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/github" alt="GitHub" class="mono-icon"> GitHub</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/propresenter.png" alt="ProPresenter"> ProPresenter</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/obs.png" alt="OBS Studio"> OBS Studio</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/Gemini.png" alt="Gemini"> Gemini</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/Chatgpt.png" alt="ChatGPT"> ChatGPT</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/Claude.png" alt="Claude"> Claude</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/DeepSeek.png" alt="DeepSeek"> DeepSeek</div> <span class="tech-dot">&bull;</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Works Section -->
     <section id="works" class="section">
@@ -1544,10 +1699,10 @@
                 subtitle: 'Christmas Party 2025',
                 desc: "A celebratory poster designed by Lance Harvey B. Borras for the 2025 Christmas gathering of the Bible study group he leads. The artwork captures the festive spirit of the season while emphasizing the central theme of divine goodness.",
                 link: "https://www.facebook.com/lanceeborras/posts/pfbid0oA9hFrHwawR68AaLydve1kjjHnKqc6j4yifWS68WHYR8JLegyeN6r4iFdVactywpl"
-            }
+            },
         ];
 
-        // Carousel setup
+        // Carousel setup with autoplay and touch swipe
         function setupCarousel(wrapperId, data, titleId, subtitleId, descId) {
             let currentIndex = 0;
             const wrapper = document.getElementById(wrapperId);
@@ -1698,10 +1853,9 @@
             }
         });
 
-        // Hide header while the hero is visible on mobile and reveal it on scroll
+        // Close mobile nav when hero is visible
         const floatingHeader = document.querySelector('.floating-header');
         new IntersectionObserver(([entry]) => {
-            floatingHeader.classList.toggle('header-hidden', entry.isIntersecting);
             if (entry.isIntersecting) {
                 menuOpen = false;
                 mobileNav.classList.remove('open');
@@ -1723,6 +1877,12 @@
                 sunIcon.classList.remove('active');
                 moonIcon.classList.add('active');
             }
+        }
+
+        // Initialize icon state based on default dark-mode class on load
+        if (body.classList.contains('dark-mode')) {
+            moonIcon.classList.remove('active');
+            sunIcon.classList.add('active');
         }
 
         themeBtn.addEventListener('click', () => {

@@ -229,7 +229,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section layout rebalance (v1)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L36"
+      "source_location": "L118"
     },
     {
       "id": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v2",
@@ -241,7 +241,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section layout rebalance (v2)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L25"
+      "source_location": "L107"
     },
     {
       "id": "docs_activity_log_2026_10_20_hero_section_typewriter_restored_v3",
@@ -253,7 +253,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section typewriter restored (v3)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L16"
+      "source_location": "L98"
     },
     {
       "id": "docs_activity_log_2026_10_20_right_side_role_box_and_blue_theme_v4",
@@ -265,7 +265,103 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 right-side role box and blue theme (v4)",
       "source_file": "docs/activity-log.md",
+      "source_location": "L85"
+    },
+    {
+      "id": "docs_activity_log_2026_11_07_add_tech_stack_auto_scrolling_marquee_banner_between_hero_and_works",
+      "label": "2026-11-07 \u2014 Add tech stack auto-scrolling marquee banner between hero and works",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-07 \u2014 add tech stack auto-scrolling marquee banner between hero and works",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L32"
+    },
+    {
+      "id": "docs_activity_log_2026_11_07_default_dark_mode_side_fades_mobile_hero_layout",
+      "label": "2026-11-07 \u2014 Default dark mode, side fades, mobile hero layout",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-07 \u2014 default dark mode, side fades, mobile hero layout",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L76"
+    },
+    {
+      "id": "docs_activity_log_2026_11_07_fix_broken_tech_marquee_icons_and_update_tool_list",
+      "label": "2026-11-07 \u2014 Fix broken tech marquee icons and update tool list",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-07 \u2014 fix broken tech marquee icons and update tool list",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L23"
+    },
+    {
+      "id": "docs_activity_log_2026_11_07_hero_header_fix_text_reposition_works_marquee_rebuild",
+      "label": "2026-11-07 \u2014 Hero header fix, text reposition, works marquee rebuild",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-07 \u2014 hero header fix, text reposition, works marquee rebuild",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L51"
+    },
+    {
+      "id": "docs_activity_log_2026_11_07_hybrid_tech_marquee_icons_local_images_for_7_apps_cdn_svg_for_rest",
+      "label": "2026-11-07 \u2014 Hybrid tech marquee icons: local images for 7 apps, CDN/SVG for rest",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-07 \u2014 hybrid tech marquee icons: local images for 7 apps, cdn/svg for rest",
+      "source_file": "docs/activity-log.md",
       "source_location": "L3"
+    },
+    {
+      "id": "docs_activity_log_2026_11_07_mobile_hero_layout_fixes_pass_2_overlaps_and_missing_elements",
+      "label": "2026-11-07 \u2014 Mobile hero layout fixes pass 2 (overlaps and missing elements)",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-07 \u2014 mobile hero layout fixes pass 2 (overlaps and missing elements)",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L65"
+    },
+    {
+      "id": "docs_activity_log_2026_11_07_revert_works_marquee_to_3d_carousel_add_grid_background_mobile_hero_box_spacing",
+      "label": "2026-11-07 \u2014 Revert works marquee to 3D carousel, add grid background, mobile hero box spacing",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-07 \u2014 revert works marquee to 3d carousel, add grid background, mobile hero box spacing",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L42"
+    },
+    {
+      "id": "docs_activity_log_2026_11_07_update_tech_marquee_tool_list_add_ai_tools_inline_svgs_for_non_cdn_icons",
+      "label": "2026-11-07 \u2014 Update tech marquee tool list, add AI tools, inline SVGs for non-CDN icons",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-07 \u2014 update tech marquee tool list, add ai tools, inline svgs for non-cdn icons",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L12"
     },
     {
       "id": "docs_activity_log_activity_log",
@@ -470,35 +566,13 @@
     },
     {
       "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_10_20_hero_section_typewriter_restored_v3",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/activity-log.md",
-      "source_location": "L16",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_activity_log_activity_log",
       "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v2",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L25",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_10_20_right_side_role_box_and_blue_theme_v4",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/activity-log.md",
-      "source_location": "L3",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -509,10 +583,120 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L36",
+      "source_location": "L118",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_update_tech_marquee_tool_list_add_ai_tools_inline_svgs_for_non_cdn_icons",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_fix_broken_tech_marquee_icons_and_update_tool_list",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_hybrid_tech_marquee_icons_local_images_for_7_apps_cdn_svg_for_rest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_add_tech_stack_auto_scrolling_marquee_banner_between_hero_and_works",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_revert_works_marquee_to_3d_carousel_add_grid_background_mobile_hero_box_spacing",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_hero_header_fix_text_reposition_works_marquee_rebuild",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_mobile_hero_layout_fixes_pass_2_overlaps_and_missing_elements",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_default_dark_mode_side_fades_mobile_hero_layout",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_10_20_right_side_role_box_and_blue_theme_v4",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_10_20_hero_section_typewriter_restored_v3",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L98",
       "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "aa1fa6648b7c9b81c6bc98a380351166e9612771"
+  "built_at_commit": "7460065d5d4b43aa91d5f4a75d0bf4ee8f4673bf"
 }
