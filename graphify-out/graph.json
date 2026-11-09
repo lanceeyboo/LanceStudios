@@ -229,7 +229,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section layout rebalance (v1)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L118"
+      "source_location": "L222"
     },
     {
       "id": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v2",
@@ -241,7 +241,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section layout rebalance (v2)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L107"
+      "source_location": "L211"
     },
     {
       "id": "docs_activity_log_2026_10_20_hero_section_typewriter_restored_v3",
@@ -253,7 +253,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 hero section typewriter restored (v3)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L98"
+      "source_location": "L202"
     },
     {
       "id": "docs_activity_log_2026_10_20_right_side_role_box_and_blue_theme_v4",
@@ -265,7 +265,7 @@
       "node_kind": "heading",
       "norm_label": "2026-10-20 \u2014 right-side role box and blue theme (v4)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L85"
+      "source_location": "L189"
     },
     {
       "id": "docs_activity_log_2026_11_07_add_tech_stack_auto_scrolling_marquee_banner_between_hero_and_works",
@@ -277,7 +277,7 @@
       "node_kind": "heading",
       "norm_label": "2026-11-07 \u2014 add tech stack auto-scrolling marquee banner between hero and works",
       "source_file": "docs/activity-log.md",
-      "source_location": "L32"
+      "source_location": "L136"
     },
     {
       "id": "docs_activity_log_2026_11_07_default_dark_mode_side_fades_mobile_hero_layout",
@@ -289,7 +289,7 @@
       "node_kind": "heading",
       "norm_label": "2026-11-07 \u2014 default dark mode, side fades, mobile hero layout",
       "source_file": "docs/activity-log.md",
-      "source_location": "L76"
+      "source_location": "L180"
     },
     {
       "id": "docs_activity_log_2026_11_07_fix_broken_tech_marquee_icons_and_update_tool_list",
@@ -301,7 +301,7 @@
       "node_kind": "heading",
       "norm_label": "2026-11-07 \u2014 fix broken tech marquee icons and update tool list",
       "source_file": "docs/activity-log.md",
-      "source_location": "L23"
+      "source_location": "L127"
     },
     {
       "id": "docs_activity_log_2026_11_07_hero_header_fix_text_reposition_works_marquee_rebuild",
@@ -313,7 +313,7 @@
       "node_kind": "heading",
       "norm_label": "2026-11-07 \u2014 hero header fix, text reposition, works marquee rebuild",
       "source_file": "docs/activity-log.md",
-      "source_location": "L51"
+      "source_location": "L155"
     },
     {
       "id": "docs_activity_log_2026_11_07_hybrid_tech_marquee_icons_local_images_for_7_apps_cdn_svg_for_rest",
@@ -325,7 +325,7 @@
       "node_kind": "heading",
       "norm_label": "2026-11-07 \u2014 hybrid tech marquee icons: local images for 7 apps, cdn/svg for rest",
       "source_file": "docs/activity-log.md",
-      "source_location": "L3"
+      "source_location": "L107"
     },
     {
       "id": "docs_activity_log_2026_11_07_mobile_hero_layout_fixes_pass_2_overlaps_and_missing_elements",
@@ -337,7 +337,7 @@
       "node_kind": "heading",
       "norm_label": "2026-11-07 \u2014 mobile hero layout fixes pass 2 (overlaps and missing elements)",
       "source_file": "docs/activity-log.md",
-      "source_location": "L65"
+      "source_location": "L169"
     },
     {
       "id": "docs_activity_log_2026_11_07_revert_works_marquee_to_3d_carousel_add_grid_background_mobile_hero_box_spacing",
@@ -349,7 +349,7 @@
       "node_kind": "heading",
       "norm_label": "2026-11-07 \u2014 revert works marquee to 3d carousel, add grid background, mobile hero box spacing",
       "source_file": "docs/activity-log.md",
-      "source_location": "L42"
+      "source_location": "L146"
     },
     {
       "id": "docs_activity_log_2026_11_07_update_tech_marquee_tool_list_add_ai_tools_inline_svgs_for_non_cdn_icons",
@@ -361,7 +361,127 @@
       "node_kind": "heading",
       "norm_label": "2026-11-07 \u2014 update tech marquee tool list, add ai tools, inline svgs for non-cdn icons",
       "source_file": "docs/activity-log.md",
-      "source_location": "L12"
+      "source_location": "L116"
+    },
+    {
+      "id": "docs_activity_log_2026_11_08_mobile_hero_spacing_fixes_and_splash_loader_logo",
+      "label": "2026-11-08 \u2014 Mobile hero spacing fixes and splash loader logo",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-08 \u2014 mobile hero spacing fixes and splash loader logo",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L95"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_major_restructure_works_cards_certificates_tools_2_column_background_mobile_hero",
+      "label": "2026-11-09 \u2014 Major restructure: works cards, certificates, tools, 2-column background, mobile hero",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 major restructure: works cards, certificates, tools, 2-column background, mobile hero",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L81"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_refinements_mobile_hero_nudges_landscape_works_cards_square_modal_tools_v2_marquee_sync_background_toggle",
+      "label": "2026-11-09 \u2014 Refinements: mobile hero nudges, landscape works cards, square modal, tools v2, marquee sync, background toggle",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 refinements: mobile hero nudges, landscape works cards, square modal, tools v2, marquee sync, background toggle",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L66"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_review_round_3_hero_separation_modal_links_certification_rename_tools_legend_clamp_fix",
+      "label": "2026-11-09 \u2014 Review round 3: hero separation, modal links, certification rename, tools legend, clamp fix",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 review round 3: hero separation, modal links, certification rename, tools legend, clamp fix",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L55"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_review_round_4_hero_box_spacing_internship_link_status_bubble_tools_columns_header_and_title_styling",
+      "label": "2026-11-09 \u2014 Review round 4: hero box spacing, internship link, status bubble, tools columns, header and title styling",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 review round 4: hero box spacing, internship link, status bubble, tools columns, header and title styling",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_review_round_5_custom_status_modal_top_right_link_splash_reveal_coverflow_hit_test_fix_lance_studios_brand",
+      "label": "2026-11-09 \u2014 Review round 5: custom status modal, top-right link, splash reveal, coverflow hit-test fix, Lance Studios brand",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 review round 5: custom status modal, top-right link, splash reveal, coverflow hit-test fix, lance studios brand",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L35"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_review_round_6_hero_top_row_layout_and_centered_status_modals",
+      "label": "2026-11-09 \u2014 Review round 6: hero top row layout and centered status modals",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 review round 6: hero top row layout and centered status modals",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L26"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_review_round_7_header_edge_alignment_caption_cleanup_gallery_credits",
+      "label": "2026-11-09 \u2014 Review round 7: header-edge alignment, caption cleanup, gallery credits",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 review round 7: header-edge alignment, caption cleanup, gallery credits",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L18"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_review_round_8_password_obfuscation_modal_description_bubble_hover_auto_tooltip",
+      "label": "2026-11-09 \u2014 Review round 8: password obfuscation, modal description, bubble hover, auto tooltip",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 review round 8: password obfuscation, modal description, bubble hover, auto tooltip",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L10"
+    },
+    {
+      "id": "docs_activity_log_2026_11_09_review_round_9_mobile_top_row_alignment_fix",
+      "label": "2026-11-09 \u2014 Review round 9: mobile top-row alignment fix",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Activity Log",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2026-11-09 \u2014 review round 9: mobile top-row alignment fix",
+      "source_file": "docs/activity-log.md",
+      "source_location": "L3"
     },
     {
       "id": "docs_activity_log_activity_log",
@@ -374,6 +494,66 @@
       "norm_label": "activity log",
       "source_file": "docs/activity-log.md",
       "source_location": "L1"
+    },
+    {
+      "id": "docs_index_2_restructure_contract",
+      "label": "index-2-restructure-contract.md",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Contract: index portfolio major restructure (index_2 request)",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "index-2-restructure-contract.md",
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_index_2_restructure_contract_contract_index_portfolio_major_restructure_index_2_request",
+      "label": "Contract: index portfolio major restructure (index_2 request)",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Contract: index portfolio major restructure (index_2 request)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "contract: index portfolio major restructure (index_2 request)",
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_index_2_restructure_contract_deliverables",
+      "label": "Deliverables",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Contract: index portfolio major restructure (index_2 request)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "deliverables",
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "docs_index_2_restructure_contract_out_of_scope",
+      "label": "Out of scope",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Contract: index portfolio major restructure (index_2 request)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "out of scope",
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L14"
+    },
+    {
+      "id": "docs_index_2_restructure_contract_verification",
+      "label": "Verification",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Contract: index portfolio major restructure (index_2 request)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "verification",
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L20"
     }
   ],
   "links": [
@@ -566,46 +746,13 @@
     },
     {
       "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v2",
+      "target": "docs_activity_log_2026_11_09_review_round_8_password_obfuscation_modal_description_bubble_hover_auto_tooltip",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L107",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v1",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/activity-log.md",
-      "source_location": "L118",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_11_07_update_tech_marquee_tool_list_add_ai_tools_inline_svgs_for_non_cdn_icons",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/activity-log.md",
-      "source_location": "L12",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_activity_log_activity_log",
-      "target": "docs_activity_log_2026_11_07_fix_broken_tech_marquee_icons_and_update_tool_list",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/activity-log.md",
-      "source_location": "L23",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -616,7 +763,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L3",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_update_tech_marquee_tool_list_add_ai_tools_inline_svgs_for_non_cdn_icons",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_07_fix_broken_tech_marquee_icons_and_update_tool_list",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -627,7 +796,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L32",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -638,7 +807,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L42",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -649,7 +818,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L51",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -660,7 +829,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L65",
+      "source_location": "L169",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_09_review_round_7_header_edge_alignment_caption_cleanup_gallery_credits",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -671,7 +851,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L76",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -682,7 +862,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L85",
+      "source_location": "L189",
       "weight": 1.0
     },
     {
@@ -693,10 +873,164 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/activity-log.md",
-      "source_location": "L98",
+      "source_location": "L202",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v2",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L211",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_10_20_hero_section_layout_rebalance_v1",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L222",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_09_review_round_6_hero_top_row_layout_and_centered_status_modals",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_09_review_round_9_mobile_top_row_alignment_fix",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_09_review_round_5_custom_status_modal_top_right_link_splash_reveal_coverflow_hit_test_fix_lance_studios_brand",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_09_review_round_4_hero_box_spacing_internship_link_status_bubble_tools_columns_header_and_title_styling",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_09_review_round_3_hero_separation_modal_links_certification_rename_tools_legend_clamp_fix",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_09_refinements_mobile_hero_nudges_landscape_works_cards_square_modal_tools_v2_marquee_sync_background_toggle",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_09_major_restructure_works_cards_certificates_tools_2_column_background_mobile_hero",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_activity_log_activity_log",
+      "target": "docs_activity_log_2026_11_08_mobile_hero_spacing_fixes_and_splash_loader_logo",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/activity-log.md",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_index_2_restructure_contract",
+      "target": "docs_index_2_restructure_contract_contract_index_portfolio_major_restructure_index_2_request",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_index_2_restructure_contract_contract_index_portfolio_major_restructure_index_2_request",
+      "target": "docs_index_2_restructure_contract_out_of_scope",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_index_2_restructure_contract_contract_index_portfolio_major_restructure_index_2_request",
+      "target": "docs_index_2_restructure_contract_verification",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_index_2_restructure_contract_contract_index_portfolio_major_restructure_index_2_request",
+      "target": "docs_index_2_restructure_contract_deliverables",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/index-2-restructure-contract.md",
+      "source_location": "L5",
       "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7460065d5d4b43aa91d5f4a75d0bf4ee8f4673bf"
+  "built_at_commit": "c1498541df118fa6a8b808c3bab9499dab24c18f"
 }

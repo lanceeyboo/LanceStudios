@@ -1,5 +1,97 @@
 # Activity Log
 
+## 2026-11-09 — Review round 9: mobile top-row alignment fix
+
+- Mobile media query only: the status bubble and QCU link both use the exact same fixed `top: 40px` inside the hero stack (the stack begins 30px below the floating header, so this is the coordinate-space equivalent of the requested 110-120px viewport value); a literal 110px would have landed on the PORTFOLIO lettering and portrait
+- The link carries a small `transform: translateY(6px)` so its text sits on the same horizontal baseline as the taller bubble (verified center delta 0.5px at both 360x640 and 768x1024)
+- Left stays at 5% for the bubble and right at 5% for the link; desktop rules were left exactly as they are
+- Verified: same computed top value for both elements, 70px clearance below the header, tooltip shows 40px below the header when active, and no overlap with the portfolio text at phone and tablet sizes; graphify update run after changes
+
+## 2026-11-09 — Review round 8: password obfuscation, modal description, bubble hover, auto tooltip
+
+- Password check now compares the Base64 form (`btoa(...)` against the encoded string) so no plaintext password remains in the source; comments updated accordingly
+- Added the descriptive paragraph above the password input ("To allow you to change this status you need to enter the password.") styled at 0.9rem with 0.8 opacity and a 15px bottom margin
+- Status bubble text wrapped in `.status-text-content`; on hover or focus the text fades out and a "Change" label appears via the bubble's `::after` pseudo-element while the green live dot stays visible
+- The internship tooltip gained a `.show-tooltip` auto-toggle driven by a 5-second interval (visible 5 seconds, hidden 5 seconds, repeating), a 0.5s opacity transition, and kept its hover reveal and blue speech-bubble styling with the down-pointing triangle
+- Verified with headless Edge CDP at 1366x768: wrong password clears the input, the encoded comparison accepts the correct password, description text and styles match, the pseudo-element content reads "Change", and the tooltip toggles on at 5 seconds and off at 10 seconds; no console errors; graphify update run after changes
+
+## 2026-11-09 — Review round 7: header-edge alignment, caption cleanup, gallery credits
+
+- Desktop: the status bubble now uses `left: 12.5%` and the QCU link `right: 12.5%`, so both align pixel-perfectly with the 75% floating header edges (verified bubble x 171 = header left 171 and link right 1195 = header right 1195); both sit on the same row at `top: 16%`
+- Mobile: both elements share one top row again (`left/right 5%`, `top 2%`) with scaled fonts (bubble 0.58rem, link 0.6rem) producing a 9px gap between them, 43px below the floating header and above the PORTFOLIO ink
+- Works modal: removed the redundant `.cf-caption` creation from `openWorksModal` and deleted the orphaned CSS rule; titles now appear only in the modal info panel
+- Data: Logic Unlocked and Codesortium descriptions rewritten with the co-designer credits; all published merchandise items tagged (10 Lead Designer, Black Theme and Debug now Co-designer with new descriptions, three polo shirts stay Unpublished); BSCS-Entry tagged Lead Designer with the new description
+- Verified with headless Edge CDP at 360x640 and 1366x768: edge alignment deltas of 0px, same-row checks, zero `.cf-caption` nodes, exact tag and description strings for all updated items; no console errors; graphify update run after changes
+
+## 2026-11-09 — Review round 6: hero top row layout and centered status modals
+
+- Split the status bubble and the Quezon City University link into two independently positioned elements: bubble at `top: 12%; left: 5%` and link at `top: 12%; right: 5%` with `z-index: 10` on both; the link stays borderless plain text with its animated underline and tooltip
+- Mobile keeps the bubble at 12% left but moves the link to 17.5% right (below the bubble) because both elements cannot share one 360px-wide row without overlapping; verified no mutual overlap and no floating header overlap on both viewports
+- Status modals are now perfectly centered (`top/left 50%` with a translate), z-index 2000, with a new full-screen `.status-overlay` backdrop (`rgba(0,0,0,0.5)` plus `blur(8px)`, z-index 1999) that closes the dialog on click
+- Opening either status modal sets `document.body.style.overflow = 'hidden'` and closing restores it; verified open, cancel and overlay-restore paths
+- Copy updated from "passcode" to "password" in the modal heading, input placeholder and the eye button labels
+- Verified with headless Edge CDP at 360x640 and 1366x768: same-row alignment on desktop (0px delta), no overlaps, centered modal geometry, blur overlay styles, scroll lock and restore; no console errors; graphify update run after changes
+
+## 2026-11-09 — Review round 5: custom status modal, top-right link, splash reveal, coverflow hit-test fix, Lance Studios brand
+
+- Status editing replaced the native prompt with two custom bottom-centered modals matching the theme: a passcode modal (input with a show/hide eye toggle, Cancel and Enter buttons, passcode "Magneto21") and a status text modal with Cancel and Enter; wrong passcodes clear the input, correct ones open the text modal prefilled, Enter saves to localStorage under `userStatus` and Escape or Cancel closes the dialogs
+- The Quezon City University link moved to the hero's top right as plain text (no borders or background) with a left-to-right animated underline and a right-aligned hover tooltip that no longer overflows the viewport edge
+- `.floating-header` and `.hero-photo-layer` now start at opacity 0 with pointer events disabled; a `hero-revealed` class on the body fades them in
+- The splash spinner became a speedometer ring (SVG circle, stroke-dashoffset 1.5s linear, clockwise from the top) started when "Yes, I'm sure" is clicked; when the fill completes the splash fades out and the header and portrait fade in together
+- Works modal coverflow: root cause of the unclickable side cards was the `translateZ` depth offsets breaking hit-testing inside the modal context, so the works slots now use rotation and scale only (`.works-cf` overrides) while staying visually 3D; the modal also gained the same 5-second autoplay as the certifications carousel, with the coverflow timer destroyed on close to avoid stacked intervals; side cards now click-to-center correctly
+- Added the "Lance Studios" brand as the first brands item (and first card slider image) with the provided description
+- Verified with headless Edge CDP at 360x640 and 1366x768: splash flow (hidden opacity 0 to revealed 1), speedometer mid-fill, modal passcode flow including the eye toggle, click-to-center, autoplay advance, location link geometry and Lance Studios first item; no console errors; graphify update run after changes
+
+## 2026-11-09 — Review round 4: hero box spacing, internship link, status bubble, tools columns, header and title styling
+
+- Mobile hero: `.hero-bottom-left` to `bottom: 30%` and `.hero-bottom-right` to `bottom: 15%`; boxes now sit 14px apart with no overlap (left 329-568, right 582-664 at 360x640) instead of the previous 46px gap
+- New `.hero-top-links` wrapper above the portfolio text: a location pin link to the Quezon City University Drive folder ("Quezon City University") with a blue tooltip on hover ("Click here to see 'Internship portfolio'") and an editable status bubble below it
+- Status bubble: pulsing green dot, default text, blue hover and active states; click prompts a passcode, "magneto" opens a second prompt, the new text is saved to localStorage under `userStatus` and restored on page load
+- Tools: mobile now uses two main columns (Visual Tools plus Applications left, Languages plus AIs right), Presentation spans both columns and the legend sits below; inner items switched to one column since the boxes are narrow; dots swapped so blue means Best, green means Good and yellow means Still learning (legend updated)
+- Header: "Hire Me" renamed to "Contacts"; nav links got an animated left-to-right underline via a `::after` pseudo-element and dark-mode hover turns the link accent blue
+- Dark mode: `.section-title` and `.contact-left .big-title` now use the accent blue; light mode unchanged
+- Verified with headless Edge CDP at 360x640 and 1366x768; status persistence across reloads, dot counts (9 blue, 7 green, 4 yellow), grid placement and title colors all checked; no console errors; graphify update run after changes
+
+## 2026-11-09 — Review round 3: hero separation, modal links, certification rename, tools legend, clamp fix
+
+- Mobile hero: `.hero-bottom-left` to `bottom: 32%` and `.hero-bottom-right` to `bottom: 12%` (boxes now fully separated: left 316-555, right 601-683 at 360x640)
+- Works modal: `.modal-info` got `min-height: 200px` with flex column centering so the panel no longer shifts between slides; added the `#works-modal-link` See Full Project button whose display and href are set per item (hidden for unpublished items and for published items without a link)
+- Data: added the provided Facebook links for Logic Unlocked and Codesortium; restored the original curated links (Azure, Occupational Safety, Trust in God, Goodness of God, Code Quest, JPCS, Glory, lanyard posts) so the modal button logic has hrefs
+- Merchandise: renamed files wired in (PS-Certificate/Favory/Statement, SC-BlackTheme/Debug/JpcsQcu/JpcsXCys/Pixelated); display titles stripped of PS and SC prefixes; card slider image paths updated; verified 0 broken images
+- Renamed Certificates to Certifications across nav links, section id, section title and the medal deep-link target
+- Tools: Programming Languages box renamed to Languages; mobile layout switches tool boxes to a 2-column grid with the Presentation box keeping a single column; new bordered legend below the grid for Best/Good/Still learning
+- Added `line-clamp: 3` next to `-webkit-line-clamp` in the mobile card description and set `flex-shrink: 0` so the three-line clamp renders cleanly without the text colliding with the button
+- Verified with headless Edge CDP at 360x640 and 1366x768; no console errors; graphify update run after changes
+
+## 2026-11-09 — Refinements: mobile hero nudges, landscape works cards, square modal, tools v2, marquee sync, background toggle
+
+Applied the second review round in `index.html`.
+
+- Mobile hero: `.hero-bottom-left` raised to `bottom: 20.5%`, `.hero-bottom-right` lowered to `bottom: 25%` (still fully visible at scroll 0, right box remains lower than the left box)
+- Works cards: removed the hard 3/8 divider; the picture now fades into the card color (bottom fade on desktop, right fade on the landscape mobile cards)
+- Mobile works: cards are landscape rectangles (left 3/8 slider, right 5/8 text); `#works` uses `padding-top: 95px` and card height 131px so the title and all three cards fit one 360x640 viewport when navigating to #works
+- Works modal: carousel slides are square 1:1 (300px desktop, 210px mobile) with `object-fit: contain`; certificates remain landscape; confirmed no See Full Project button exists inside the modal
+- Visuals data: added Codesortium and Logic-Unlocked with the Co-designer tag (the six original items stay Lead Designer)
+- Merchandise data: 15 items matching the exact file names; the five SC pin items use the release description "Released March 2025, on celebrating the 31st anniversary of QCU."; the three JPCS PoloShirt items keep the Unpublished tag
+- Tools: new Applications box after Programming Languages (5-column grid); Node.js joined Programming; proficiency dots added (green best, blue good, yellow still learning); FreeShow and EasyWorship use Assets/app/FreeShow.png and Assets/app/EastWorship.png; OBS uses the local icon
+- Marquee: rebuilt to the exact 20-item sequence with local Assets/app/ icons wherever available
+- Background: JPCS duties start collapsed; the chevron toggle moved to the bottom-left underneath the text block
+- Verified with headless Edge CDP at 360x640 and 1366x768 in dark and light mode; no console errors; graphify update run after changes
+
+## 2026-11-09 — Major restructure: works cards, certificates, tools, 2-column background, mobile hero
+
+Reworked `index.html` directly per the approved contract in `docs/index-2-restructure-contract.md`.
+
+- Navigation: added Certificates and Tools links to `.header-center` and `.mobile-nav`; compact header rules moved to a new `max-width: 1200px` band (90% width, smaller links) so five links fit at 850-1200px
+- Mobile hero 768px: `.hero-bg-portfolio` to `top: 7%`, `.hero-photo-layer` to `65vh` at `bottom: 20%` so the head top blocks the lower portion of the T and F while the upper portion stays visible, `.hero-bottom-left` to `bottom: 19%` (shoulder level, clear of nose and mouth), `.hero-bottom-right` to `bottom: 26%` (lower than the left box and fully visible at scroll 0)
+- `#works`: replaced the 3D carousel with three portrait cards (Visuals, Merchandise, Brands); each card has a 3/8 image slider advancing every 5 seconds and a 5/8 text block with theme, title, subtitle, justified description and a See Full Project button
+- `#works` modal: category items open in a five-slot 3D coverflow with portrait cards, arrows, swipe, click-to-focus and Escape/backdrop close; Visuals items carry the Lead Designer chip; Polo Shirts and Revise carry the stroked Unpublished chip with a red dot
+- BSCS-Entry medal: bronze medal plus "3rd" badge closes the modal, scrolls to `#certificates` and activates the 3rd Placer slide
+- `#certificates` (new): five-slot 3D landscape carousel over the six Assets/Certificates files, auto-advancing every 5 seconds; title, type and description parsed from filenames with display typos corrected
+- `#tools` (new): four boxes (Visual Tools, Programming Languages, AIs, Presentation) with divider rows; CDN icons for Figma, HTML, CSS, JavaScript, Git, GitHub and OBS Studio; inline SVG for EasyWorship; local Assets/app icons for the remaining tools
+- `#background`: two-column grid (Experience left, Education right) collapsing to one column on mobile; added NCMB internship entry and CSBN education entry under MMC; added a chevron toggle for the JPCS duties list
+- Verified with headless Edge CDP screenshots at 360x640, 940x700 and 1366x768 in dark and light mode; no console errors; card and certificate auto-advance confirmed working
+
 ## 2026-11-08 — Mobile hero spacing fixes and splash loader logo
 
 Repositioned portrait-mode hero elements and rebuilt the splash loader in `index.html`.

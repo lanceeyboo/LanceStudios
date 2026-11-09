@@ -121,14 +121,27 @@
             align-items: center;
         }
         .header-center a {
+            position: relative;
             color: var(--text-color);
             text-decoration: none;
             font-weight: bold;
             font-size: 1rem;
-            transition: opacity 0.3s;
+            transition: color 0.3s;
             white-space: nowrap;
         }
-        .header-center a:hover { opacity: 0.6; text-decoration: underline; }
+        .header-center a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background-color: currentColor;
+            transform-origin: left;
+            transition: width 0.3s ease;
+        }
+        .header-center a:hover::after { width: 100%; }
+        .dark-mode .header-center a:hover { color: var(--accent-blue); }
 
         .header-right { display: flex; align-items: center; gap: 12px; }
 
@@ -264,6 +277,8 @@
             min-height: 2.4rem;
             margin-top: 0;
         }
+        /* Dark mode accent for section titles */
+        .dark-mode .section-title { color: var(--accent-blue); }
         .section-subtitle {
             font-size: 1rem;
             opacity: 0.8;
@@ -472,6 +487,199 @@
             white-space: nowrap;
         }
 
+        /* Internship location link and status bubble on the hero top row */
+        .hero-location-link {
+            position: absolute;
+            top: 10%;
+            right: 13.5%;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .hero-location-link svg { width: 15px; height: 15px; color: var(--accent-blue); flex-shrink: 0; }
+        .hero-location-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background-color: currentColor;
+            transform-origin: left;
+            transition: width 0.3s ease;
+        }
+        .hero-location-link:hover::after { width: 100%; }
+        .location-tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            right: 0;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background-color: var(--accent-blue);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: bold;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 6;
+        }
+        .location-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            right: 22px;
+            border: 5px solid transparent;
+            border-top-color: var(--accent-blue);
+        }
+        .hero-location-link:hover .location-tooltip,
+        .location-tooltip.show-tooltip { opacity: 1; }
+        .hero-status-bubble {
+            position: absolute;
+            top: 10%;
+            left: 12.5%;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border: 2px solid var(--text-color);
+            border-radius: 30px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: bold;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+        .hero-status-bubble:hover,
+        .hero-status-bubble:focus-visible {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+            outline: none;
+        }
+        .hero-status-bubble:active { box-shadow: 0 0 0 5px rgba(2, 132, 199, 0.3); }
+        .hero-status-bubble .status-text-content { transition: opacity 0.25s ease; }
+        .hero-status-bubble:hover .status-text-content,
+        .hero-status-bubble:focus-visible .status-text-content { opacity: 0; }
+        .hero-status-bubble::after {
+            content: 'Change';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+        .hero-status-bubble:hover::after,
+        .hero-status-bubble:focus-visible::after { opacity: 1; }
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            flex-shrink: 0;
+            animation: status-pulse 1.6s ease-in-out infinite;
+        }
+        @keyframes status-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+            50% { opacity: 0.55; transform: scale(0.8); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+        }
+
+        /* Custom status editor modals */
+        .status-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1999;
+            display: none;
+        }
+        .status-overlay.open { display: block; }
+        .status-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            width: min(320px, 92vw);
+            display: none;
+            padding: 16px;
+            border: 2px solid var(--text-color);
+            border-radius: 14px;
+            background-color: var(--bg-color);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+            box-sizing: border-box;
+        }
+        .status-modal.open { display: block; }
+        .status-modal h4 { margin: 0 0 10px 0; font-size: 1rem; }
+        .status-modal-desc { font-size: 0.9rem; opacity: 0.8; margin: 0 0 15px 0; }
+        .status-input-row { position: relative; }
+        .status-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 9px 38px 9px 12px;
+            border: 2px solid var(--text-color);
+            border-radius: 8px;
+            background-color: transparent;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .status-input:focus { outline: none; border-color: var(--accent-blue); }
+        #status-text-input { padding-right: 12px; }
+        .status-eye {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            padding: 2px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            opacity: 0.75;
+            cursor: pointer;
+        }
+        .status-eye:hover { opacity: 1; color: var(--accent-blue); }
+        .status-eye svg { width: 18px; height: 18px; }
+        .status-eye .eye-closed { display: none; }
+        .status-eye.showing .eye-open { display: none; }
+        .status-eye.showing .eye-closed { display: block; }
+        .status-modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+        .status-btn {
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 7px 16px;
+            border: 2px solid var(--text-color);
+            border-radius: 30px;
+            background-color: transparent;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .status-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
+        .status-btn.primary {
+            background-color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #ffffff;
+        }
+        .status-btn.primary:hover { background-color: transparent; color: var(--accent-blue); }
+
         /* Layer 4: CTA button inside the bottom-left container */
         .cta-btn {
             position: relative;
@@ -599,42 +807,353 @@
             .tech-dot { margin: 0 20px; }
         }
 
-        /* Works 3D Carousel Gallery */
+        /* Works Category Cards */
         .works-container {
             width: 100%;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
         }
-        .carousel-wrapper {
+        .works-cards {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 30px;
+            width: 90%;
+            max-width: 1080px;
+        }
+        .work-card {
+            flex: 1 1 0;
+            min-width: 0;
+            max-width: 330px;
+            height: 540px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-color);
+            border: 2px solid var(--text-color);
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+        .dark-mode .work-card { box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); }
+        .work-card:hover { transform: translateY(-6px); }
+        .card-media {
+            position: relative;
+            height: 37.5%;
+            overflow: hidden;
+            background-color: rgba(128, 128, 128, 0.08);
+        }
+        /* Picture to color fade replaces the hard divider */
+        .card-media::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 45%;
+            background: linear-gradient(to bottom, transparent, var(--bg-color));
+            pointer-events: none;
+        }
+        .card-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.9s ease;
+        }
+        .card-slide.active { opacity: 1; }
+        .card-body {
+            height: 62.5%;
+            box-sizing: border-box;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .card-theme {
+            margin: 0 0 6px 0;
+            font-size: 0.72rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+        .card-title { margin: 0; font-size: 1.5rem; line-height: 1.2; }
+        .card-subtitle { margin: 4px 0 0 0; font-size: 0.92rem; font-style: italic; font-weight: 400; opacity: 0.85; }
+        .card-desc {
+            margin: 10px 0 0 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            opacity: 0.9;
+            text-align: justify;
+        }
+        .card-btn {
+            margin-top: auto;
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: bold;
+            color: var(--text-color);
+            background-color: transparent;
+            border: 2px solid var(--text-color);
+            border-radius: 30px;
+            padding: 9px 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .card-btn:hover { background-color: var(--text-color); color: var(--bg-color); }
+
+        /* Coverflow carousel shared by the works modal and certificates */
+        .cf-wrapper {
             position: relative;
             width: 100%;
-            max-width: 1000px;
-            height: 380px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
-            perspective: 1200px;
+            perspective: 1400px;
             transform-style: preserve-3d;
         }
-        .carousel-item {
+        .cf-item {
             position: absolute;
-            width: 300px;
-            height: 300px;
             left: 50%;
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out, z-index 0.5s step-end;
-            object-fit: contain;
+            top: 50%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--text-color);
+            background-color: var(--bg-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+            transition: transform 0.55s ease-out, opacity 0.55s ease-out, z-index 0.55s step-end;
             will-change: transform, opacity;
-            border: none;
-            outline: none;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
-        .dark-mode .carousel-item { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); }
-        .item-center { transform: translateX(-50%) translateZ(0) rotateY(0deg) scale(1); z-index: 3; opacity: 1; }
-        .item-left-1 { transform: translateX(-120%) translateZ(-100px) rotateY(15deg) scale(0.85); z-index: 2; opacity: 0.6; }
-        .item-right-1 { transform: translateX(20%) translateZ(-100px) rotateY(-15deg) scale(0.85); z-index: 2; opacity: 0.6; }
-        .item-hidden { opacity: 0; z-index: 1; pointer-events: none; transform: translateX(-50%) translateZ(-300px); }
+        .dark-mode .cf-item { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); }
+        .cf-item.cf-square { width: 300px; height: 300px; }
+        .cf-item.cf-landscape { width: 430px; height: 285px; }
+        .cf-item img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+        .cf-item.cf-square img { object-fit: contain; }
+        .cf-slot-0 { transform: translate(-50%, -50%) scale(1); z-index: 5; opacity: 1; cursor: default; }
+        .cf-slot-l1 { transform: translate(calc(-50% - 60%), -50%) translateZ(-120px) rotateY(24deg) scale(0.85); z-index: 4; opacity: 0.72; cursor: pointer; }
+        .cf-slot-r1 { transform: translate(calc(-50% + 60%), -50%) translateZ(-120px) rotateY(-24deg) scale(0.85); z-index: 4; opacity: 0.72; cursor: pointer; }
+        .cf-slot-l2 { transform: translate(calc(-50% - 112%), -50%) translateZ(-260px) rotateY(36deg) scale(0.7); z-index: 3; opacity: 0.4; cursor: pointer; }
+        .cf-slot-r2 { transform: translate(calc(-50% + 112%), -50%) translateZ(-260px) rotateY(-36deg) scale(0.7); z-index: 3; opacity: 0.4; cursor: pointer; }
+        .cf-slot-hidden { transform: translate(-50%, -50%) translateZ(-420px) scale(0.6); z-index: 1; opacity: 0; pointer-events: none; }
+        /* Works modal slots stay hit-testable by avoiding translateZ depth offsets */
+        .works-cf .cf-slot-l1 { transform: translate(calc(-50% - 60%), -50%) rotateY(24deg) scale(0.8); }
+        .works-cf .cf-slot-r1 { transform: translate(calc(-50% + 60%), -50%) rotateY(-24deg) scale(0.8); }
+        .works-cf .cf-slot-l2 { transform: translate(calc(-50% - 112%), -50%) rotateY(36deg) scale(0.65); }
+        .works-cf .cf-slot-r2 { transform: translate(calc(-50% + 112%), -50%) rotateY(-36deg) scale(0.65); }
+        .works-cf .cf-slot-hidden { transform: translate(-50%, -50%) scale(0.6); }
+        .tag-chip {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 4px 11px;
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            font-size: 0.68rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+        .tag-unpublished::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #e53935;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .medal-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border: 2px solid #cd7f32;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #ffd9ad;
+            font-family: inherit;
+            font-size: 0.72rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 6;
+        }
+        .medal-badge:hover { background: rgba(0, 0, 0, 0.85); }
+        .medal-badge svg { width: 15px; height: 15px; }
+
+        /* Works modal */
+        .works-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 4000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .works-modal.open { display: flex; }
+        .works-modal-panel {
+            position: relative;
+            width: min(1000px, 96vw);
+            max-height: 92vh;
+            overflow-y: auto;
+            overflow-x: clip;
+            background: var(--bg-color);
+            border: 2px solid var(--text-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-sizing: border-box;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid var(--text-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+        .modal-close:hover { background: var(--text-color); color: var(--bg-color); }
+        .modal-category-title { margin: 0; font-size: 1.6rem; text-align: left; }
+        .modal-category-sub { margin: 4px 0 12px 0; font-size: 0.9rem; opacity: 0.8; text-align: left; }
+        .works-cf { height: 340px; }
+        .modal-info {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-info h4 { margin: 0; font-size: 1.35rem; }
+        .modal-item-sub {
+            margin: 5px 0 12px 0;
+            font-size: 1rem;
+            font-weight: bold;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .modal-item-desc { margin: 0; font-size: 0.95rem; line-height: 1.6; opacity: 0.9; text-align: justify; }
+
+        /* Certificates carousel info typography */
+        .cert-cf { height: 330px; }
+        .carousel-info {
+            text-align: center;
+            width: 70%;
+            max-width: 900px;
+        }
+        .carousel-info h3 { margin: 0; font-size: 1.8rem; }
+        .carousel-info p.highlight-type {
+            margin: 5px 0 15px 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .work-description {
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-align: justify;
+        }
+
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 25px;
+            width: 92%;
+            max-width: 1300px;
+            align-items: start;
+        }
+        .tool-box {
+            border: 2px solid var(--text-color);
+            border-radius: 14px;
+            padding: 18px 18px 6px 18px;
+            background-color: var(--bg-color);
+        }
+        .tool-box h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.05rem;
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 8px;
+        }
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.35);
+            font-size: 0.98rem;
+            font-weight: bold;
+        }
+        .tool-item:last-child { border-bottom: none; }
+        .tool-item img, .tool-item svg { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
+        .tool-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .tool-item .tool-dot { margin-left: auto; }
+        .dot-green { background-color: #22c55e; }
+        .dot-blue { background-color: #3b82f6; }
+        .dot-yellow { background-color: #eab308; }
+        .tools-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 25px;
+            padding: 12px 25px;
+            border: 2px solid var(--text-color);
+            border-radius: 14px;
+            background-color: var(--bg-color);
+        }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: bold; }
+        .dark-mode .tool-item img.mono-icon { filter: brightness(0) invert(1); }
+        @media (max-width: 1200px) {
+            .tools-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        @media (max-width: 850px) {
+            .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
 
         .nav-btn {
             position: absolute;
@@ -790,12 +1309,14 @@
 
         /* Background Section */
         .background-container {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             justify-content: center;
-            gap: 30px;
-            width: 70%;
+            gap: 50px;
+            width: 85%;
+            max-width: 1200px;
             margin: 0 auto;
+            align-items: start;
         }
         .bg-category-title {
             font-size: 1.5rem;
@@ -895,6 +1416,25 @@
             text-align: justify;
             opacity: 0.9;
         }
+        .org-bullets.collapsed { display: none; }
+        .org-toggle {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            margin-top: 12px;
+            border: 2px solid var(--text-color);
+            border-radius: 50%;
+            background-color: transparent;
+            color: var(--text-color);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .org-toggle svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+        .org-toggle.open svg { transform: rotate(180deg); }
+        .org-toggle:hover { background-color: var(--text-color); color: var(--bg-color); }
 
         /* Hire Me / Contact Section */
         .contact-container {
@@ -919,6 +1459,7 @@
             margin: 0 0 30px 0;
             text-transform: uppercase;
         }
+        .dark-mode .contact-left .big-title { color: var(--accent-blue); }
 
         .contact-objective {
             font-size: 0.9rem;
@@ -1017,10 +1558,11 @@
         }
 
         /* Responsive Styles */
-        @media (max-width: 1050px) {
-            .header-center { gap: 10px; }
-            .header-center a { font-size: 0.85rem; }
-            .company-name { font-size: 0.95rem; }
+        @media (max-width: 1200px) {
+            .floating-header { width: 90%; padding: 0 18px; }
+            .header-center { gap: 8px; }
+            .header-center a { font-size: 0.8rem; }
+            .company-name { font-size: 0.85rem; }
         }
 
         @media (max-width: 850px) {
@@ -1075,11 +1617,15 @@
 
             /* Mobile adjustments for the new Hero layout */
             .hero-stack { height: 100vh; }
-            .hero-bg-portfolio { top: 12%; font-size: clamp(8rem, 40vw, 15rem); transform: translate(-50%, 0); }
-            .hero-photo-layer { height: 65vh; bottom: 8%; display: flex; justify-content: center; z-index: 2; }
+            .hero-bg-portfolio { top: 7%; font-size: clamp(8rem, 40vw, 15rem); transform: translate(-50%, 0); }
+            /* Top row sits between the header and the portfolio text */
+            .hero-status-bubble { top: 40px; left: 5%; font-size: 0.58rem; padding: 5px 10px; gap: 6px; }
+            /* The small offset keeps the link text on the same baseline as the taller bubble */
+            .hero-location-link { top: 40px; right: 5%; font-size: 0.6rem; transform: translateY(6px); }
+            .hero-photo-layer { height: 65vh; bottom: 20%; display: flex; justify-content: center; z-index: 2; }
             .hero-photo-layer img { object-position: center bottom; }
-            .hero-bottom-left { position: absolute; bottom: 12%; left: 5%; width: auto; max-width: 250px; z-index: 5; text-align: left; padding: 0; }
-            .hero-bottom-right { position: absolute; bottom: 12%; right: 5%; width: auto; max-width: 260px; z-index: 5; text-align: right; padding: 15px; box-sizing: border-box; }
+            .hero-bottom-left { position: absolute; bottom: 30%; left: 5%; width: auto; max-width: 250px; z-index: 5; text-align: left; padding: 0; }
+            .hero-bottom-right { position: absolute; bottom: 15%; right: 5%; width: auto; max-width: 260px; z-index: 5; text-align: right; padding: 15px; box-sizing: border-box; }
             .hero-welcome-text { font-size: 0.9rem; }
             .hero-typed-line { font-size: clamp(1.6rem, 7vw, 2.4rem); min-height: 1.4em; }
             .hero-description { font-size: 0.95rem; margin-bottom: 20px; }
@@ -1088,10 +1634,60 @@
             .cta-btn { padding: 12px 32px; font-size: 1rem; }
             
             .company-name { display: block; font-size: 0.85rem; }
-            .carousel-wrapper { height: 260px; }
-            .carousel-item { width: 200px; height: 200px; }
-            .item-left-1 { transform: translateX(-105%) translateZ(-80px) rotateY(12deg) scale(0.85); }
-            .item-right-1 { transform: translateX(5%) translateZ(-80px) rotateY(-12deg) scale(0.85); }
+            /* Landscape category cards with left picture and right text */
+            #works { padding-top: 95px; }
+            .works-cards { flex-direction: column; align-items: center; gap: 10px; width: 95%; }
+            .work-card { flex: none; flex-direction: row; width: min(360px, 94vw); max-width: none; height: 131px; }
+            .work-card:hover { transform: none; }
+            .work-card .card-media { width: 37.5%; height: 100%; }
+            .work-card .card-media::after {
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: auto;
+                width: 55%;
+                height: auto;
+                background: linear-gradient(to right, transparent, var(--bg-color));
+            }
+            .work-card .card-body { width: 62.5%; height: 100%; padding: 9px 11px; }
+            .work-card .card-theme { font-size: 0.58rem; letter-spacing: 1.5px; margin-bottom: 2px; }
+            .work-card .card-title { font-size: 0.96rem; }
+            .work-card .card-subtitle { font-size: 0.62rem; margin-top: 2px; }
+            .work-card .card-desc {
+                font-size: 0.6rem;
+                line-height: 1.3;
+                margin-top: 3px;
+                flex-shrink: 0;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .work-card .card-btn { font-size: 0.6rem; padding: 4px 10px; }
+            .cf-item.cf-square { width: 210px; height: 210px; }
+            .cf-item.cf-landscape { width: 265px; height: 175px; }
+            .cf-slot-l2 { transform: translate(calc(-50% - 88%), -50%) translateZ(-260px) rotateY(36deg) scale(0.7); }
+            .cf-slot-r2 { transform: translate(calc(-50% + 88%), -50%) translateZ(-260px) rotateY(-36deg) scale(0.7); }
+            .works-cf .cf-slot-l2 { transform: translate(calc(-50% - 88%), -50%) rotateY(36deg) scale(0.65); }
+            .works-cf .cf-slot-r2 { transform: translate(calc(-50% + 88%), -50%) rotateY(-36deg) scale(0.65); }
+            .works-cf { height: 250px; }
+            .cert-cf { height: 225px; }
+            /* Two main columns with Presentation spanning both */
+            .tools-grid { grid-template-columns: 1fr 1fr; width: 95%; gap: 12px; }
+            .tool-box { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 12px 12px 4px 12px; }
+            .tool-box h3 { grid-column: 1 / -1; margin-bottom: 0; font-size: 0.95rem; }
+            .tools-grid .tool-box:nth-child(1) { grid-column: 1; grid-row: 1; }
+            .tools-grid .tool-box:nth-child(2) { grid-column: 2; grid-row: 1; }
+            .tools-grid .tool-box:nth-child(3) { grid-column: 1; grid-row: 2; }
+            .tools-grid .tool-box:nth-child(4) { grid-column: 2; grid-row: 2; }
+            .tools-grid .tool-box:nth-child(5) { grid-column: 1 / -1; grid-row: 3; }
+            .tool-item { font-size: 0.82rem; gap: 8px; padding: 9px 0; }
+            .tool-item img, .tool-item svg { width: 22px; height: 22px; }
+            .tools-legend { gap: 18px; padding: 10px 15px; margin-top: 18px; }
+            .carousel-info { width: 95%; }
+            .works-modal-panel { padding: 18px; }
+            .modal-info h4 { font-size: 1.15rem; }
             .about-content { flex-direction: column; text-align: center; gap: 20px; width: 95%;}
             .contact-container { flex-direction: column; text-align: center; width: 95%;}
             .contact-left { align-items: center; }
@@ -1103,8 +1699,18 @@
             .skill-tag { width: 100%; justify-content: flex-start; }
             .timeline-header, .org-subheader { flex-direction: column; align-items: flex-start; gap: 5px; }
             .timeline-header span, .org-subheader span { margin-left: 0; text-align: left; }
-            .background-container { width: 95%; }
+            .background-container { grid-template-columns: 1fr; width: 95%; gap: 40px; }
         }
+
+        /* Header and portrait start hidden until the splash reveal */
+        .floating-header,
+        .hero-photo-layer {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .hero-photo-layer { transition: opacity 0.8s ease; }
+        body.hero-revealed .floating-header { opacity: 1; pointer-events: auto; }
+        body.hero-revealed .hero-photo-layer { opacity: 1; }
 
         /* Prevent scrolling while splash screen is active */
         html.no-scroll, body.no-scroll { overflow: hidden !important; height: 100vh !important; }
@@ -1173,19 +1779,30 @@
             justify-content: center;
             align-items: center;
         }
-        .spinner {
+        .speedometer {
             position: absolute;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            border: 5px solid rgba(0, 0, 0, 0.1);
-            border-top-color: var(--accent-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            box-sizing: border-box;
-            margin: 0;
+            transform: rotate(-90deg);
         }
-        .dark-mode .spinner { border: 5px solid rgba(255, 255, 255, 0.1); border-top-color: var(--accent-blue); }
+        .speed-track {
+            fill: none;
+            stroke: rgba(0, 0, 0, 0.12);
+            stroke-width: 5;
+        }
+        .dark-mode .speed-track { stroke: rgba(255, 255, 255, 0.14); }
+        .speed-fill {
+            fill: none;
+            stroke: var(--accent-blue);
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-dasharray: 276.5;
+            stroke-dashoffset: 276.5;
+            transition: stroke-dashoffset 1.5s linear;
+        }
+        .spinner-container.filling .speed-fill { stroke-dashoffset: 0; }
         .loader-logo {
             width: 50px;
             height: 50px;
@@ -1197,7 +1814,6 @@
             0%, 100% { transform: scale(1); opacity: 0.8; }
             50% { transform: scale(1.1); opacity: 1; }
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="no-scroll dark-mode">
@@ -1206,16 +1822,19 @@
     <div id="splash-screen">
         <div class="splash-card">
             <div class="splash-content" id="splash-content">
-                <h1 class="splash-heading"><span class="title-open">OPEN</span> <span class="title-portfolio">PORTFOLIO</span></h1>
-                <p class="splash-title">This page is created for Lance Harvey B. Borras,<br>do you want to proceed?</p>
-                <button class="splash-btn" id="splash-yes-btn">Yes, I'm sure</button>
+                <h1 class="splash-heading"><span class="title-open">WELCOME To</span> <span class="title-portfolio"> <br> Lance Studios</span></h1>
+                <p class="splash-title">This page is created for Lance Harvey B. Borras,<br> do you want to see unbelievable works?</p>
+                <button class="splash-btn" id="splash-yes-btn"> Of Course! </button>
             </div>
             <div class="splash-loader" id="splash-loader" style="display: none;">
                 <div class="spinner-container">
-                    <div class="spinner"></div>
+                    <svg class="speedometer" viewBox="0 0 100 100">
+                        <circle class="speed-track" cx="50" cy="50" r="44"></circle>
+                        <circle class="speed-fill" cx="50" cy="50" r="44"></circle>
+                    </svg>
                     <img src="Assets/lancestudios.png" alt="Lance Studios Logo" class="loader-logo">
                 </div>
-                <p>Loading awesomeness...</p>
+                <p>Please Wait, <br> the Anbilibabol is cooking!</p>
             </div>
         </div>
     </div>
@@ -1234,6 +1853,8 @@
 
         <nav class="header-center">
             <a href="#works">Works</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#tools">Tools</a>
             <a href="#profile">Profile</a>
             <a href="#background">Background</a>
         </nav>
@@ -1255,7 +1876,7 @@
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
             </button>
-            <a href="#contact" class="message-btn">Hire Me</a>
+            <a href="#contact" class="message-btn">Contacts</a>
         </div>
     </header>
 
@@ -1263,6 +1884,8 @@
     <nav class="mobile-nav" id="mobileNav">
         <a href="#home">Home</a>
         <a href="#works">Works</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#tools">Tools</a>
         <a href="#profile">Profile</a>
         <a href="#background">Background</a>
     </nav>
@@ -1289,6 +1912,19 @@
                 <img src="Assets/lance.png" alt="Lance Harvey B. Borras" draggable="false">
             </div>
 
+            <!-- Location link in the top right corner -->
+            <a class="hero-location-link" href="https://drive.google.com/drive/folders/1Mc53J7pF70QyI8gpqP4Z9lKr25WypA-B?usp=sharing" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>Quezon City University</span>
+                <span class="location-tooltip" id="qcu-tooltip">Click here to see my Internship portfolio</span>
+            </a>
+
+            <!-- Editable status bubble in the top left -->
+            <button class="hero-status-bubble" id="hero-status-bubble" type="button" title="Click to edit the status">
+                <span class="status-dot"></span>
+                <span class="status-text-content" id="hero-status-text">Hello! wala bang kanin Boseng?</span>
+            </button>
+
             <!-- Layer 3: Bottom-left content group -->
             <div class="hero-bottom-left">
                 <p class="hero-welcome-text">Welcome to</p>
@@ -1313,40 +1949,46 @@
                 <div class="tech-item"><img src="Assets/app/photoshop.png" alt="Photoshop"> Photoshop</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/canva.png" alt="Canva"> Canva</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma"> Figma</div> <span class="tech-dot">&bull;</span>
-                <div class="tech-item"><img src="Assets/app/vscode.png" alt="VS Code"> VS Code</div> <span class="tech-dot">&bull;</span>
-                <div class="tech-item"><img src="Assets/app/visualstudios.webp" alt="Visual Studio"> Visual Studio</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/capcut.png" alt="CapCut"> CapCut</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML"> HTML</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/CSS.png" alt="CSS"> CSS</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript"> JavaScript</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js"> Node.js</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/vscode.png" alt="VS Code"> VS Code</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/visualstudios.webp" alt="Visual Studio"> Visual Studio</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git"> Git</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/github" alt="GitHub" class="mono-icon"> GitHub</div> <span class="tech-dot">&bull;</span>
-                <div class="tech-item"><img src="Assets/app/propresenter.png" alt="ProPresenter"> ProPresenter</div> <span class="tech-dot">&bull;</span>
-                <div class="tech-item"><img src="Assets/app/obs.png" alt="OBS Studio"> OBS Studio</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/Gemini.png" alt="Gemini"> Gemini</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/Chatgpt.png" alt="ChatGPT"> ChatGPT</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/Claude.png" alt="Claude"> Claude</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/DeepSeek.png" alt="DeepSeek"> DeepSeek</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/propresenter.png" alt="ProPresenter"> ProPresenter</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/obs.png" alt="OBS Studio"> OBS Studio</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/EastWorship.png" alt="EasyWorship"> EasyWorship</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/FreeShow.png" alt="FreeShow"> FreeShow</div> <span class="tech-dot">&bull;</span>
             </div>
             <!-- Group 2 (Duplicate for seamless scroll) -->
             <div class="tech-group">
                 <div class="tech-item"><img src="Assets/app/photoshop.png" alt="Photoshop"> Photoshop</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/canva.png" alt="Canva"> Canva</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma"> Figma</div> <span class="tech-dot">&bull;</span>
-                <div class="tech-item"><img src="Assets/app/vscode.png" alt="VS Code"> VS Code</div> <span class="tech-dot">&bull;</span>
-                <div class="tech-item"><img src="Assets/app/visualstudios.webp" alt="Visual Studio"> Visual Studio</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/capcut.png" alt="CapCut"> CapCut</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML"> HTML</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/CSS.png" alt="CSS"> CSS</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript"> JavaScript</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js"> Node.js</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/vscode.png" alt="VS Code"> VS Code</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/visualstudios.webp" alt="Visual Studio"> Visual Studio</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git"> Git</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="https://cdn.simpleicons.org/github" alt="GitHub" class="mono-icon"> GitHub</div> <span class="tech-dot">&bull;</span>
-                <div class="tech-item"><img src="Assets/app/propresenter.png" alt="ProPresenter"> ProPresenter</div> <span class="tech-dot">&bull;</span>
-                <div class="tech-item"><img src="Assets/app/obs.png" alt="OBS Studio"> OBS Studio</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/Gemini.png" alt="Gemini"> Gemini</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/Chatgpt.png" alt="ChatGPT"> ChatGPT</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/Claude.png" alt="Claude"> Claude</div> <span class="tech-dot">&bull;</span>
                 <div class="tech-item"><img src="Assets/app/DeepSeek.png" alt="DeepSeek"> DeepSeek</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/propresenter.png" alt="ProPresenter"> ProPresenter</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/obs.png" alt="OBS Studio"> OBS Studio</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/EastWorship.png" alt="EasyWorship"> EasyWorship</div> <span class="tech-dot">&bull;</span>
+                <div class="tech-item"><img src="Assets/app/FreeShow.png" alt="FreeShow"> FreeShow</div> <span class="tech-dot">&bull;</span>
             </div>
         </div>
     </div>
@@ -1359,34 +2001,150 @@
         </div>
 
         <div class="works-container">
-            <div class="carousel-wrapper reveal-item" id="works-carousel" style="--reveal-delay: 0.1s;">
-                <button class="nav-btn prevBtn">&lt;</button>
-                <img class="carousel-item" src="Assets/TrustinGod.png" alt="Trustin God" draggable="false">
-                <img class="carousel-item" src="Assets/OcccupationalSafety.png" alt="Occupational Safety" draggable="false">
-                <img class="carousel-item" src="Assets/CodeQuest.jpg" alt="Code Quest" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/MAROON V2.png" alt="MAROON V2" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v2.png" alt="SUNRISE v2" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/UNIVERSITY.png" alt="UNIVERSITY" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/SUNSET.png" alt="SUNSET" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/MAROON v1.jpg" alt="MAROON V1" draggable="false">
-                <img class="carousel-item" src="Assets/Lanyard/SUNRISE v1.jpg" alt="SUNRISE V1" draggable="false">
-                <img class="carousel-item" src="Assets/Logo/JPCS.png" alt="JPCS-QCU Logo" draggable="false">
-                <img class="carousel-item" src="Assets/Logo/Glory.png" alt="Glory in the Highest Bible School" draggable="false">
-                <img class="carousel-item" src="Assets/Azure.jpg" alt="Azure" draggable="false">
-                <img class="carousel-item" src="Assets/Goodness.png" alt="Goodness of God" draggable="false">
-                <button class="nav-btn nextBtn">&gt;</button>
-            </div>
-            <div class="carousel-info">
-                <h3 id="works-title" class="reveal-item" style="--reveal-delay: 0.2s;"></h3>
-                <p id="works-type" class="highlight-type reveal-item" style="--reveal-delay: 0.3s;"></p>
-                <p id="works-desc" class="work-description reveal-item" style="--reveal-delay: 0.4s;"></p>
-                <a id="works-link" href="#" target="_blank" rel="noopener noreferrer" class="resume-link reveal-item" style="margin-top: 25px; --reveal-delay: 0.5s;">
-                    <div class="icon-circle">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            <div class="works-cards">
+                <div class="work-card reveal-item" data-category="visuals" style="--reveal-delay: 0.1s;">
+                    <div class="card-media">
+                        <img class="card-slide" src="Assets/Visuals/Azure.jpg" alt="Azure" draggable="false">
+                        <img class="card-slide" src="Assets/Visuals/OcccupationalSafety.png" alt="Occupational Safety" draggable="false">
+                        <img class="card-slide" src="Assets/Visuals/TrustinGod.png" alt="Trust in God" draggable="false">
+                        <img class="card-slide" src="Assets/Visuals/Goodness.png" alt="Goodness of God" draggable="false">
+                        <img class="card-slide" src="Assets/Visuals/Recruitment-Poster.jpg" alt="Recruitment" draggable="false">
+                        <img class="card-slide" src="Assets/Visuals/CodeQuest.jpg" alt="Code Quest 2025" draggable="false">
+                        <img class="card-slide" src="Assets/Visuals/Codesortium.png" alt="Codesortium" draggable="false">
+                        <img class="card-slide" src="Assets/Visuals/Logic-Unlocked.png" alt="Logic Unlocked" draggable="false">
                     </div>
-                    <span>See Full Project</span>
-                </a>
+                    <div class="card-body">
+                        <p class="card-theme">Graphic Design</p>
+                        <h3 class="card-title">Visuals</h3>
+                        <p class="card-subtitle">Event posters and promotional graphics</p>
+                        <p class="card-desc">A collection of event posters, promotional materials, and digital artworks designed for organizations, competitions, and community events throughout Lance's journey.</p>
+                        <button class="card-btn" type="button">See Full Project</button>
+                    </div>
+                </div>
+
+                <div class="work-card reveal-item" data-category="merchandise" style="--reveal-delay: 0.2s;">
+                    <div class="card-media">
+                        <img class="card-slide" src="Assets/Merchandise/MAROON v2.png" alt="Maroon v2 Lanyard" draggable="false">
+                        <img class="card-slide" src="Assets/Merchandise/CLICKER.png" alt="BSCS Clicker Lanyard" draggable="false">
+                        <img class="card-slide" src="Assets/Merchandise/SC-JpcsQcu.jpg" alt="JPCS QCU Pin" draggable="false">
+                        <img class="card-slide" src="Assets/Merchandise/SC-Pixelated.jpg" alt="Pixelated Pin" draggable="false">
+                        <img class="card-slide" src="Assets/Merchandise/PS-Certificate.png" alt="Certificate Polo Shirt" draggable="false">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-theme">Merch Design</p>
+                        <h3 class="card-title">Merchandise</h3>
+                        <p class="card-subtitle">Lanyards, pins, and shirt concepts</p>
+                        <p class="card-desc">Organization merchandise designed by Lance for the Junior Philippine Computer Society - QCU Chapter, including lanyard collections, pin concepts, and polo shirt mockups.</p>
+                        <button class="card-btn" type="button">See Full Project</button>
+                    </div>
+                </div>
+
+                <div class="work-card reveal-item" data-category="brands" style="--reveal-delay: 0.3s;">
+                    <div class="card-media">
+                        <img class="card-slide" src="Assets/lancestudios.png" alt="Lance Studios Logo" draggable="false">
+                        <img class="card-slide" src="Assets/Logo/Glory.png" alt="Glory in the Highest Bible School" draggable="false">
+                        <img class="card-slide" src="Assets/Logo/JPCS.png" alt="JPCS-QCU Logo" draggable="false">
+                        <img class="card-slide" src="Assets/Logo/Revise.png" alt="Revise Logo Concept" draggable="false">
+                        <img class="card-slide" src="Assets/Logo/BSCS-Entry.png" alt="BSCS Logo Entry" draggable="false">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-theme">Brand Identity</p>
+                        <h3 class="card-title">Brands</h3>
+                        <p class="card-subtitle">Logos and organizational seals</p>
+                        <p class="card-desc">Official logo seals and brand identities crafted for schools, organizations, and communities.</p>
+                        <button class="card-btn" type="button">See Full Project</button>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certifications" class="section">
+        <div class="section-title-wrapper reveal-item">
+            <h2 class="section-title typewriter-title" data-text="Certifications"></h2>
+            <p class="section-subtitle">Some credentials achieved by Lance Harvey B. Borras.</p>
+        </div>
+
+        <div class="cf-wrapper cert-cf reveal-item" id="cert-carousel" style="--reveal-delay: 0.1s;">
+            <button class="nav-btn prevBtn" id="cert-prev" aria-label="Previous certificate">&lt;</button>
+            <div class="cf-item cf-landscape">
+                <img src="Assets/Certificates/24-03-01 Quiz Bee (Certificate of Participation).jpg" alt="Quiz Bee Certificate of Participation" draggable="false">
+            </div>
+            <div class="cf-item cf-landscape">
+                <img src="Assets/Certificates/24-03-05 Logo making contest BSCS catergory -3rd Placer (Certificate of Achievement).jpg" alt="Logo Making Contest BSCS Category 3rd Placer Certificate of Achievement" draggable="false">
+            </div>
+            <div class="cf-item cf-landscape">
+                <img src="Assets/Certificates/24-12-22 JPCS Certicate of Membership 2024-25.jpg" alt="JPCS Certificate of Membership 2024-25" draggable="false">
+            </div>
+            <div class="cf-item cf-landscape">
+                <img src="Assets/Certificates/25-01-20 YES Trasitional Leadership Worshop 2025(Certificate of Participation).jpg" alt="YES Transitional Leadership Workshop 2025 Certificate of Participation" draggable="false">
+            </div>
+            <div class="cf-item cf-landscape">
+                <img src="Assets/Certificates/25-12-18 Codesortium Certificate.jpg" alt="Codesortium Certificate" draggable="false">
+            </div>
+            <div class="cf-item cf-landscape">
+                <img src="Assets/Certificates/26-04-13 JPCS Certicate of Membership 2025-26.jpg" alt="JPCS Certificate of Membership 2025-26" draggable="false">
+            </div>
+            <button class="nav-btn nextBtn" id="cert-next" aria-label="Next certificate">&gt;</button>
+        </div>
+
+        <div class="carousel-info">
+            <h3 id="cert-title" class="reveal-item" style="--reveal-delay: 0.2s;"></h3>
+            <p id="cert-type" class="highlight-type reveal-item" style="--reveal-delay: 0.3s;"></p>
+            <p id="cert-desc" class="work-description reveal-item" style="--reveal-delay: 0.4s;"></p>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="section">
+        <div class="section-title-wrapper reveal-item">
+            <h2 class="section-title typewriter-title" data-text="Tools"></h2>
+            <p class="section-subtitle">Tools and technologies Lance works with.</p>
+        </div>
+
+        <div class="tools-grid">
+            <div class="tool-box reveal-item" style="--reveal-delay: 0.1s;">
+                <h3>Visual Tools</h3>
+                <div class="tool-item"><img src="Assets/app/photoshop.png" alt="Photoshop" draggable="false"> Photoshop <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="Assets/app/canva.png" alt="Canva" draggable="false"> Canva <span class="tool-dot dot-green" title="Good"></span></div>
+                <div class="tool-item"><img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" draggable="false"> Figma <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="Assets/app/capcut.png" alt="CapCut" draggable="false"> CapCut <span class="tool-dot dot-green" title="Good"></span></div>
+            </div>
+            <div class="tool-box reveal-item" style="--reveal-delay: 0.2s;">
+                <h3>Languages</h3>
+                <div class="tool-item"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML" draggable="false"> HTML <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="https://cdn.simpleicons.org/css/1572B6" alt="CSS" draggable="false"> CSS <span class="tool-dot dot-green" title="Good"></span></div>
+                <div class="tool-item"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" draggable="false"> JavaScript <span class="tool-dot dot-yellow" title="Still learning"></span></div>
+                <div class="tool-item"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js" draggable="false"> Node.js <span class="tool-dot dot-yellow" title="Still learning"></span></div>
+            </div>
+            <div class="tool-box reveal-item" style="--reveal-delay: 0.3s;">
+                <h3>Applications</h3>
+                <div class="tool-item"><img src="Assets/app/vscode.png" alt="VS Code" draggable="false"> VS Code <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="Assets/app/visualstudios.webp" alt="Visual Studio" draggable="false"> Visual Studio <span class="tool-dot dot-green" title="Good"></span></div>
+                <div class="tool-item"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" draggable="false"> Git <span class="tool-dot dot-green" title="Good"></span></div>
+                <div class="tool-item"><img src="https://cdn.simpleicons.org/github" alt="GitHub" class="mono-icon" draggable="false"> GitHub <span class="tool-dot dot-green" title="Good"></span></div>
+            </div>
+            <div class="tool-box reveal-item" style="--reveal-delay: 0.4s;">
+                <h3>AIs</h3>
+                <div class="tool-item"><img src="Assets/app/Gemini.png" alt="Gemini" draggable="false"> Gemini <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="Assets/app/Chatgpt.png" alt="ChatGPT" draggable="false"> ChatGPT <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="Assets/app/Claude.png" alt="Claude" draggable="false"> Claude <span class="tool-dot dot-green" title="Good"></span></div>
+                <div class="tool-item"><img src="Assets/app/DeepSeek.png" alt="DeepSeek" draggable="false"> DeepSeek <span class="tool-dot dot-yellow" title="Still learning"></span></div>
+            </div>
+            <div class="tool-box tool-box-single reveal-item" style="--reveal-delay: 0.5s;">
+                <h3>Presentation</h3>
+                <div class="tool-item"><img src="Assets/app/propresenter.png" alt="ProPresenter" draggable="false"> ProPresenter <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="Assets/app/obs.png" alt="OBS Studio" draggable="false"> OBS Studio <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="Assets/app/EastWorship.png" alt="EasyWorship" draggable="false"> EasyWorship <span class="tool-dot dot-blue" title="Best"></span></div>
+                <div class="tool-item"><img src="Assets/app/FreeShow.png" alt="FreeShow" draggable="false"> FreeShow <span class="tool-dot dot-yellow" title="Still learning"></span></div>
+            </div>
+        </div>
+
+        <div class="tools-legend reveal-item" style="--reveal-delay: 0.6s;">
+            <span class="legend-item"><span class="tool-dot dot-blue"></span> Best</span>
+            <span class="legend-item"><span class="tool-dot dot-green"></span> Good</span>
+            <span class="legend-item"><span class="tool-dot dot-yellow"></span> Still learning</span>
         </div>
     </section>
 
@@ -1443,17 +2201,34 @@
                 <h3 class="bg-category-title">Experience</h3>
                 <div class="timeline">
                     <div class="timeline-item">
+                        <div class="timeline-logo"><img src="Assets/Logo/NCMB.png" alt="NCMB" draggable="false"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h4>Frontend Developer Intern</h4>
+                                <span>Sept 2026 - Nov 2026</span>
+                            </div>
+                            <div class="org-subheader">
+                                <h5>National Conciliation and Mediation Board</h5>
+                                <span>Brgy. Paligsahan, Quezon City</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
                         <div class="timeline-logo"><img src="Assets/Logo/JPCS.png" alt="JPCS" draggable="false"></div>
                         <div class="timeline-content">
                             <div class="timeline-header">
                                 <h4>Founding Head, Visual Arts Department</h4>
-                                <span>August 2024 – July 2026</span>
+                                <span>Aug 2024 – July 2026</span>
                             </div>
                             <div class="org-subheader">
-                                <h5>Junior Philippine Computer Society – Quezon City University Chapter</h5>
+                                <h5>Junior Philippine Computer Society – QCU Chapter</h5>
                                 <span>Novaliches, Quezon City</span>
                             </div>
-                            <ul class="org-bullets">
+                            <button class="org-toggle" id="jpcs-toggle" aria-expanded="false" aria-controls="jpcs-duties" title="Toggle duties">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <ul class="org-bullets collapsed" id="jpcs-duties">
                                 <li>Directed a creative committee in producing event visuals, promotional videos, and photo documentation by delegating tasks, conducting technical software training, and executing final design approvals.</li>
                                 <li>Conceptualized and designed the official organization logo and core merchandise including lanyards, polo shirts, and pins to establish a unified and highly recognizable brand identity.</li>
                                 <li>Managed live audiovisual operations by configuring complex projection and professional livestreaming setups to ensure seamless technical execution and zero downtime.</li>
@@ -1484,7 +2259,18 @@
                                 <h4>Metro Manila College</h4>
                                 <span>2021 - 2023</span>
                             </div>
-                            <p>Graduated as Science, Technology, Engineering and Mathematics (STEM) Student.<br>Graduated the Senior High School with Honors.</p>
+                            <p>Graduated as STEM Student.<br>Graduated the Senior High School with Honors.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-logo"><img src="Assets/Logo/CSBN.png" alt="CSBN" draggable="false"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h4>Colegio de San Bartolome de Novaliches</h4>
+                                <span>2017 - 2021</span>
+                            </div>
+                            <p>Graduated the Junior High School.</p>
                         </div>
                     </div>
                 </div>
@@ -1569,6 +2355,53 @@
         </div>
     </section>
 
+    <!-- Works Category Modal -->
+    <div class="works-modal" id="works-modal">
+        <div class="works-modal-panel">
+            <button class="modal-close" id="works-modal-close" aria-label="Close modal">&times;</button>
+            <h3 class="modal-category-title" id="works-modal-title"></h3>
+            <p class="modal-category-sub" id="works-modal-sub"></p>
+            <div class="cf-wrapper works-cf" id="works-cf">
+                <button class="nav-btn prevBtn" id="works-cf-prev" aria-label="Previous item">&lt;</button>
+                <button class="nav-btn nextBtn" id="works-cf-next" aria-label="Next item">&gt;</button>
+            </div>
+            <div class="modal-info">
+                <h4 id="works-modal-item-title"></h4>
+                <p class="modal-item-sub" id="works-modal-item-sub"></p>
+                <p class="modal-item-desc" id="works-modal-item-desc"></p>
+                <a id="works-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="card-btn" style="display:inline-block; margin-top:15px; text-decoration:none;">See Full Project</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status editor modals -->
+    <div class="status-overlay" id="status-overlay"></div>
+
+    <div class="status-modal" id="status-pass-modal">
+        <h4>Enter password</h4>
+        <p class="status-modal-desc">To allow you to change this status you need to enter the password.</p>
+        <div class="status-input-row">
+            <input type="password" id="status-pass-input" class="status-input" placeholder="Password" autocomplete="off">
+            <button class="status-eye" id="status-eye-btn" type="button" title="Show or hide password" aria-label="Show or hide password">
+                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+            </button>
+        </div>
+        <div class="status-modal-actions">
+            <button class="status-btn" id="status-pass-cancel" type="button">Cancel</button>
+            <button class="status-btn primary" id="status-pass-enter" type="button">Enter</button>
+        </div>
+    </div>
+
+    <div class="status-modal" id="status-text-modal">
+        <h4>Set new status</h4>
+        <input type="text" id="status-text-input" class="status-input" placeholder="New status message" autocomplete="off">
+        <div class="status-modal-actions">
+            <button class="status-btn" id="status-text-cancel" type="button">Cancel</button>
+            <button class="status-btn primary" id="status-text-enter" type="button">Enter</button>
+        </div>
+    </div>
+
     <script>
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
@@ -1620,167 +2453,328 @@
             document.getElementById('works').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Works carousel data
-        const worksData = [
-            {
-                title: 'Trust In God',
-                subtitle: 'Daily Vacation Bible School 2026',
-                desc: "Designed for the Glory in the Highest Christian Ministry's Daily Vacation Bible School (DVBS) 2026, this poster promotes a five-day educational children's event. The artwork visually communicates the program's core biblical teachings, focusing on the six days of creation, the story of Adam and Eve, and the origin of the first sin.",
-                link: "https://www.facebook.com/photo/?fbid=992733043262730"
-            },
-            {
-                title: 'Occupational Safety',
-                subtitle: 'Organization Event',
-                desc: "This promotional material was created for an organizational seminar focused on cybersecurity. The event educated students on essential digital safety practices, specifically detailing how to protect personal artworks, websites, and applications from hackers and malicious software.",
-                link: "https://www.facebook.com/photo?fbid=122149871888410118"
-            },
-            {
-                title: 'Code Quest 2025',
-                subtitle: 'Organization Event',
-                desc: "A promotional design for a programming competition held in celebration of the 31st Anniversary of Quezon City University. The event highlighted the technical expertise and coding talents of the students from the College of Computer Studies. The artwork features an original concept by Haimie A. Jamael, which was formally refined and improved by Lance Harvey B. Borras.",
-                link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0ns1EA2oKqGiEHCJBJJxkKPKR37jUYcBWAJM4RQYrkEyYErzuJMPydUvc9tsS15Y8l"
-            },
-            {
-                title: 'Maroon v2',
-                subtitle: 'Lanyard Designs for JPCS-QCU',
-                desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026.",
-                link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl"
-            },
-            {
-                title: 'Sunrise v2',
-                subtitle: 'Lanyard Designs for JPCS-QCU',
-                desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026.",
-                link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl"
-            },
-            {
-                title: 'University',
-                subtitle: 'Lanyard Designs for JPCS-QCU',
-                desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026.",
-                link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl"
-            },
-            {
-                title: 'Sunset',
-                subtitle: 'Lanyard Designs for JPCS-QCU',
-                desc: "A four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026.",
-                link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl"
-            },
-            {
-                title: 'Maroon v1',
-                subtitle: 'Lanyard Designs for JPCS-QCU',
-                desc: "The first two-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Unlocking the Power of Azure event on November 23, 2024.",
-                link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0eerB8Q9x97PSkLxLqjzuAjajYzYXfE1unn6cGhBmYgVxAVujmD8XECiJZoSpk2S6l"
-            },
-            {
-                title: 'Sunrise v1',
-                subtitle: 'Lanyard Designs for JPCS-QCU',
-                desc: "The first two-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Unlocking the Power of Azure event on November 23, 2024.",
-                link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0eerB8Q9x97PSkLxLqjzuAjajYzYXfE1unn6cGhBmYgVxAVujmD8XECiJZoSpk2S6l"
-            },
-            {
-                title: 'JPCS-QCU',
-                subtitle: 'Logo Seal',
-                desc: "As a founding member of the organization, Lance Harvey B. Borras designed the official logo seal for the Junior Philippine Computer Society - QCU Chapter. The creative process was guided by his mentor, Mr. George Warren Asuncion, with collaborative assistance from his colleague in the Visual Arts Department, Mr. Wyn M. Guiñarez.",
-                link: "https://www.facebook.com/jpcs.qcu"
-            },
-            {
-                title: 'Glory in the Highest Bible School',
-                subtitle: 'Logo Seal',
-                desc: "Initiated by Pastor Bernabe Perez, a former student of the institution, this project involved creating the official logo seal for the newly established Glory in the Highest Bible School. Lance Harvey B. Borras developed the emblem to establish a strong visual identity that reflects the school's foundational mission.",
-                link: "https://www.facebook.com/profile.php?id=100086925937031"
-            },
-            {
-                title: 'Azure',
-                subtitle: 'Organization Event',
-                desc: "Developed for the inaugural event of JPCS-QCU. For this collaborative project, Lance Harvey B. Borras designed a custom cloud icon featuring an integrated Azure logo, which served as a central visual asset. The complete event poster utilizing this asset was laid out and designed by Rafael B. Codiñera.",
-                link: "https://www.facebook.com/photo/?fbid=122118394712410118"
-            },
-            {
-                title: 'Goodness of God',
-                subtitle: 'Christmas Party 2025',
-                desc: "A celebratory poster designed by Lance Harvey B. Borras for the 2025 Christmas gathering of the Bible study group he leads. The artwork captures the festive spirit of the season while emphasizing the central theme of divine goodness.",
-                link: "https://www.facebook.com/lanceeborras/posts/pfbid0oA9hFrHwawR68AaLydve1kjjHnKqc6j4yifWS68WHYR8JLegyeN6r4iFdVactywpl"
-            },
-        ];
+        // Editable hero status bubble persisted in localStorage
+        const statusBubble = document.getElementById('hero-status-bubble');
+        const statusText = document.getElementById('hero-status-text');
+        const statusPassModal = document.getElementById('status-pass-modal');
+        const statusTextModal = document.getElementById('status-text-modal');
+        const statusPassInput = document.getElementById('status-pass-input');
+        const statusTextInput = document.getElementById('status-text-input');
+        const statusEyeBtn = document.getElementById('status-eye-btn');
+        const statusOverlay = document.getElementById('status-overlay');
+        const savedStatus = localStorage.getItem('userStatus');
+        if (savedStatus) statusText.textContent = savedStatus;
 
-        // Carousel setup with autoplay and touch swipe
-        function setupCarousel(wrapperId, data, titleId, subtitleId, descId) {
-            let currentIndex = 0;
+        function openStatusPassModal() {
+            statusTextModal.classList.remove('open');
+            statusPassModal.classList.add('open');
+            statusOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            statusPassInput.value = '';
+            statusPassInput.type = 'password';
+            statusEyeBtn.classList.remove('showing');
+            statusPassInput.focus();
+        }
+
+        function openStatusTextModal() {
+            statusPassModal.classList.remove('open');
+            statusTextModal.classList.add('open');
+            statusOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            statusTextInput.value = statusText.textContent;
+            statusTextInput.focus();
+            statusTextInput.select();
+        }
+
+        function closeStatusModals() {
+            statusPassModal.classList.remove('open');
+            statusTextModal.classList.remove('open');
+            statusOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function submitStatusPasscode() {
+            // Compare against the Base64 form of the password
+            if (btoa(statusPassInput.value) === 'TWFnbmV0bzIx') {
+                openStatusTextModal();
+            } else {
+                statusPassInput.value = '';
+                statusPassInput.focus();
+            }
+        }
+
+        function submitStatusText() {
+            const newStatus = statusTextInput.value.trim();
+            if (newStatus) {
+                statusText.textContent = newStatus;
+                localStorage.setItem('userStatus', newStatus);
+            }
+            closeStatusModals();
+        }
+
+        statusBubble.addEventListener('click', openStatusPassModal);
+        statusBubble.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openStatusPassModal();
+            }
+        });
+        statusOverlay.addEventListener('click', closeStatusModals);
+        document.getElementById('status-pass-enter').addEventListener('click', submitStatusPasscode);
+        document.getElementById('status-pass-cancel').addEventListener('click', closeStatusModals);
+        document.getElementById('status-text-enter').addEventListener('click', submitStatusText);
+        document.getElementById('status-text-cancel').addEventListener('click', closeStatusModals);
+        statusEyeBtn.addEventListener('click', () => {
+            const showing = statusPassInput.type === 'text';
+            statusPassInput.type = showing ? 'password' : 'text';
+            statusEyeBtn.classList.toggle('showing', !showing);
+        });
+        statusPassInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitStatusPasscode(); });
+        statusTextInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitStatusText(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeStatusModals();
+        });
+
+        // Auto-toggle the internship tooltip every 5 seconds
+        const qcuTooltip = document.getElementById('qcu-tooltip');
+        setInterval(() => qcuTooltip.classList.toggle('show-tooltip'), 5000);
+
+        // Works category data for the cards and the modal coverflow
+        const worksCategories = {
+            visuals: {
+                title: 'Visuals',
+                subtitle: 'Posters and promotional graphics',
+                items: [
+                    { img: 'Assets/Visuals/Azure.jpg', title: 'Azure', subtitle: 'Organization Event', tag: 'Lead Designer', link: "https://www.facebook.com/photo/?fbid=122118394712410118", desc: "Developed for the inaugural event of JPCS-QCU. For this collaborative project, Lance Harvey B. Borras designed a custom cloud icon featuring an integrated Azure logo, which served as a central visual asset. The complete event poster utilizing this asset was laid out and designed by Rafael B. Codiñera." },
+                    { img: 'Assets/Visuals/OcccupationalSafety.png', title: 'Occupational Safety', subtitle: 'Organization Event', tag: 'Lead Designer', link: "https://www.facebook.com/photo?fbid=122149871888410118", desc: "This promotional material was created for an organizational seminar focused on cybersecurity. The event educated students on essential digital safety practices, specifically detailing how to protect personal artworks, websites, and applications from hackers and malicious software." },
+                    { img: 'Assets/Visuals/TrustinGod.png', title: 'Trust in God', subtitle: 'Daily Vacation Bible School 2026', tag: 'Lead Designer', link: "https://www.facebook.com/photo/?fbid=992733043262730", desc: "Designed for the Glory in the Highest Christian Ministry's Daily Vacation Bible School (DVBS) 2026, this poster promotes a five-day educational children's event. The artwork visually communicates the program's core biblical teachings, focusing on the six days of creation, the story of Adam and Eve, and the origin of the first sin." },
+                    { img: 'Assets/Visuals/Goodness.png', title: 'Goodness of God', subtitle: 'Christmas Party 2025', tag: 'Lead Designer', link: "https://www.facebook.com/lanceeborras/posts/pfbid0oA9hFrHwawR68AaLydve1kjjHnKqc6j4yifWS68WHYR8JLegyeN6r4iFdVactywpl", desc: "A celebratory poster designed by Lance Harvey B. Borras for the 2025 Christmas gathering of the Bible study group he leads. The artwork captures the festive spirit of the season while emphasizing the central theme of divine goodness." },
+                    { img: 'Assets/Visuals/Recruitment-Poster.jpg', title: 'Recruitment', subtitle: 'Organization Event', tag: 'Lead Designer', desc: "A recruitment poster designed by Lance Harvey B. Borras to invite students to join the Junior Philippine Computer Society (JPCS) - QCU Chapter and discover the organization's programs and community." },
+                    { img: 'Assets/Visuals/CodeQuest.jpg', title: 'Code Quest 2025', subtitle: 'Organization Event', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0ns1EA2oKqGiEHCJBJJxkKPKR37jUYcBWAJM4RQYrkEyYErzuJMPydUvc9tsS15Y8l", desc: "A promotional design for a programming competition held in celebration of the 31st Anniversary of Quezon City University. The event highlighted the technical expertise and coding talents of the students from the College of Computer Studies. The artwork features an original concept by Haimie A. Jamael, which was formally refined and improved by Lance Harvey B. Borras." },
+                    { img: 'Assets/Visuals/Codesortium.png', title: 'Codesortium', subtitle: 'Organization Event', tag: 'Co-designer', link: "https://www.facebook.com/photo/?fbid=122151505424410118", desc: "Created by Lujille R. Pojas for the Codesortium event, with the collaborative help of Lance Harvey B. Borras. This event featured a competitive programming contest to showcase students' Python coding skills." },
+                    { img: 'Assets/Visuals/Logic-Unlocked.png', title: 'Logic Unlocked', subtitle: 'Organization Event', tag: 'Co-designer', link: "https://www.facebook.com/photo/?fbid=122145627290410118", desc: "Created by Rafael Emmanuel B. Codinera for the Logic Unlocked event, with the collaborative help of Lance Harvey B. Borras. This event was a seminar focused on teaching the fundamentals of programming and databases." }
+                ]
+            },
+            merchandise: {
+                title: 'Merchandise',
+                subtitle: 'Lanyards, pins, and shirt concepts',
+                items: [
+                    { img: 'Assets/Merchandise/MAROON v2.png', title: 'MAROON v2', subtitle: 'Lanyard Designs for JPCS-QCU', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl", desc: "Part of the four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026." },
+                    { img: 'Assets/Merchandise/SUNRISE v2.png', title: 'SUNRISE v2', subtitle: 'Lanyard Designs for JPCS-QCU', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl", desc: "Part of the four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026." },
+                    { img: 'Assets/Merchandise/SUNSET.png', title: 'SUNSET', subtitle: 'Lanyard Designs for JPCS-QCU', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl", desc: "Part of the four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026." },
+                    { img: 'Assets/Merchandise/UNIVERSITY.png', title: 'UNIVERSITY', subtitle: 'Lanyard Designs for JPCS-QCU', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0Vdx6G2V377cZ776MHGcmQkZ3o92V6SRg4pfEym81j5pA5ya3zMjsQer51FA8S5yEl", desc: "Part of the four-piece collection of lanyard designs crafted by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Occupational Safety event on November 25, 2025, and proceeded into physical manufacturing in early 2026." },
+                    { img: 'Assets/Merchandise/CLICKER.png', title: 'CLICKER', subtitle: 'Lanyard Design for BSCS', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0eerB8Q9x97PSkLxLqjzuAjajYzYXfE1unn6cGhBmYgVxAVujmD8XECiJZoSpk2S6l", desc: "A lanyard design created by Lance Harvey B. Borras for the Bachelor of Science in Computer Science program, featuring the BSCS branding with a clicker attachment." },
+                    { img: 'Assets/Merchandise/PS-Certificate.png', title: 'Certificate', subtitle: 'Organization Shirt for JPCS-QCU', tag: 'Unpublished', unpublished: true, desc: "An organization polo shirt concept designed by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The design was completed but was not approved for production." },
+                    { img: 'Assets/Merchandise/PS-Favory.png', title: 'Favory', subtitle: 'Organization Shirt for JPCS-QCU', tag: 'Unpublished', unpublished: true, desc: "An organization polo shirt concept designed by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The design was completed but was not approved for production." },
+                    { img: 'Assets/Merchandise/PS-Statement.png', title: 'Statement', subtitle: 'Organization Shirt for JPCS-QCU', tag: 'Unpublished', unpublished: true, desc: "An organization polo shirt concept designed by Lance Harvey B. Borras for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The design was completed but was not approved for production." },
+                    { img: 'Assets/Merchandise/MAROON v1.jpg', title: 'MAROON v1', subtitle: 'Lanyard Designs for JPCS-QCU', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0eerB8Q9x97PSkLxLqjzuAjajYzYXfE1unn6cGhBmYgVxAVujmD8XECiJZoSpk2S6l", desc: "Part of the first two-piece collection of lanyard designs crafted by Lance Harvey B. Borras with the Help of Wyn M. Guiñarez for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Unlocking the Power of Azure event on November 23, 2024." },
+                    { img: 'Assets/Merchandise/SUNRISE v1.jpg', title: 'SUNRISE v1', subtitle: 'Lanyard Designs for JPCS-QCU', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu/posts/pfbid0eerB8Q9x97PSkLxLqjzuAjajYzYXfE1unn6cGhBmYgVxAVujmD8XECiJZoSpk2S6l", desc: "Part of the first two-piece collection of lanyard designs crafted by Lance Harvey B. Borras with the Help of Wyn M. Guiñarez for the Junior Philippine Computer Society (JPCS) - QCU Chapter. The collection was officially unveiled during the Unlocking the Power of Azure event on November 23, 2024." },
+                    { img: 'Assets/Merchandise/SC-BlackTheme.jpg', title: 'Black Theme', subtitle: 'Pin Design for JPCS-QCU', tag: 'Co-designer', desc: "Created by Christian G. Sendon with the help of Lance Harvey B. Borras. Released March 2025, on celebrating the 31st anniversary of QCU." },
+                    { img: 'Assets/Merchandise/SC-Debug.jpg', title: 'Debug', subtitle: 'Pin Design for JPCS-QCU', tag: 'Co-designer', desc: "Created by Christian G. Sendon with the help of Lance Harvey B. Borras. Released March 2025, on celebrating the 31st anniversary of QCU." },
+                    { img: 'Assets/Merchandise/SC-JpcsQcu.jpg', title: 'JPCS QCU', subtitle: 'Pin Design for JPCS-QCU', tag: 'Lead Designer', desc: "Released March 2025, on celebrating the 31st anniversary of QCU." },
+                    { img: 'Assets/Merchandise/SC-JpcsXCys.jpg', title: 'JPCS x CYS', subtitle: 'Pin Design for JPCS-QCU', tag: 'Lead Designer', desc: "Released March 2025, on celebrating the 31st anniversary of QCU." },
+                    { img: 'Assets/Merchandise/SC-Pixelated.jpg', title: 'Pixelated', subtitle: 'Pin Design for JPCS-QCU', tag: 'Co-designer', desc: "Created by Christian G. Sendon with the help of Lance Harvey B. Borras. Released March 2025, on celebrating the 31st anniversary of QCU." }
+                   
+                ]
+            },
+            brands: {
+                title: 'Brands',
+                subtitle: 'Logos and organizational seals',
+                items: [
+                    { img: 'Assets/lancestudios.png', title: 'Lance Studios', subtitle: "Lance's Branding", tag: 'Lead Designer', desc: "A personal studio and creative brand founded by Lance Harvey B. Borras. Serving as his official watermark and signature across all his projects—including graphic design, video editing, and UI/UX development—the brand identity features a minimalist, stylized portrait of Lance backed by a geometric triangle, representing his personal touch and creative vision." },
+                    { img: 'Assets/Logo/Glory.png', title: 'Glory', subtitle: 'Logo Seal', tag: 'Lead Designer', link: "https://www.facebook.com/profile.php?id=100086925937031", desc: "Initiated by Pastor Bernabe Perez, a former student of the institution, this project involved creating the official logo seal for the newly established Glory in the Highest Bible School. Lance Harvey B. Borras developed the emblem to establish a strong visual identity that reflects the school's foundational mission." },
+                    { img: 'Assets/Logo/JPCS.png', title: 'JPCS', subtitle: 'Logo Seal', tag: 'Lead Designer', link: "https://www.facebook.com/jpcs.qcu", desc: "As a founding member of the organization, Lance Harvey B. Borras designed the official logo seal for the Junior Philippine Computer Society - QCU Chapter. The creative process was guided by his mentor, Mr. George Warren Asuncion, with collaborative assistance from his colleague in the Visual Arts Department, Mr. Wyn M. Guiñarez." },
+                    { img: 'Assets/Logo/Revise.png', title: 'Revise', subtitle: 'Logo Concept', tag: 'Unpublished', unpublished: true, desc: "An alternative logo concept developed by Lance Harvey B. Borras for the Bachelor of Science in Computer Science program. The design was not approved for official use." },
+                    { img: 'Assets/Logo/BSCS-Entry.png', title: 'BSCS-Entry', subtitle: 'Logo Making Contest Entry (3rd Place)', tag: 'Lead Designer', medal: true, desc: "Created by Lance Harvey B. Borras as the lead designer, with the collaborative help of Christian G. Sendon. This was the official logo entry for the Logo Making Contest under the BSCS category, which earned 3rd Place." }
+                ]
+            }
+        };
+
+        // Auto-advance every work card image slider every 5 seconds
+        document.querySelectorAll('.work-card').forEach((card, cardIndex) => {
+            const slides = card.querySelectorAll('.card-slide');
+            let slideIndex = cardIndex % slides.length;
+            slides[slideIndex].classList.add('active');
+            setInterval(() => {
+                slides[slideIndex].classList.remove('active');
+                slideIndex = (slideIndex + 1) % slides.length;
+                slides[slideIndex].classList.add('active');
+            }, 5000);
+        });
+
+        // Five-slot 3D coverflow shared by the works modal and the certificates
+        function createCoverflow(wrapperId, prevId, nextId, onUpdate, autoMs) {
             const wrapper = document.getElementById(wrapperId);
-            const items = wrapper.querySelectorAll('.carousel-item');
-            const totalItems = data.length;
+            const slides = Array.from(wrapper.querySelectorAll('.cf-item'));
+            const total = slides.length;
+            const slotClasses = ['cf-slot-0', 'cf-slot-l1', 'cf-slot-r1', 'cf-slot-l2', 'cf-slot-r2', 'cf-slot-hidden'];
+            let current = 0;
+            let timer = null;
 
-            function updateCarousel() {
-                items.forEach((item, index) => {
-                    let diff = index - currentIndex;
-                    if (diff < -1) diff += totalItems;
-                    if (diff > 1) diff -= totalItems;
-
-                    item.className = 'carousel-item';
-
-                    if (diff === 0) {
-                        item.classList.add('item-center');
-                    } else if (diff === -1) {
-                        item.classList.add('item-left-1');
-                    } else if (diff === 1) {
-                        item.classList.add('item-right-1');
-                    } else {
-                        item.classList.add('item-hidden');
-                    }
-
-                    item.onclick = function() {
-                        if (diff !== 0) {
-                            currentIndex = index;
-                            resetAutoplay();
-                            updateCarousel();
-                        }
-                    };
-
-                    item.style.cursor = (diff !== 0 && Math.abs(diff) === 1) ? 'pointer' : 'default';
+            function update() {
+                slides.forEach((slide, index) => {
+                    let diff = index - current;
+                    if (diff > total / 2) diff -= total;
+                    if (diff < -total / 2) diff += total;
+                    slide.classList.remove(...slotClasses);
+                    if (diff === 0) slide.classList.add('cf-slot-0');
+                    else if (diff === -1) slide.classList.add('cf-slot-l1');
+                    else if (diff === 1) slide.classList.add('cf-slot-r1');
+                    else if (diff === -2) slide.classList.add('cf-slot-l2');
+                    else if (diff === 2) slide.classList.add('cf-slot-r2');
+                    else slide.classList.add('cf-slot-hidden');
+                    slide.onclick = () => { if (diff !== 0) goTo(index); };
                 });
-
-                document.getElementById(titleId).innerText = data[currentIndex].title;
-                document.getElementById(subtitleId).innerText = data[currentIndex].subtitle;
-                document.getElementById(descId).innerText = data[currentIndex].desc;
-                document.getElementById('works-link').href = data[currentIndex].link;
+                if (onUpdate) onUpdate(current, slides[current]);
             }
 
-            function goNext() {
-                currentIndex = (currentIndex + 1) % totalItems;
-                updateCarousel();
+            function goTo(index) {
+                current = (index + total) % total;
+                update();
             }
 
-            function goPrev() {
-                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-                updateCarousel();
+            function resetTimer() {
+                if (!autoMs) return;
+                clearInterval(timer);
+                timer = setInterval(() => goTo(current + 1), autoMs);
             }
 
-            // Manual navigation resets the timer so it does not double-skip
-            function resetAutoplay() {
-                clearInterval(autoplayTimer);
-                autoplayTimer = setInterval(goNext, 5000);
-            }
+            function next() { goTo(current + 1); resetTimer(); }
+            function prev() { goTo(current - 1); resetTimer(); }
 
-            let autoplayTimer = setInterval(goNext, 5000);
-
-            wrapper.querySelector('.nextBtn').addEventListener('click', () => { goNext(); resetAutoplay(); });
-            wrapper.querySelector('.prevBtn').addEventListener('click', () => { goPrev(); resetAutoplay(); });
+            document.getElementById(prevId).onclick = prev;
+            document.getElementById(nextId).onclick = next;
 
             // Swipe left or right to navigate on touch devices
             let touchStartX = 0;
-            wrapper.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].clientX;
-            }, { passive: true });
-            wrapper.addEventListener('touchend', (e) => {
+            wrapper.ontouchstart = (e) => { touchStartX = e.changedTouches[0].clientX; };
+            wrapper.ontouchend = (e) => {
                 const deltaX = e.changedTouches[0].clientX - touchStartX;
                 if (Math.abs(deltaX) < 50) return;
-                if (deltaX > 0) goPrev(); else goNext();
-                resetAutoplay();
-            }, { passive: true });
+                if (deltaX > 0) prev(); else next();
+            };
 
-            updateCarousel();
+            resetTimer();
+            update();
+            function destroy() { clearInterval(timer); }
+            return { goTo: goTo, resetTimer: resetTimer, destroy: destroy };
         }
 
-        setupCarousel('works-carousel', worksData, 'works-title', 'works-type', 'works-desc');
+        // Certificate data matching the static slide order in the section
+        const certData = [
+            { title: 'Quiz Bee', type: 'Certificate of Participation', date: 'March 1, 2024' },
+            { title: 'Logo Making Contest, BSCS Category - 3rd Placer', type: 'Certificate of Achievement', date: 'March 5, 2024' },
+            { title: 'JPCS Certificate of Membership 2024-25', type: 'Certificate of Membership', date: 'December 22, 2024' },
+            { title: 'YES Transitional Leadership Workshop 2025', type: 'Certificate of Participation', date: 'January 20, 2025' },
+            { title: 'Codesortium', type: 'Certificate', date: 'December 18, 2025' },
+            { title: 'JPCS Certificate of Membership 2025-26', type: 'Certificate of Membership', date: 'April 13, 2026' }
+        ];
+
+        function updateCertInfo(index) {
+            const cert = certData[index];
+            document.getElementById('cert-title').innerText = cert.title;
+            document.getElementById('cert-type').innerText = cert.type;
+            document.getElementById('cert-desc').innerText = 'Lance Harvey B. Borras achieved this ' + cert.type + ' last ' + cert.date + ' on the event of ' + cert.title + '.';
+        }
+
+        const certCarousel = createCoverflow('cert-carousel', 'cert-prev', 'cert-next', updateCertInfo, 5000);
+
+        // Works modal: builds one coverflow slide per item of the chosen category
+        const worksModal = document.getElementById('works-modal');
+        let worksCoverflow = null;
+
+        function openWorksModal(categoryKey) {
+            const category = worksCategories[categoryKey];
+            if (!category) return;
+            document.getElementById('works-modal-title').innerText = category.title;
+            document.getElementById('works-modal-sub').innerText = category.subtitle;
+            const cf = document.getElementById('works-cf');
+            cf.querySelectorAll('.cf-item').forEach(el => el.remove());
+
+            category.items.forEach(item => {
+                const slide = document.createElement('div');
+                slide.className = 'cf-item cf-square';
+
+                const img = document.createElement('img');
+                img.src = item.img;
+                img.alt = item.title;
+                img.draggable = false;
+                slide.appendChild(img);
+
+                if (item.tag) {
+                    const tag = document.createElement('span');
+                    tag.className = item.unpublished ? 'tag-chip tag-unpublished' : 'tag-chip';
+                    tag.innerText = item.tag;
+                    slide.appendChild(tag);
+                }
+
+                if (item.medal) {
+                    const medal = document.createElement('button');
+                    medal.type = 'button';
+                    medal.className = 'medal-badge';
+                    medal.title = 'View the 3rd Placer certificate';
+                    medal.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="9 1.5 12 8.5 7.5 7 5 3" fill="#b0522a"></polygon><polygon points="15 1.5 12 8.5 16.5 7 19 3" fill="#8c3d1f"></polygon><circle cx="12" cy="14.5" r="7" fill="#cd7f32" stroke="#f0b37e" stroke-width="1.5"></circle></svg><span>3rd</span>';
+                    medal.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        closeWorksModal();
+                        document.getElementById('certifications').scrollIntoView({ behavior: 'smooth' });
+                        certCarousel.goTo(1);
+                        certCarousel.resetTimer();
+                    });
+                    slide.appendChild(medal);
+                }
+
+                cf.appendChild(slide);
+            });
+
+            worksModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            if (worksCoverflow) worksCoverflow.destroy();
+            worksCoverflow = createCoverflow('works-cf', 'works-cf-prev', 'works-cf-next', (index) => {
+                const item = category.items[index];
+                document.getElementById('works-modal-item-title').innerText = item.title;
+                document.getElementById('works-modal-item-sub').innerText = item.subtitle;
+                document.getElementById('works-modal-item-desc').innerText = item.desc;
+                const modalLink = document.getElementById('works-modal-link');
+                if (item.link && !item.unpublished) {
+                    modalLink.href = item.link;
+                    modalLink.style.display = 'inline-block';
+                } else {
+                    modalLink.style.display = 'none';
+                }
+            }, 5000);
+        }
+
+        function closeWorksModal() {
+            worksModal.classList.remove('open');
+            document.body.style.overflow = '';
+            if (worksCoverflow) {
+                worksCoverflow.destroy();
+                worksCoverflow = null;
+            }
+        }
+
+        document.querySelectorAll('.work-card').forEach(card => {
+            card.addEventListener('click', () => openWorksModal(card.getAttribute('data-category')));
+        });
+
+        document.getElementById('works-modal-close').addEventListener('click', closeWorksModal);
+        worksModal.addEventListener('click', (e) => {
+            if (e.target === worksModal) closeWorksModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && worksModal.classList.contains('open')) closeWorksModal();
+        });
+
+        // JPCS duties expand and collapse toggle
+        const jpcsToggle = document.getElementById('jpcs-toggle');
+        const jpcsDuties = document.getElementById('jpcs-duties');
+        jpcsToggle.addEventListener('click', () => {
+            const collapsed = jpcsDuties.classList.toggle('collapsed');
+            jpcsToggle.classList.toggle('open', !collapsed);
+            jpcsToggle.setAttribute('aria-expanded', String(!collapsed));
+        });
 
         // Scroll reveal with IntersectionObserver - resets on exit for replay
         const revealObserver = new IntersectionObserver((entries) => {
@@ -1909,7 +2903,7 @@
         document.addEventListener('contextmenu', (e) => e.preventDefault());
 
         // Right-box role typewriter cycling through available positions
-        const rolePhrases = ["Graphic Designer?", "Frontend Developer?", "Visual Artist?", "UI/UX Designer?", "AI Full Stack Developer?"];
+        const rolePhrases = ["Computer Science Graduate?","Graphic Designer?", "Frontend Developer?", "Visual Artist?", "UI/UX Designer?"];
         const roleTypewriterElement = document.getElementById("role-typewriter");
         let roleTextIndex = 0;
         let roleCharIndex = 0;
@@ -1962,17 +2956,22 @@
             splashContent.style.display = 'none';
             splashLoader.style.display = 'block';
 
+            // Kick the speedometer fill once the loader is visible
+            const speedoContainer = splashLoader.querySelector('.spinner-container');
+            setTimeout(() => speedoContainer.classList.add('filling'), 50);
+
             setTimeout(() => {
                 splashScreen.classList.add('fade-out');
                 document.documentElement.classList.remove('no-scroll');
                 document.body.classList.remove('no-scroll');
                 document.querySelector('.hero-stack').classList.add('animate-in');
+                document.body.classList.add('hero-revealed');
                 document.querySelectorAll('.peeking-eye').forEach(eye => eye.classList.add('show-eyes'));
 
                 setTimeout(() => {
                     splashScreen.remove();
                 }, 800);
-            }, 1500);
+            }, 1550);
         });
     </script>
 </body>

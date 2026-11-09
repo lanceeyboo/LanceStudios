@@ -1,0 +1,410 @@
+{
+  ".vscode/launch.json": {
+    "mtime": 1790855753.7757351,
+    "seen": 1792119108.7010388,
+    "ast_hash": "e8497cc8ab0cfbc70bcae172b7c456f4",
+    "semantic_hash": ""
+  },
+  ".vscode/settings.json": {
+    "mtime": 1790855512.603185,
+    "seen": 1792119108.7010388,
+    "ast_hash": "19751b2a32e46d1ba1477f357123a898",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1790084552.7862236,
+    "seen": 1792119108.7010388,
+    "ast_hash": "05654d21b2a1032b009638f8687c0774",
+    "semantic_hash": ""
+  },
+  "Index.html": {
+    "mtime": 1792120107.1569803,
+    "seen": 1792120113.0732164,
+    "ast_hash": "4b410701f260749eb1dc23dc4320f7f5",
+    "semantic_hash": ""
+  },
+  "Assets/Borras-Porfolio.pdf": {
+    "mtime": 1790907058.1631632,
+    "seen": 1792119108.7010388,
+    "ast_hash": "ef5abd245d47105ef72c962c6017ac83",
+    "semantic_hash": ""
+  },
+  "Assets/Borras-Resume.pdf": {
+    "mtime": 1787670111.3188388,
+    "seen": 1792119108.7010388,
+    "ast_hash": "ab2b9dd7741e2f078b14db8cdac46a90",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/CSBN.png": {
+    "mtime": 1790855512.9928522,
+    "seen": 1792119108.7010388,
+    "ast_hash": "46f46b8f4d3baff6f11a46c26e24c1ec",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/FCAN.png": {
+    "mtime": 1790855512.9944675,
+    "seen": 1792119108.7010388,
+    "ast_hash": "a1ad1a1c7f5a3e858c763299f5bb7c89",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/Glory.png": {
+    "mtime": 1736005012.0,
+    "seen": 1792119108.7010388,
+    "ast_hash": "6142296a1bafe72ed63e4da88deac5bd",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/JPCS.png": {
+    "mtime": 1790855513.0020022,
+    "seen": 1792119108.7010388,
+    "ast_hash": "fa5c3a97d099415f0665c41557473a72",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/MMC.png": {
+    "mtime": 1790855513.0230985,
+    "seen": 1792119108.7010388,
+    "ast_hash": "3dab88028b99bdc8695bfd6c7b0f9388",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/NCMB.png": {
+    "mtime": 1790855513.0316799,
+    "seen": 1792119108.7010388,
+    "ast_hash": "e37906b2ae96992433a87afcf5c78fe0",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/QCU.png": {
+    "mtime": 1790855513.0456965,
+    "seen": 1792119108.7010388,
+    "ast_hash": "31f83732a1e43845d7ad60d5b42dd7a0",
+    "semantic_hash": ""
+  },
+  "Assets/MATA.png": {
+    "mtime": 1790910186.1390855,
+    "seen": 1792119108.7010388,
+    "ast_hash": "4a75ffa52c2d4cfda62aa3d98dfad7ff",
+    "semantic_hash": ""
+  },
+  "Assets/lance.jpg": {
+    "mtime": 1790855513.0670724,
+    "seen": 1792119108.7010388,
+    "ast_hash": "a920a3223754f6f7517ae71574a2de1f",
+    "semantic_hash": ""
+  },
+  "Assets/lance.png": {
+    "mtime": 1790911292.6523783,
+    "seen": 1792119108.7010388,
+    "ast_hash": "f2f3457c50a46a320cfb509963181e16",
+    "semantic_hash": ""
+  },
+  "Assets/lancestudios.png": {
+    "mtime": 1790855513.0901203,
+    "seen": 1792119108.7010388,
+    "ast_hash": "c1b661b2f8f11afb669b437444eca70b",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1794228888.9545276,
+    "seen": 1794230037.9815903,
+    "ast_hash": "74f861e9aeb20e5e526fe3b09d569f6f",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/BSCS-Entry.png": {
+    "mtime": 1712972488.0,
+    "seen": 1792415275.7893724,
+    "ast_hash": "40bed3c734505ab9391f54a73bdd2e8a",
+    "semantic_hash": ""
+  },
+  "docs/activity-log.md": {
+    "mtime": 1794229894.3024063,
+    "seen": 1794230037.9815903,
+    "ast_hash": "bbde820b09c6cf367a8cd38d32ac6e42",
+    "semantic_hash": ""
+  },
+  "Assets/app/CSS.png": {
+    "mtime": 1794064544.9640758,
+    "seen": 1794065191.8812652,
+    "ast_hash": "66df51b18adf655a751abf2e2e553f2e",
+    "semantic_hash": ""
+  },
+  "Assets/app/canva.png": {
+    "mtime": 1794063989.8270433,
+    "seen": 1794065191.8812652,
+    "ast_hash": "6f41ad534e74b6f75dbd16be64ce55b2",
+    "semantic_hash": ""
+  },
+  "Assets/app/capcut.png": {
+    "mtime": 1794064070.296991,
+    "seen": 1794065191.8812652,
+    "ast_hash": "e51220e23be953236d22e8194e3d2d80",
+    "semantic_hash": ""
+  },
+  "Assets/app/photoshop.png": {
+    "mtime": 1794063937.070078,
+    "seen": 1794065191.8812652,
+    "ast_hash": "a2422d6d79f6f7e8112bda1b1645ce4e",
+    "semantic_hash": ""
+  },
+  "Assets/app/propresenter.png": {
+    "mtime": 1794064641.3651788,
+    "seen": 1794065191.8812652,
+    "ast_hash": "c9db433e42a27753faaab4cbde38b394",
+    "semantic_hash": ""
+  },
+  "Assets/app/visualstudios.webp": {
+    "mtime": 1794064046.3048284,
+    "seen": 1794065191.8812652,
+    "ast_hash": "6d1f3913c40e641f41cdae1ef72bb6c1",
+    "semantic_hash": ""
+  },
+  "Assets/app/vscode.png": {
+    "mtime": 1794064027.5774646,
+    "seen": 1794065191.8812652,
+    "ast_hash": "43ad39a977665ece2f8066f61d8ded45",
+    "semantic_hash": ""
+  },
+  "Assets/app/Chatgpt.png": {
+    "mtime": 1794066474.6386075,
+    "seen": 1794066807.970714,
+    "ast_hash": "8c4f339ad08b136d4969bd2c11acd274",
+    "semantic_hash": ""
+  },
+  "Assets/app/Claude.png": {
+    "mtime": 1794066457.8059964,
+    "seen": 1794066807.970714,
+    "ast_hash": "089872c10c26022eede5ecb082b0e5a9",
+    "semantic_hash": ""
+  },
+  "Assets/app/DeepSeek.png": {
+    "mtime": 1794066536.5029492,
+    "seen": 1794066807.970714,
+    "ast_hash": "3bd460d1bdeb315edc96da2494de36f1",
+    "semantic_hash": ""
+  },
+  "Assets/app/Gemini.png": {
+    "mtime": 1794066348.1768503,
+    "seen": 1794066807.970714,
+    "ast_hash": "97c2846d6ad3914a31d96dd3e49fe567",
+    "semantic_hash": ""
+  },
+  "Assets/lancestudios2026.png": {
+    "mtime": 1794158089.111175,
+    "seen": 1794164342.302481,
+    "ast_hash": "9b49bbdd9fc3b126b1e317d0a83ff79c",
+    "semantic_hash": ""
+  },
+  "Assets/app/OBS.png": {
+    "mtime": 1794067811.830585,
+    "seen": 1794068520.6024482,
+    "ast_hash": "42d37de773b537dca45eac0a5cad2ca0",
+    "semantic_hash": ""
+  },
+  "Assets/Lance.png": {
+    "mtime": 1794069258.478264,
+    "seen": 1794070292.3275735,
+    "ast_hash": "3e3eddefe1be8ef6c3a8e0ba5c4ee9a3",
+    "semantic_hash": ""
+  },
+  "docs/index-2-restructure-contract.md": {
+    "mtime": 1794159998.7131984,
+    "seen": 1794164342.302481,
+    "ast_hash": "ac7fef83a0dae8cf7f0d54ccfc2ccd22",
+    "semantic_hash": ""
+  },
+  "Assets/Certificates/24-03-01 Quiz Bee (Certificate of Participation).jpg": {
+    "mtime": 1794153427.6369572,
+    "seen": 1794164342.302481,
+    "ast_hash": "5be6d26bd5a6c02c2c1d175d280f68be",
+    "semantic_hash": ""
+  },
+  "Assets/Certificates/24-03-05 Logo making contest BSCS catergory -3rd Placer (Certificate of Achievement).jpg": {
+    "mtime": 1794153430.1812973,
+    "seen": 1794164342.302481,
+    "ast_hash": "4d60342db00b4cc393ffca3722df9a48",
+    "semantic_hash": ""
+  },
+  "Assets/Certificates/24-12-22 JPCS Certicate of Membership 2024-25.jpg": {
+    "mtime": 1794153432.89559,
+    "seen": 1794164342.302481,
+    "ast_hash": "20fd15ac88afa012659f4ee97d86b083",
+    "semantic_hash": ""
+  },
+  "Assets/Certificates/25-01-20 YES Trasitional Leadership Worshop 2025(Certificate of Participation).jpg": {
+    "mtime": 1794153435.151008,
+    "seen": 1794164342.302481,
+    "ast_hash": "6970c3661e266fbd9906349ef9ba35a1",
+    "semantic_hash": ""
+  },
+  "Assets/Certificates/25-12-18 Codesortium Certificate.jpg": {
+    "mtime": 1794153437.5504632,
+    "seen": 1794164342.302481,
+    "ast_hash": "22cfc755fca4fa33d4268aeae3fb9ce4",
+    "semantic_hash": ""
+  },
+  "Assets/Certificates/26-04-13 JPCS Certicate of Membership 2025-26.jpg": {
+    "mtime": 1794153440.055203,
+    "seen": 1794164342.302481,
+    "ast_hash": "21b3a93156428f3f230bfed12c6790a7",
+    "semantic_hash": ""
+  },
+  "Assets/Logo/Revise.png": {
+    "mtime": 1731173600.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "d22d436aca0fb75b5a9a48eaf8034373",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/CLICKER.png": {
+    "mtime": 1792412642.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "ced4b7481705444f05b4c3b7ff16d5ec",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/MAROON v1.jpg": {
+    "mtime": 1731414142.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "21956bf361d2bb0d7f0519e0f4f55b12",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/MAROON v2.png": {
+    "mtime": 1790855512.7727334,
+    "seen": 1794164342.302481,
+    "ast_hash": "bfcecfcc18d20288a6a2ea5d56a4d2f1",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/PS-Certificate.png": {
+    "mtime": 1774984363.4478652,
+    "seen": 1794164342.302481,
+    "ast_hash": "460b68727efdf9d8a87ae1155841a901",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/PS-Favory.png": {
+    "mtime": 1775552575.1953177,
+    "seen": 1794164342.302481,
+    "ast_hash": "c1f7af3619089b304bfeb80d82eea77d",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/PS-Statement.png": {
+    "mtime": 1774984350.0339918,
+    "seen": 1794164342.302481,
+    "ast_hash": "fae6c2014275620a076005e0f9e32682",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/SC-BlackTheme.jpg": {
+    "mtime": 1731593324.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "a9cc81f71bae0002a5d15109373810b2",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/SC-Debug.jpg": {
+    "mtime": 1731593522.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "cae1a9947f41ca7b335f41e89a86c7a0",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/SC-JpcsQcu.jpg": {
+    "mtime": 1731593060.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "31c7f2c2dad4d5425299c46bec49ee1a",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/SC-JpcsXCys.jpg": {
+    "mtime": 1731593154.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "ed58fe6878db798e349b6a8d081a101a",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/SC-Pixelated.jpg": {
+    "mtime": 1731593444.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "a4479091d565fe995f2ac1f19b248e97",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/SUNRISE v1.jpg": {
+    "mtime": 1731414112.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "539b121ca576c6f74c7a79b3fc2fe10f",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/SUNRISE v2.png": {
+    "mtime": 1790855512.8355093,
+    "seen": 1794164342.302481,
+    "ast_hash": "6987ba7073c08373368104f0b38a0175",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/SUNSET.png": {
+    "mtime": 1790855512.8955915,
+    "seen": 1794164342.302481,
+    "ast_hash": "5c3f2c5940bfaf1b36455d77e5fa016a",
+    "semantic_hash": ""
+  },
+  "Assets/Merchandise/UNIVERSITY.png": {
+    "mtime": 1790855512.9545777,
+    "seen": 1794164342.302481,
+    "ast_hash": "8ffc8c5d0fdbf6ef950d141b8187e0f3",
+    "semantic_hash": ""
+  },
+  "Assets/Visuals/Azure.jpg": {
+    "mtime": 1790855512.6064837,
+    "seen": 1794164342.302481,
+    "ast_hash": "d1908c621d4f41bfa790db8f24432978",
+    "semantic_hash": ""
+  },
+  "Assets/Visuals/CodeQuest.jpg": {
+    "mtime": 1790855512.6223416,
+    "seen": 1794164342.302481,
+    "ast_hash": "fef44fb02ff373f21246148c087cd1ba",
+    "semantic_hash": ""
+  },
+  "Assets/Visuals/Codesortium.png": {
+    "mtime": 1765971200.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "1428cea0ea721c0063d2469270a798d3",
+    "semantic_hash": ""
+  },
+  "Assets/Visuals/Goodness.png": {
+    "mtime": 1765985918.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "cf76448ae4d0f144b1ef0594e1e8b1a4",
+    "semantic_hash": ""
+  },
+  "Assets/Visuals/Logic-Unlocked.png": {
+    "mtime": 1760417786.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "6f6cf4c5c8f6f1a0c5a9ad0c06477c04",
+    "semantic_hash": ""
+  },
+  "Assets/Visuals/OcccupationalSafety.png": {
+    "mtime": 1790855513.050735,
+    "seen": 1794164342.302481,
+    "ast_hash": "7369ad03f4a3f8d70caeb40f969864ce",
+    "semantic_hash": ""
+  },
+  "Assets/Visuals/Recruitment-Poster.jpg": {
+    "mtime": 1726806148.0,
+    "seen": 1794164342.302481,
+    "ast_hash": "6e4356e98f4ba2a57a65071ea9480381",
+    "semantic_hash": ""
+  },
+  "Assets/Visuals/TrustinGod.png": {
+    "mtime": 1790855513.0584836,
+    "seen": 1794164342.302481,
+    "ast_hash": "99ea9409a57487f535b70cef175a5f6f",
+    "semantic_hash": ""
+  },
+  "Assets/app/obs.png": {
+    "mtime": 1794067811.830585,
+    "seen": 1794164342.302481,
+    "ast_hash": "42d37de773b537dca45eac0a5cad2ca0",
+    "semantic_hash": ""
+  },
+  "Assets/app/EastWorship.png": {
+    "mtime": 1794164874.4874506,
+    "seen": 1794168221.1308618,
+    "ast_hash": "38f03c955993f9e56aea3c2017839e0e",
+    "semantic_hash": ""
+  },
+  "Assets/app/FreeShow.png": {
+    "mtime": 1794163483.5288017,
+    "seen": 1794168221.1308618,
+    "ast_hash": "0e49125c27cec8a8a5774f7f9ec09394",
+    "semantic_hash": ""
+  }
+}
