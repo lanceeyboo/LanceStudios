@@ -17,22 +17,32 @@
             --accent-blue: #0284c7;
             --bg-color: #ffffff;
             --text-color: #000000;
+            --muted-text: rgba(0, 0, 0, 0.6);
             --header-bg: rgba(255, 255, 255, 0.95);
             --header-border: #000000;
             --logo-box-bg: var(--accent-blue);
             --logo-border: var(--accent-blue);
             --footer-bg: #f9f9f9;
+            --border-color: rgba(0, 0, 0, 0.22);
+            --social-border: rgba(0, 0, 0, 0.22);
+            --social-bg: rgba(0, 0, 0, 0.04);
+            --divider-color: rgba(0, 0, 0, 0.15);
         }
 
         .dark-mode {
             --bg-color: #0f0f0f;
             --text-color: #ffffff;
+            --muted-text: rgba(255, 255, 255, 0.55);
             --header-bg: rgba(26, 26, 26, 0.95);
             --header-border: #ffffff;
             --logo-box-bg: #ffffff;
             --logo-border: #ffffff;
             --footer-bg: #1a1a1a;
             --accent-blue: #38bdf8;
+            --border-color: rgba(255, 255, 255, 0.18);
+            --social-border: rgba(255, 255, 255, 0.25);
+            --social-bg: rgba(255, 255, 255, 0.06);
+            --divider-color: rgba(255, 255, 255, 0.16);
         }
 
         html {
@@ -126,22 +136,29 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 1rem;
-            transition: color 0.3s;
+            padding-bottom: 3px;
+            transition: color 0.25s ease;
             white-space: nowrap;
         }
         .header-center a::after {
             content: "";
             position: absolute;
             left: 0;
-            bottom: -4px;
-            width: 0;
+            bottom: 0;
+            width: 100%;
             height: 2px;
-            background-color: currentColor;
-            transform-origin: left;
-            transition: width 0.3s ease;
+            background-color: var(--accent-blue);
+            transform: scaleX(0);
+            transform-origin: right center;
+            transition: transform 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .header-center a:hover::after { width: 100%; }
-        .dark-mode .header-center a:hover { color: var(--accent-blue); }
+        .header-center a:hover {
+            color: var(--accent-blue);
+        }
+        .header-center a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left center;
+        }
 
         .header-right { display: flex; align-items: center; gap: 12px; }
 
@@ -500,21 +517,30 @@
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: bold;
+            padding-bottom: 3px;
             white-space: nowrap;
+            transition: color 0.25s ease;
         }
         .hero-location-link svg { width: 15px; height: 15px; color: var(--accent-blue); flex-shrink: 0; }
         .hero-location-link::after {
             content: "";
             position: absolute;
             left: 0;
-            bottom: -4px;
-            width: 0;
+            bottom: 0;
+            width: 100%;
             height: 2px;
-            background-color: currentColor;
-            transform-origin: left;
-            transition: width 0.3s ease;
+            background-color: var(--accent-blue);
+            transform: scaleX(0);
+            transform-origin: right center;
+            transition: transform 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .hero-location-link:hover::after { width: 100%; }
+        .hero-location-link:hover {
+            color: var(--accent-blue);
+        }
+        .hero-location-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left center;
+        }
         .location-tooltip {
             position: absolute;
             bottom: calc(100% + 10px);
@@ -1068,6 +1094,60 @@
         }
         .modal-item-desc { margin: 0; font-size: 0.95rem; line-height: 1.6; opacity: 0.9; text-align: justify; }
 
+        /* Floating PDF preview modal */
+        .pdf-preview-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 4100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .pdf-preview-modal.open { display: flex; }
+        .pdf-preview-panel {
+            position: relative;
+            width: min(900px, 96vw);
+            max-height: 92vh;
+            overflow-y: auto;
+            background: var(--bg-color);
+            border: 2px solid var(--text-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-sizing: border-box;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+        .pdf-preview-title {
+            margin: 0;
+            padding-right: 48px;
+            font-size: 1.6rem;
+            text-align: left;
+        }
+        .pdf-preview-frame {
+            display: block;
+            height: min(68vh, 620px);
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-top: 14px;
+            background: #ffffff;
+            box-sizing: border-box;
+        }
+        .pdf-preview-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 14px;
+        }
+        .pdf-preview-actions .card-btn { margin-top: 0; display: inline-block; text-decoration: none; }
+
         /* Certificates carousel info typography */
         .cert-cf { height: 330px; }
         .carousel-info {
@@ -1496,7 +1576,7 @@
         .contact-right {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
             flex: 1;
         }
 
@@ -1506,7 +1586,7 @@
             gap: 20px;
             border: 2px solid var(--text-color);
             border-radius: 10px;
-            padding: 15px;
+            padding: 11px 15px;
             text-decoration: none;
             color: var(--text-color);
             transition: all 0.3s;
@@ -1535,6 +1615,49 @@
             font-weight: bold;
             word-break: break-all;
         }
+
+        .contact-copy-btn {
+            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: 1.5px solid currentColor;
+            border-radius: 50%;
+            background: transparent;
+            color: inherit;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+        .contact-copy-btn:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+        .contact-card:hover .contact-copy-btn {
+            border-color: var(--bg-color);
+            color: var(--bg-color);
+        }
+        .contact-card:hover .contact-copy-btn:hover {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .contact-copy-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .contact-copy-btn .check-icon { display: none; }
+        .contact-copy-btn.copied .copy-icon { display: none; }
+        .contact-copy-btn.copied .check-icon { display: block; }
 
         /* Footer Section */
         .footer-section {
@@ -1687,6 +1810,7 @@
             .tools-legend { gap: 18px; padding: 10px 15px; margin-top: 18px; }
             .carousel-info { width: 95%; }
             .works-modal-panel { padding: 18px; }
+            .pdf-preview-panel { padding: 18px; }
             .modal-info h4 { font-size: 1.15rem; }
             .about-content { flex-direction: column; text-align: center; gap: 20px; width: 95%;}
             .contact-container { flex-direction: column; text-align: center; width: 95%;}
@@ -1712,24 +1836,52 @@
         body.hero-revealed .floating-header { opacity: 1; pointer-events: auto; }
         body.hero-revealed .hero-photo-layer { opacity: 1; }
 
-        /* ===== Lu-Bot Floating Assistant ===== */
-        /* Floating Launcher Container */
-        .lubot-launcher {
+        /* ===== Yohan.AI Floating Assistant ===== */
+        /* Floating Launcher Wrapper (emits sonar waves in circle mode) */
+        .yohan-launcher-wrapper {
             position: fixed;
-            bottom: 50px;
+            bottom: 22px;
             right: 25px;
             z-index: 1500;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.4s ease, right 0.3s ease;
         }
-        body.hero-revealed .lubot-launcher {
+        body.hero-revealed .yohan-launcher-wrapper {
             opacity: 1;
             pointer-events: auto;
         }
 
+        /* Outward Sonar Wave Ripple Animation */
+        @keyframes yohan-radar-wave {
+            0% {
+                transform: scale(1);
+                opacity: 0.75;
+            }
+            100% {
+                transform: scale(1.75);
+                opacity: 0;
+            }
+        }
+
+        .yohan-launcher-wrapper:not(.is-expanded):not(.is-open)::before,
+        .yohan-launcher-wrapper:not(.is-expanded):not(.is-open)::after {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-blue);
+            pointer-events: none;
+            z-index: -1;
+            animation: yohan-radar-wave 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        }
+
+        .yohan-launcher-wrapper:not(.is-expanded):not(.is-open)::after {
+            animation-delay: 1.2s;
+        }
+
         /* Morphing Pill Button */
-        .lubot-btn {
+        .yohan-btn {
             height: 56px;
             min-width: 56px;
             max-width: 56px;
@@ -1745,14 +1897,14 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.25);
             transition: max-width 0.55s cubic-bezier(0.22, 1, 0.36, 1), padding 0.55s ease, box-shadow 0.2s ease;
         }
-        .lubot-btn:hover {
+        .yohan-btn:hover {
             box-shadow: 0 12px 32px rgba(0,0,0,0.3);
         }
-        .lubot-btn.expanded {
-            max-width: 240px;
+        .yohan-btn.is-expanded {
+            max-width: 260px;
             padding: 0 18px 0 12px;
         }
-        .lubot-btn-avatar {
+        .yohan-btn-avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -1760,7 +1912,7 @@
             flex-shrink: 0;
             background: var(--bg-color);
         }
-        .lubot-btn-text {
+        .yohan-btn-text {
             display: flex;
             flex-direction: column;
             text-align: left;
@@ -1768,16 +1920,16 @@
             opacity: 0;
             transition: opacity 0.35s ease;
         }
-        .lubot-btn.expanded .lubot-btn-text {
+        .yohan-btn.is-expanded .yohan-btn-text {
             opacity: 1;
         }
-        .lubot-btn-title {
+        .yohan-btn-title {
             font-size: 0.85rem;
             font-weight: 800;
             line-height: 1.15;
             color: var(--text-color);
         }
-        .lubot-btn-sub {
+        .yohan-btn-sub {
             font-size: 0.68rem;
             font-weight: 500;
             opacity: 0.8;
@@ -1786,9 +1938,9 @@
         }
 
         /* Chat Window */
-        .lubot-window {
+        .yohan-window {
             position: fixed;
-            bottom: 120px;
+            bottom: 90px;
             right: 25px;
             width: min(420px, 92vw);
             height: 550px;
@@ -1804,16 +1956,16 @@
             transition: opacity 0.3s ease, transform 0.3s ease, right 0.3s ease,
                         width 0.3s cubic-bezier(0.22, 1, 0.36, 1), height 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .lubot-window.open {
+        .yohan-window.is-open {
             display: flex;
         }
-        .lubot-window.expanded-view {
+        .yohan-window.is-expanded-view {
             width: min(600px, 92vw);
             height: 76vh;
         }
 
         /* Chat Header */
-        .lubot-header {
+        .yohan-header {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -1822,50 +1974,50 @@
             background-color: var(--bg-color);
             flex-shrink: 0;
         }
-        .lubot-header-avatar {
+        .yohan-header-avatar {
             width: 28px;
             height: 28px;
             border-radius: 50%;
             object-fit: contain;
             background: var(--bg-color);
         }
-        .lubot-header-info {
+        .yohan-header-info {
             display: flex;
             flex-direction: column;
             min-width: 0;
         }
-        .lubot-header-title {
+        .yohan-header-title {
             font-size: 0.9rem;
             font-weight: bold;
             line-height: 1.2;
         }
-        .lubot-header-sub {
+        .yohan-header-sub {
             display: flex;
             align-items: center;
             gap: 6px;
             font-size: 0.7rem;
             opacity: 0.75;
         }
-        .lubot-status-dot {
+        .yohan-status-dot {
             width: 7px;
             height: 7px;
             border-radius: 50%;
             background-color: #22c55e;
             flex-shrink: 0;
-            animation: lubot-pulse 1.6s ease-in-out infinite;
+            animation: yohan-pulse 1.6s ease-in-out infinite;
         }
-        @keyframes lubot-pulse {
+        @keyframes yohan-pulse {
             0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
             50% { opacity: 0.55; transform: scale(0.8); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
         }
-        .lubot-header-actions {
+        .yohan-header-actions {
             display: flex;
             align-items: center;
             gap: 8px;
             margin-left: auto;
         }
-        .lubot-close,
-        .lubot-expand {
+        .yohan-close,
+        .yohan-expand {
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -1880,18 +2032,18 @@
             justify-content: center;
             transition: background-color 0.2s, color 0.2s, transform 0.2s;
         }
-        .lubot-close:hover,
-        .lubot-expand:hover {
+        .yohan-close:hover,
+        .yohan-expand:hover {
             background-color: var(--text-color);
             color: var(--bg-color);
         }
-        .lubot-expand svg {
+        .yohan-expand svg {
             width: 16px;
             height: 16px;
         }
 
         /* Messages Area */
-        .lubot-messages {
+        .yohan-messages {
             flex: 1;
             padding: 14px;
             overflow-y: auto;
@@ -1903,35 +2055,35 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(128,128,128,0.45) transparent;
         }
-        .lubot-messages::-webkit-scrollbar {
+        .yohan-messages::-webkit-scrollbar {
             width: 5px;
         }
-        .lubot-messages::-webkit-scrollbar-track {
+        .yohan-messages::-webkit-scrollbar-track {
             background: transparent;
         }
-        .lubot-messages::-webkit-scrollbar-thumb {
+        .yohan-messages::-webkit-scrollbar-thumb {
             background: rgba(128,128,128,0.45);
             border-radius: 10px;
         }
 
-        .lubot-message-wrapper {
+        .yohan-message-wrapper {
             display: flex;
             flex-direction: column;
             max-width: 82%;
             gap: 4px;
         }
-        .lubot-message-wrapper.user {
+        .yohan-message-wrapper.user {
             align-self: flex-end;
             align-items: flex-end;
             margin-left: auto;
         }
-        .lubot-message-wrapper.bot {
+        .yohan-message-wrapper.bot {
             align-self: flex-start;
             flex-direction: row;
             align-items: flex-start;
             gap: 8px;
         }
-        .lubot-message-avatar {
+        .yohan-message-avatar {
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -1941,17 +2093,17 @@
             flex-shrink: 0;
             background: var(--bg-color);
         }
-        .lubot-sender-name {
+        .yohan-sender-name {
             font-size: 0.65rem;
             font-weight: 600;
             opacity: 0.7;
             color: var(--text-color);
             padding: 0 2px;
         }
-        .lubot-message-wrapper.user .lubot-sender-name {
+        .yohan-message-wrapper.user .yohan-sender-name {
             text-align: right;
         }
-        .lubot-message {
+        .yohan-message {
             font-size: 0.85rem;
             line-height: 1.5;
             padding: 10px 13px;
@@ -1960,19 +2112,19 @@
             width: fit-content;
             max-width: 100%;
         }
-        .lubot-message.bot {
+        .yohan-message.bot {
             background: rgba(128,128,128,0.14);
             border: 1px solid rgba(128,128,128,0.3);
             border-radius: 14px 14px 14px 4px;
         }
-        .lubot-message.user {
+        .yohan-message.user {
             background: var(--accent-blue);
             color: #ffffff;
             border-radius: 14px 14px 4px 14px;
         }
 
         /* Typing Indicator */
-        .lubot-typing-wrapper {
+        .yohan-typing-wrapper {
             align-self: flex-start;
             display: flex;
             flex-direction: row;
@@ -1980,12 +2132,12 @@
             gap: 8px;
             max-width: 82%;
         }
-        .lubot-typing-wrapper > div {
+        .yohan-typing-wrapper > div {
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
-        .lubot-typing {
+        .yohan-typing {
             display: flex;
             gap: 4px;
             padding: 10px 13px;
@@ -1993,23 +2145,23 @@
             border: 1px solid rgba(128,128,128,0.3);
             border-radius: 14px 14px 14px 4px;
         }
-        .lubot-typing span {
+        .yohan-typing span {
             width: 7px;
             height: 7px;
             border-radius: 50%;
             background: var(--text-color);
             opacity: 0.5;
-            animation: lubot-typing-bounce 1.2s ease-in-out infinite;
+            animation: yohan-typing-bounce 1.2s ease-in-out infinite;
         }
-        .lubot-typing span:nth-child(2) { animation-delay: 0.2s; }
-        .lubot-typing span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes lubot-typing-bounce {
+        .yohan-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .yohan-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes yohan-typing-bounce {
             0%, 100% { transform: translateY(0); opacity: 0.4; }
             50% { transform: translateY(-5px); opacity: 1; }
         }
 
         /* Quick Question Chips Carousel */
-        .lubot-chips-wrapper {
+        .yohan-chips-wrapper {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -2017,7 +2169,7 @@
             border-top: 1px solid rgba(128,128,128,0.2);
             flex-shrink: 0;
         }
-        .lubot-chips-nav {
+        .yohan-chips-nav {
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -2033,13 +2185,13 @@
             line-height: 1;
             transition: all 0.2s ease;
         }
-        .lubot-chips-nav:hover {
+        .yohan-chips-nav:hover {
             border-color: var(--accent-blue);
             background-color: var(--accent-blue);
             color: #ffffff;
             transform: scale(1.06);
         }
-        .lubot-chips-track {
+        .yohan-chips-track {
             flex: 1;
             display: flex;
             gap: 6px;
@@ -2050,10 +2202,10 @@
             padding: 2px 4px;
             scroll-behavior: smooth;
         }
-        .lubot-chips-track::-webkit-scrollbar {
+        .yohan-chips-track::-webkit-scrollbar {
             display: none;
         }
-        .lubot-chip {
+        .yohan-chip {
             flex-shrink: 0;
             white-space: nowrap;
             font-size: 0.78rem;
@@ -2068,19 +2220,19 @@
             align-items: center;
             gap: 6px;
         }
-        .lubot-chip:hover {
+        .yohan-chip:hover {
             border-color: var(--accent-blue);
             background-color: rgba(2, 132, 199, 0.14);
             color: var(--accent-blue);
         }
-        .lubot-chip-sparkle {
+        .yohan-chip-sparkle {
             font-size: 0.85rem;
             line-height: 1;
             opacity: 0.7;
         }
 
         /* Action Button inside bot bubbles */
-        .lubot-action-btn {
+        .yohan-action-btn {
             margin-top: 10px;
             display: inline-flex;
             align-items: center;
@@ -2095,13 +2247,13 @@
             cursor: pointer;
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
-        .lubot-action-btn:hover {
+        .yohan-action-btn:hover {
             transform: translateY(-1px);
             opacity: 0.92;
         }
 
         /* Input Bar - Pill shaped */
-        .lubot-input-bar {
+        .yohan-input-bar {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -2110,7 +2262,7 @@
             background-color: var(--bg-color);
             flex-shrink: 0;
         }
-        .lubot-input-pill {
+        .yohan-input-pill {
             flex: 1;
             display: flex;
             align-items: center;
@@ -2120,7 +2272,7 @@
             border: 1.5px solid rgba(128,128,128,0.35);
             background: rgba(128,128,128,0.06);
         }
-        .lubot-input {
+        .yohan-input {
             flex: 1;
             padding: 8px 0;
             border: none;
@@ -2130,11 +2282,11 @@
             font-size: 0.85rem;
             outline: none;
         }
-        .lubot-input::placeholder {
+        .yohan-input::placeholder {
             color: var(--text-color);
             opacity: 0.5;
         }
-        .lubot-send {
+        .yohan-send {
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -2148,17 +2300,17 @@
             transition: background-color 0.2s, transform 0.2s;
             flex-shrink: 0;
         }
-        .lubot-send:hover {
+        .yohan-send:hover {
             background-color: #0369a1;
             transform: scale(1.05);
         }
-        .lubot-send svg {
+        .yohan-send svg {
             width: 16px;
             height: 16px;
         }
 
         /* Bottom AI Disclaimer */
-        .lubot-disclaimer {
+        .yohan-disclaimer {
             font-size: 0.68rem;
             text-align: center;
             opacity: 0.65;
@@ -2169,33 +2321,33 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .lubot-launcher {
+            .yohan-launcher-wrapper {
                 bottom: 18px;
                 right: 18px;
             }
-            .lubot-window {
+            .yohan-window {
                 bottom: 82px;
                 right: 5vw;
                 width: 90vw;
                 height: 70vh;
             }
-            .lubot-window.expanded-view {
+            .yohan-window.is-expanded-view {
                 width: 95vw;
                 height: 85vh;
             }
-            .lubot-btn.expanded {
-                max-width: 200px;
+            .yohan-btn.is-expanded {
+                max-width: 220px;
             }
-            .lubot-chips-nav {
+            .yohan-chips-nav {
                 width: 26px;
                 height: 26px;
                 font-size: 0.9rem;
             }
-            .lubot-chip {
+            .yohan-chip {
                 font-size: 0.72rem;
                 padding: 6px 12px;
             }
-            .lubot-disclaimer {
+            .yohan-disclaimer {
                 font-size: 0.62rem;
                 padding: 4px 8px 8px;
             }
@@ -2305,184 +2457,348 @@
         }
 
         /* ===== SITE FOOTER ===== */
+        /* Footer — top divider full viewport width, inner content matches divider edges, compact height with chatbot clearance */
         .lance-footer {
-          width: 100%;
-          background-color: var(--bg-color);
-          color: var(--text-color);
-          scroll-snap-align: end;
           position: relative;
-          z-index: 10;
-          padding-top: 20px;
+          z-index: 2;
+          width: 100%;
+          padding: 64px 0 18px;
+          color: var(--text-color);
+          transition: color 0.35s ease;
         }
 
+        .lance-footer-verse {
+          width: 75%;
+          margin: 0 auto 24px;
+          text-align: center;
+          font-style: italic;
+          font-size: 0.88rem;
+          line-height: 1.5;
+          color: var(--muted-text);
+          letter-spacing: 0.3px;
+        }
+
+        /* Top divider — full viewport width like floating-header (75%/90%/95%) */
+        .lance-footer-top-divider {
+          width: 75%;
+          max-width: none;
+          margin: 0 auto 32px;
+          border-top: 1px solid var(--divider-color);
+        }
+
+        /* Inner constrained container — matches top divider edges exactly (75%/90%/95%) with deeper symmetrical inset */
         .lance-footer-inner {
-          width: min(1150px, 92%);
+          width: 75%;
+          max-width: none;
           margin: 0 auto;
-          border-top: 1px solid rgba(128, 128, 128, 0.28);
-          padding-top: 48px;
+          padding: 0 120px;
+          box-sizing: border-box;
         }
 
-        .lance-footer-top {
+        .lance-footer-main {
           display: flex;
           justify-content: space-between;
-          align-items: flex-start;
-          flex-wrap: wrap;
-          gap: 36px;
-          padding-bottom: 36px;
+          align-items: stretch;
+          gap: 48px;
         }
 
         .lance-footer-brand {
+          min-width: 260px;
+          max-width: 360px;
+          flex-shrink: 0;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          max-width: 380px;
         }
 
         .lance-footer-logo {
-          width: 44px;
-          height: 44px;
+          display: block;
+          width: 48px;
+          height: 48px;
           object-fit: contain;
-          border-radius: 10px;
-          margin-bottom: 14px;
+          border-radius: 8px;
+          margin-bottom: 12px;
         }
 
-        .lance-footer-title {
-          font-size: 1.55rem;
-          font-weight: 800;
+        .lance-footer-brand-title {
+          font-size: 28px;
+          font-weight: 900;
+          line-height: 1.15;
+          letter-spacing: 0.3px;
           color: var(--accent-blue);
-          margin: 0 0 4px 0;
-          line-height: 1.2;
+          white-space: nowrap;
         }
 
         .lance-footer-subtitle {
-          font-size: 0.95rem;
-          font-weight: 600;
+          margin: 4px 0 0 0;
+          font-size: 16px;
+          font-weight: 700;
           color: var(--text-color);
-          opacity: 0.85;
-          margin: 0 0 18px 0;
+          line-height: 1.4;
+          white-space: nowrap;
+        }
+
+        .lance-footer-desc {
+          margin: 4px 0 0 0;
+          font-size: 14px;
+          font-weight: 400;
+          color: var(--muted-text);
+          line-height: 1.5;
+          max-width: 320px;
         }
 
         .lance-footer-socials {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
+          margin-top: 14px;
         }
 
-        .lance-social-circle {
-          width: 38px;
-          height: 38px;
+        .lance-footer-social-btn {
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
-          border: 1.5px solid rgba(128, 128, 128, 0.4);
+          border: 1.5px solid var(--social-border);
+          background: var(--social-bg);
+          color: var(--text-color);
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: var(--text-color);
           text-decoration: none;
-          transition: all 0.25s ease;
+          transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .lance-social-circle:hover {
+        .lance-footer-social-btn:hover {
+          transform: translateY(-3px);
           border-color: var(--accent-blue);
-          background-color: var(--accent-blue);
-          color: #ffffff;
-          transform: translateY(-2px);
+          color: var(--accent-blue);
+          background: rgba(56, 189, 248, 0.12);
+          box-shadow: 0 6px 18px rgba(2, 132, 199, 0.18);
         }
 
-        .lance-footer-right {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          justify-content: space-between;
-          gap: 28px;
+        .lance-footer-social-btn svg {
+          width: 16px;
+          height: 16px;
         }
 
+        /* Right navigation column — stretches full height, nav links at top (aligned with brand title), back-to-top at bottom (aligned with socials) */
         .lance-footer-nav {
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-end;
+          min-width: 0;
+        }
+
+        .lance-footer-nav-top {
+          display: flex;
+          gap: clamp(16px, 2.5vw, 32px);
+          width: 100%;
           justify-content: flex-end;
-          flex-wrap: wrap;
-          gap: 22px;
         }
 
-        .lance-footer-nav a {
-          font-size: 0.92rem;
-          font-weight: 600;
-          color: var(--text-color);
+        .lance-footer-nav-col {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        /* 5 nav headings — blue headings with sliding underline hover */
+        .lance-footer-nav-title {
+          position: relative;
+          display: inline-block;
+          width: fit-content;
+          font-size: 13.5px;
+          font-weight: 700;
+          color: var(--accent-blue);
           text-decoration: none;
-          transition: color 0.2s ease;
+          text-transform: none;
+          letter-spacing: 0.2px;
+          line-height: 1.2;
+          padding-bottom: 3px;
         }
 
-        .lance-footer-nav a:hover {
+        .lance-footer-nav-title::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 2px;
+          background-color: var(--accent-blue);
+          transform: scaleX(0);
+          transform-origin: right center;
+          transition: transform 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .lance-footer-nav-title:hover {
           color: var(--accent-blue);
         }
 
-        .lance-back-to-top {
+        .lance-footer-nav-title:hover::after {
+          transform: scaleX(1);
+          transform-origin: left center;
+        }
+
+        .lance-footer-nav-links {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .lance-footer-link-anim {
+          position: relative;
+          display: inline-block;
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--text-color);
+          text-decoration: none;
+          padding-bottom: 2px;
+          transition: color 0.25s ease;
+        }
+
+        .lance-footer-link-anim::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 2px;
+          background-color: var(--accent-blue);
+          transform: scaleX(0);
+          transform-origin: right center;
+          transition: transform 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .lance-footer-link-anim:hover {
+          color: var(--accent-blue);
+        }
+
+        .lance-footer-link-anim:hover::after {
+          transform: scaleX(1);
+          transform-origin: left center;
+        }
+
+        /* Back to top — aligned with social icons row */
+        .lance-footer-nav-bottom {
+          margin-top: auto;
+          padding-top: 16px;
+        }
+
+        .lance-footer-backtop-btn {
           display: inline-flex;
           align-items: center;
           gap: 10px;
           background: transparent;
           border: none;
           color: var(--text-color);
-          font-size: 0.85rem;
-          font-weight: 600;
+          font-family: inherit;
+          font-size: 13.5px;
+          font-weight: 700;
           cursor: pointer;
           padding: 0;
           transition: color 0.2s ease;
         }
 
-        .lance-back-to-top-circle {
-          width: 34px;
-          height: 34px;
-          border-radius: 50%;
-          border: 1.5px solid rgba(128, 128, 128, 0.45);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.25s ease;
-        }
-
-        .lance-back-to-top:hover {
+        .lance-footer-backtop-btn:hover {
           color: var(--accent-blue);
         }
 
-        .lance-back-to-top:hover .lance-back-to-top-circle {
-          border-color: var(--accent-blue);
-          background-color: var(--accent-blue);
-          color: #ffffff;
-          transform: translateY(-2px);
+        .lance-footer-backtop-circle {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: var(--social-bg);
+          border: 1.5px solid var(--social-border);
+          color: var(--accent-blue);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .lance-footer-bottom {
-          border-top: 1px solid rgba(128, 128, 128, 0.28);
-          padding: 20px 0 95px 0;
+        .lance-footer-backtop-btn:hover .lance-footer-backtop-circle {
+          background: var(--accent-blue);
+          border-color: var(--accent-blue);
+          color: #ffffff;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(2, 132, 199, 0.25);
+        }
+
+        .lance-footer-backtop-circle svg {
+          width: 15px;
+          height: 15px;
+        }
+
+        /* Bottom divider — matches inner container width */
+        .lance-footer-bottom-divider {
+          width: 100%;
+          margin: 20px auto 14px;
+          border-top: 1px solid var(--divider-color);
+        }
+
+        .lance-footer-sub {
           display: flex;
           justify-content: space-between;
           align-items: center;
           flex-wrap: wrap;
-          gap: 12px;
-          font-size: 0.82rem;
-          color: var(--text-color);
-          opacity: 0.85;
+          gap: 16px;
+          font-size: 13px;
+          color: var(--muted-text);
         }
 
-        .lance-footer-bottom strong {
+        .lance-footer-credit-link {
           color: var(--accent-blue);
           font-weight: 700;
+          text-decoration: none;
+          transition: opacity 0.2s ease;
+        }
+
+        .lance-footer-credit-link:hover {
+          opacity: 0.8;
+          text-decoration: underline;
+        }
+
+        /* Responsive: top divider & inner container match floating header */
+        @media (max-width: 1200px) {
+          .lance-footer-top-divider { width: 90%; }
+          .lance-footer-inner { width: 90%; padding: 0 96px; }
+          .lance-footer-verse { width: 90%; }
         }
 
         @media (max-width: 768px) {
-          .lance-footer-right {
+          .lance-footer-top-divider { width: 95%; }
+          .lance-footer-inner { width: 95%; padding: 0 64px; }
+          .lance-footer-verse { width: 95%; font-size: 0.8rem; }
+        }
+
+        @media (max-width: 960px) {
+          .lance-footer-main {
+            flex-direction: column;
+            gap: 32px;
             align-items: flex-start;
           }
           .lance-footer-nav {
-            justify-content: flex-start;
-            gap: 16px;
-          }
-          .lance-footer-bottom {
-            flex-direction: column;
             align-items: flex-start;
-            padding-bottom: 105px;
+            width: 100%;
           }
+          .lance-footer-nav-top {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: clamp(16px, 3vw, 28px);
+          }
+        }
+
+        @media (max-width: 600px) {
+          .lance-footer-brand { max-width: 100%; min-width: 0; }
+          .lance-footer-brand-title { font-size: 22px; }
+          .lance-footer-nav-top { flex-direction: column; gap: 20px; width: 100%; }
+          .lance-footer-nav-col { min-width: 0; width: 100%; }
+          .lance-footer-sub { flex-direction: column; text-align: center; }
+          .lance-footer-backtop-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -2688,7 +3004,7 @@
                         <h3 class="card-title">Visuals</h3>
                         <p class="card-subtitle">Event posters and promotional graphics</p>
                         <p class="card-desc">A collection of event posters, promotional materials, and digital artworks designed for organizations, competitions, and community events throughout Lance's journey.</p>
-                        <button class="card-btn" type="button">See Full Project</button>
+                        <button class="card-btn" type="button">See All Project</button>
                     </div>
                 </div>
 
@@ -2705,7 +3021,7 @@
                         <h3 class="card-title">Merchandise</h3>
                         <p class="card-subtitle">Lanyards, pins, and shirt concepts</p>
                         <p class="card-desc">Organization merchandise designed by Lance for the Junior Philippine Computer Society - QCU Chapter, including lanyard collections, pin concepts, and polo shirt mockups.</p>
-                        <button class="card-btn" type="button">See Full Project</button>
+                        <button class="card-btn" type="button">See All Project</button>
                     </div>
                 </div>
 
@@ -2722,7 +3038,7 @@
                         <h3 class="card-title">Brands</h3>
                         <p class="card-subtitle">Logos and organizational seals</p>
                         <p class="card-desc">Official logo seals and brand identities crafted for schools, organizations, and communities.</p>
-                        <button class="card-btn" type="button">See Full Project</button>
+                        <button class="card-btn" type="button">See All Project</button>
                     </div>
                 </div>
             </div>
@@ -2737,7 +3053,7 @@
         </div>
 
         <div class="cf-wrapper cert-cf reveal-item" id="cert-carousel" style="--reveal-delay: 0.1s;">
-            <button class="nav-btn prevBtn" id="cert-prev" aria-label="Previous certificate">&lt;</button>
+            <button class="nav-btn prevBtn" id="cert-prev" aria-label="Previous certificate"><</button>
             <div class="cf-item cf-landscape">
                 <img src="Assets/Certificates/24-03-01 Quiz Bee (Certificate of Participation).jpg" alt="Quiz Bee Certificate of Participation" draggable="false">
             </div>
@@ -2756,7 +3072,7 @@
             <div class="cf-item cf-landscape">
                 <img src="Assets/Certificates/26-04-13 JPCS Certicate of Membership 2025-26.jpg" alt="JPCS Certificate of Membership 2025-26" draggable="false">
             </div>
-            <button class="nav-btn nextBtn" id="cert-next" aria-label="Next certificate">&gt;</button>
+            <button class="nav-btn nextBtn" id="cert-next" aria-label="Next certificate">></button>
         </div>
 
         <div class="carousel-info">
@@ -2867,7 +3183,7 @@
         </div>
 
         <div class="background-container">
-            <div class="reveal-item">
+            <div class="reveal-item" id="bg-experience">
                 <h3 class="bg-category-title">Experience</h3>
                 <div class="timeline">
                     <div class="timeline-item">
@@ -2908,7 +3224,7 @@
                 </div>
             </div>
 
-            <div class="reveal-item">
+            <div class="reveal-item" id="bg-education">
                 <h3 class="bg-category-title">Education</h3>
                 <div class="timeline">
                     <div class="timeline-item">
@@ -2957,16 +3273,16 @@
                 <p class="contact-objective">I'm open to opportunities where I can contribute my visual artist's eye for aesthetics alongside my frontend development skills, bridging the gap between beautiful design and seamless interactivity.</p>
 
                 <div class="download-buttons">
-                    <a href="Assets/Borras-Resume.pdf" download class="resume-link">
+                    <a href="Assets/Borras-Resume.pdf" class="resume-link" data-pdf-preview data-pdf-title="Resume">
                         <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                         </div>
                         <span>Resume</span>
                     </a>
 
-                    <a href="Assets/Borras-Porfolio.pdf" download class="resume-link">
+                    <a href="Assets/Borras-Porfolio.pdf" class="resume-link" data-pdf-preview data-pdf-title="Portfolio">
                         <div class="icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                         </div>
                         <span>Portfolio</span>
                     </a>
@@ -2974,14 +3290,18 @@
             </div>
 
             <div class="contact-right reveal-item">
-                <a href="https://www.facebook.com/edu.lanceeborras" target="_blank" class="contact-card">
+                <a href="tel:+639102512362" class="contact-card">
                     <div class="icon-circle">
-                        <svg class="fill-icon" viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     </div>
                     <div class="card-text">
-                        <span class="card-label">FACEBOOK</span>
-                        <span class="card-value">facebook.com/edu.lanceeborras</span>
+                        <span class="card-label">PHONE</span>
+                        <span class="card-value">+63 910 251 2362</span>
                     </div>
+                    <button type="button" class="contact-copy-btn" data-copy="+63 910 251 2362" aria-label="Copy phone number" title="Copy phone number">
+                        <svg class="copy-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </button>
                 </a>
 
                 <a href="mailto:borras.lanceharvey.belleca@gmail.com" class="contact-card">
@@ -2992,9 +3312,23 @@
                         <span class="card-label">EMAIL</span>
                         <span class="card-value">borras.lanceharvey.belleca@gmail.com</span>
                     </div>
+                    <button type="button" class="contact-copy-btn" data-copy="borras.lanceharvey.belleca@gmail.com" aria-label="Copy email address" title="Copy email address">
+                        <svg class="copy-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </button>
                 </a>
 
-                <a href="https://github.com/lanceeyboo" target="_blank" class="contact-card">
+                <a href="https://www.linkedin.com/in/lance-harvey-borras/" target="_blank" rel="noopener noreferrer" class="contact-card">
+                    <div class="icon-circle">
+                        <svg class="fill-icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </div>
+                    <div class="card-text">
+                        <span class="card-label">LINKEDIN</span>
+                        <span class="card-value">linkedin.com/in/lance-harvey-borras/</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/lanceeyboo" target="_blank" rel="noopener noreferrer" class="contact-card">
                     <div class="icon-circle">
                         <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                     </div>
@@ -3004,13 +3338,13 @@
                     </div>
                 </a>
 
-                <a href="https://www.linkedin.com/in/lance-harvey-borras/" target="_blank" class="contact-card">
+                <a href="https://providelynx.com/u/lanceharveyborras" target="_blank" rel="noopener noreferrer" class="contact-card">
                     <div class="icon-circle">
-                        <svg class="fill-icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        <img src="https://www.google.com/s2/favicons?domain=providelynx.com&sz=64" alt="ProvideLynx" style="width: 22px; height: 22px; object-fit: contain; border-radius: 4px;" onerror="this.onerror=null; this.src='https://providelynx.com/favicon.ico';">
                     </div>
                     <div class="card-text">
-                        <span class="card-label">LINKEDIN</span>
-                        <span class="card-value">linkedin.com/in/lance-harvey-borras/</span>
+                        <span class="card-label">PROVIDELYNX</span>
+                        <span class="card-value">providelynx.com/u/lanceharveyborras</span>
                     </div>
                 </a>
             </div>
@@ -3019,64 +3353,99 @@
 
     <!-- Site Footer -->
     <footer id="site-footer" class="lance-footer">
+      <p class="lance-footer-verse">&ldquo;With man this is impossible, but with God all things are possible.&rdquo; &mdash; Matthew 19:26</p>
+
+      <!-- Top divider — full viewport width like floating-header -->
+      <div class="lance-footer-top-divider"></div>
+
+      <!-- Inner constrained container — matches top divider edges exactly -->
       <div class="lance-footer-inner">
-        <div class="lance-footer-top">
-          <!-- Left Column: Tab Logo, Title, Subtitle & Social Circles -->
+        <img src="Assets/lancestudios2026.png" alt="Lance Studios Logo" class="lance-footer-logo">
+
+        <div class="lance-footer-main">
+          <!-- Left Brand Column -->
           <div class="lance-footer-brand">
-            <img src="Assets/lancestudios2026.png" alt="Lance Studios Logo" class="lance-footer-logo" />
-            <h3 class="lance-footer-title">Lance Studios</h3>
-            <p class="lance-footer-subtitle">Lance Harvey Borras' Website</p>
+            <div class="lance-footer-brand-title">Lance Harvey B. Borras</div>
+            <p class="lance-footer-subtitle">A Personal Website</p>
+            <p class="lance-footer-desc">Creative portfolio showcasing graphic design, visual arts, UI/UX engineering, and full-stack web development.</p>
+
+            <!-- Social Icons (Facebook, Instagram, Phone, Email) -->
             <div class="lance-footer-socials">
-              <!-- Facebook -->
-              <a href="https://www.facebook.com/edu.lanceeborras" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="lance-social-circle">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/>
-                </svg>
+              <a href="https://www.facebook.com/edu.lanceeborras" target="_blank" rel="noopener noreferrer" class="lance-footer-social-btn" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               </a>
-              <!-- Instagram -->
-              <a href="https://www.instagram.com/_lanceeborras/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="lance-social-circle">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
+              <a href="https://www.instagram.com/_lanceeborras/" target="_blank" rel="noopener noreferrer" class="lance-footer-social-btn" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               </a>
-              <!-- LinkedIn -->
-              <a href="https://www.linkedin.com/in/lance-harvey-borras" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="lance-social-circle">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/>
-                </svg>
+              <a href="tel:+639102512362" class="lance-footer-social-btn" aria-label="Phone">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </a>
+              <a href="mailto:borras.lanceharvey.belleca@gmail.com" class="lance-footer-social-btn" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
               </a>
             </div>
           </div>
 
-          <!-- Right Column: Header Navigation Links & Back to Top -->
-          <div class="lance-footer-right">
-            <nav class="lance-footer-nav" aria-label="Footer Navigation">
-              <a href="#works">Works</a>
-              <a href="#certifications">Certifications</a>
-              <a href="#tools">Tools</a>
-              <a href="#profile">Profile</a>
-              <a href="#background">Background</a>
-              <a href="#contact">Contacts</a>
-            </nav>
+          <!-- Right Navigation Column — stretches full height, nav links at top (aligned with brand title), back-to-top at bottom (aligned with socials) -->
+          <div class="lance-footer-nav">
+            <div class="lance-footer-nav-top">
+              <div class="lance-footer-nav-col">
+                <a href="#works" class="lance-footer-nav-title">Works</a>
+                <ul class="lance-footer-nav-links">
+                  <li>
+                    <!-- Ready to update to #projects once the Frontend Projects section is built -->
+                    <a href="#works" class="lance-footer-link-anim">Projects</a>
+                  </li>
+                  <li><a href="#certifications" class="lance-footer-link-anim">Certifications</a></li>
+                  <li><a href="#tools" class="lance-footer-link-anim">Tools</a></li>
+                </ul>
+              </div>
 
-            <button type="button" class="lance-back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })">
-              <span>Back to top</span>
-              <span class="lance-back-to-top-circle">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="19" x2="12" y2="5"></line>
-                  <polyline points="5 12 12 5 19 12"></polyline>
-                </svg>
-              </span>
-            </button>
+              <div class="lance-footer-nav-col">
+                <a href="#profile" class="lance-footer-nav-title">Profile</a>
+                <ul class="lance-footer-nav-links">
+                  <li><a href="Assets/Borras-Resume.pdf" class="lance-footer-link-anim" data-pdf-preview data-pdf-title="Resume">Resume</a></li>
+                  <li><a href="Assets/Borras-Porfolio.pdf" class="lance-footer-link-anim" data-pdf-preview data-pdf-title="Portfolio">Portfolio</a></li>
+                  <li><a href="https://providelynx.com/u/lanceharveyborras" target="_blank" rel="noopener noreferrer" class="lance-footer-link-anim">ProvideLynx</a></li>
+                </ul>
+              </div>
+
+              <div class="lance-footer-nav-col">
+                <a href="#background" class="lance-footer-nav-title">Background</a>
+                <ul class="lance-footer-nav-links">
+                  <li><a href="#bg-experience" class="lance-footer-link-anim" data-bg-link>Experience</a></li>
+                  <li><a href="#bg-education" class="lance-footer-link-anim" data-bg-link>Education</a></li>
+                </ul>
+              </div>
+
+              <div class="lance-footer-nav-col">
+                <a href="#contact" class="lance-footer-nav-title">Contacts</a>
+                <ul class="lance-footer-nav-links">
+                  <li><a href="https://www.linkedin.com/in/lance-harvey-borras/" target="_blank" rel="noopener noreferrer" class="lance-footer-link-anim">LinkedIn</a></li>
+                  <li><a href="https://github.com/lanceeyboo" target="_blank" rel="noopener noreferrer" class="lance-footer-link-anim">GitHub</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Back to top — aligned with social icons row -->
+            <div class="lance-footer-nav-bottom">
+              <button type="button" class="lance-footer-backtop-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });" aria-label="Back to top">
+                <span>Back to top</span>
+                <span class="lance-footer-backtop-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Bottom Divider & Sub-Footer Bar -->
-        <div class="lance-footer-bottom">
+        <!-- Bottom Divider — matches inner container width -->
+        <div class="lance-footer-bottom-divider"></div>
+
+        <!-- Bottom Sub-Footer Strip -->
+        <div class="lance-footer-sub">
           <span>&copy; 2026 Lance Harvey Borras, All Right Reserved.</span>
-          <span>Developed by <strong>Lance Studios</strong></span>
+          <span>Developed by <a href="#profile" class="lance-footer-credit-link">Himself</a></span>
         </div>
       </div>
     </footer>
@@ -3088,14 +3457,27 @@
             <h3 class="modal-category-title" id="works-modal-title"></h3>
             <p class="modal-category-sub" id="works-modal-sub"></p>
             <div class="cf-wrapper works-cf" id="works-cf">
-                <button class="nav-btn prevBtn" id="works-cf-prev" aria-label="Previous item">&lt;</button>
-                <button class="nav-btn nextBtn" id="works-cf-next" aria-label="Next item">&gt;</button>
+                <button class="nav-btn prevBtn" id="works-cf-prev" aria-label="Previous item"><</button>
+                <button class="nav-btn nextBtn" id="works-cf-next" aria-label="Next item">></button>
             </div>
             <div class="modal-info">
                 <h4 id="works-modal-item-title"></h4>
                 <p class="modal-item-sub" id="works-modal-item-sub"></p>
                 <p class="modal-item-desc" id="works-modal-item-desc"></p>
-                <a id="works-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="card-btn" style="display:inline-block; margin-top:15px; text-decoration:none;">See Full Project</a>
+                <a id="works-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="card-btn" style="display:inline-block; margin-top:15px; text-decoration:none;">See All Project</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating PDF Preview Modal -->
+    <div class="pdf-preview-modal" id="pdf-preview-modal" role="dialog" aria-modal="true" aria-label="PDF preview">
+        <div class="pdf-preview-panel">
+            <button class="modal-close" id="pdf-preview-close" aria-label="Close PDF preview">&times;</button>
+            <h3 class="pdf-preview-title" id="pdf-preview-title">Preview</h3>
+            <iframe class="pdf-preview-frame" id="pdf-preview-frame" title="PDF preview" src="about:blank"></iframe>
+            <div class="pdf-preview-actions">
+                <a id="pdf-preview-newtab" class="card-btn" href="about:blank" target="_blank" rel="noopener noreferrer">View in New Tab</a>
+                <a id="pdf-preview-download" class="card-btn" href="about:blank" download>Download</a>
             </div>
         </div>
     </div>
@@ -3128,46 +3510,46 @@
         </div>
     </div>
 
-    <!-- Lu-Bot Floating Assistant -->
-    <div class="lubot-launcher" id="lubot-launcher">
-        <button class="lubot-btn" id="lubot-btn" type="button" aria-label="Open Lu-Bot chat" title="Ask Lu-Bot">
-            <img src="Assets/lancestudios.png" alt="Lu-Bot" class="lubot-btn-avatar" draggable="false">
-            <div class="lubot-btn-text">
-                <span class="lubot-btn-title">Ask Lu-Bot!</span>
-                <span class="lubot-btn-sub">Ask Lance's AI-Bot!</span>
+    <!-- Yohan.AI Floating Assistant -->
+    <div class="yohan-launcher-wrapper" id="yohan-launcher-wrapper">
+        <button class="yohan-btn" id="yohan-btn" type="button" aria-label="Open Yohan chat" title="Ask Yohan.AI">
+            <img src="Assets/lancestudios.png" alt="Yohan" class="yohan-btn-avatar" draggable="false">
+            <div class="yohan-btn-text">
+                <span class="yohan-btn-title">Ask Yohan.AI!</span>
+                <span class="yohan-btn-sub">Ask Lance's AI Assistant!</span>
             </div>
         </button>
     </div>
 
-    <div class="lubot-window" id="lubot-window" role="dialog" aria-label="Lu-Bot Chat" aria-modal="true">
-        <div class="lubot-header">
-            <img src="Assets/lancestudios.png" alt="Lu-Bot" class="lubot-header-avatar" draggable="false">
-            <div class="lubot-header-info">
-                <span class="lubot-header-title">Lu-Bot</span>
-                <span class="lubot-header-sub"><span class="lubot-status-dot"></span>Lance's AI Assistant</span>
+    <div class="yohan-window" id="yohan-window" role="dialog" aria-label="Yohan Chat" aria-modal="true">
+        <div class="yohan-header">
+            <img src="Assets/lancestudios.png" alt="Yohan" class="yohan-header-avatar" draggable="false">
+            <div class="yohan-header-info">
+                <span class="yohan-header-title">Yohan</span>
+                <span class="yohan-header-sub"><span class="yohan-status-dot"></span>Lance's AI Assistant</span>
             </div>
-            <div class="lubot-header-actions">
-                <button class="lubot-expand" id="lubot-expand-btn" type="button" aria-label="Expand chat" title="Expand chat">
+            <div class="yohan-header-actions">
+                <button class="yohan-expand" id="yohan-expand-btn" type="button" aria-label="Expand chat" title="Expand chat">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
                 </button>
-                <button class="lubot-close" id="lubot-close" type="button" aria-label="Close chat">&times;</button>
+                <button class="yohan-close" id="yohan-close" type="button" aria-label="Close chat">&times;</button>
             </div>
         </div>
-        <div class="lubot-messages" id="lubot-messages"></div>
-        <div class="lubot-chips-wrapper" id="lubot-chips-wrapper">
-            <button class="lubot-chips-nav" id="lubot-chips-prev" type="button" aria-label="Previous questions" tabindex="0">‹</button>
-            <div class="lubot-chips-track" id="lubot-chips-track"></div>
-            <button class="lubot-chips-nav" id="lubot-chips-next" type="button" aria-label="Next questions" tabindex="0">›</button>
+        <div class="yohan-messages" id="yohan-messages"></div>
+        <div class="yohan-chips-wrapper" id="yohan-chips-wrapper">
+            <button class="yohan-chips-nav" id="yohan-chips-prev" type="button" aria-label="Previous questions" tabindex="0">‹</button>
+            <div class="yohan-chips-track" id="yohan-chips-track"></div>
+            <button class="yohan-chips-nav" id="yohan-chips-next" type="button" aria-label="Next questions" tabindex="0">›</button>
         </div>
-        <form class="lubot-input-bar" id="lubot-form">
-            <div class="lubot-input-pill">
-                <input type="text" class="lubot-input" id="lubot-input" placeholder="Ask Lu-Bot anything..." autocomplete="off" aria-label="Message Lu-Bot">
-                <button type="submit" class="lubot-send" aria-label="Send message">
+        <form class="yohan-input-bar" id="yohan-form">
+            <div class="yohan-input-pill">
+                <input type="text" class="yohan-input" id="yohan-input" placeholder="Ask Yohan anything..." autocomplete="off" aria-label="Message Yohan">
+                <button type="submit" class="yohan-send" aria-label="Send message">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                 </button>
             </div>
         </form>
-        <div class="lubot-disclaimer">Lu-Bot can make mistakes. Ask Lance personally for anything important.</div>
+        <div class="yohan-disclaimer">Yohan can make mistakes. Ask Lance personally for anything important.</div>
     </div>
 
     <script>
@@ -3342,7 +3724,6 @@
                     { img: 'Assets/Merchandise/SC-JpcsQcu.jpg', title: 'JPCS QCU', subtitle: 'Pin Design for JPCS-QCU', tag: 'Lead Designer', desc: "Released March 2025, on celebrating the 31st anniversary of QCU." },
                     { img: 'Assets/Merchandise/SC-JpcsXCys.jpg', title: 'JPCS x CYS', subtitle: 'Pin Design for JPCS-QCU', tag: 'Lead Designer', desc: "Released March 2025, on celebrating the 31st anniversary of QCU." },
                     { img: 'Assets/Merchandise/SC-Pixelated.jpg', title: 'Pixelated', subtitle: 'Pin Design for JPCS-QCU', tag: 'Co-designer', desc: "Created by Christian G. Sendon with the help of Lance Harvey B. Borras. Released March 2025, on celebrating the 31st anniversary of QCU." }
-                   
                 ]
             },
             brands: {
@@ -3533,6 +3914,78 @@
         });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && worksModal.classList.contains('open')) closeWorksModal();
+        });
+
+        // Floating PDF preview modal shared by the contact buttons and footer links
+        const pdfPreviewModal = document.getElementById('pdf-preview-modal');
+        const pdfPreviewFrame = document.getElementById('pdf-preview-frame');
+        const pdfPreviewTitle = document.getElementById('pdf-preview-title');
+        const pdfPreviewNewTab = document.getElementById('pdf-preview-newtab');
+        const pdfPreviewDownload = document.getElementById('pdf-preview-download');
+
+        function openPdfPreview(src, title) {
+            pdfPreviewTitle.innerText = title;
+            pdfPreviewFrame.src = src;
+            pdfPreviewFrame.title = title + ' PDF preview';
+            pdfPreviewNewTab.href = src;
+            pdfPreviewDownload.href = src;
+            pdfPreviewDownload.setAttribute('download', src.split('/').pop());
+            pdfPreviewModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePdfPreview() {
+            pdfPreviewModal.classList.remove('open');
+            document.body.style.overflow = '';
+            pdfPreviewFrame.src = 'about:blank';
+        }
+
+        document.querySelectorAll('[data-pdf-preview]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                openPdfPreview(link.getAttribute('href'), link.getAttribute('data-pdf-title'));
+            });
+        });
+
+        document.getElementById('pdf-preview-close').addEventListener('click', closePdfPreview);
+        pdfPreviewModal.addEventListener('click', (e) => {
+            if (e.target === pdfPreviewModal) closePdfPreview();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && pdfPreviewModal.classList.contains('open')) closePdfPreview();
+        });
+
+        // Footer sub-links open the works modal for their category
+        document.querySelectorAll('[data-works-category]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                openWorksModal(link.getAttribute('data-works-category'));
+            });
+        });
+
+        // Footer background links target a column on mobile and the section on desktop
+        document.querySelectorAll('[data-bg-link]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = window.matchMedia('(max-width: 768px)').matches ? link.getAttribute('href') : '#background';
+                const target = document.querySelector(targetId);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Contact copy buttons write the card value and flash a checkmark
+        document.querySelectorAll('.contact-copy-btn').forEach(btn => {
+            let copyTimer;
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(btn.getAttribute('data-copy')).catch(() => {});
+                }
+                btn.classList.add('copied');
+                clearTimeout(copyTimer);
+                copyTimer = setTimeout(() => btn.classList.remove('copied'), 1500);
+            });
         });
 
         // JPCS duties expand and collapse toggle
@@ -3741,540 +4194,7 @@
                 }, 800);
             }, 1550);
         });
-
-        // ===== Lu-Bot Floating Assistant Logic =====
-        (function() {
-            const launcher = document.getElementById('lubot-launcher');
-            const btn = document.getElementById('lubot-btn');
-            const windowEl = document.getElementById('lubot-window');
-            const closeBtn = document.getElementById('lubot-close');
-            const expandBtn = document.getElementById('lubot-expand-btn');
-            const messagesEl = document.getElementById('lubot-messages');
-            const chipsWrapper = document.getElementById('lubot-chips-wrapper');
-            const chipsTrack = document.getElementById('lubot-chips-track');
-            const chipsPrevBtn = document.getElementById('lubot-chips-prev');
-            const chipsNextBtn = document.getElementById('lubot-chips-next');
-            const form = document.getElementById('lubot-form');
-            const input = document.getElementById('lubot-input');
-            const floatingHeader = document.querySelector('.floating-header');
-
-            let isOpen = false;
-            let expandTimer = null;
-            let collapseTimer = null;
-
-            // Quick question chips data
-            const quickQuestions = [
-                "Who is Lance?",
-                "What roles is he open for?",
-                "Where did he study & intern?",
-                "What are his best works?",
-                "What tools & tech does he use?",
-                "How can I contact Lance?",
-                "May kanin na ba, Boseng?"
-            ];
-
-            // Align launcher and chat window with floating header's right edge
-            function alignWithHeader() {
-                if (!floatingHeader) return;
-                const headerRect = floatingHeader.getBoundingClientRect();
-                const viewportWidth = window.innerWidth;
-                const rightOffset = viewportWidth - headerRect.right;
-                launcher.style.right = rightOffset + 'px';
-                windowEl.style.right = rightOffset + 'px';
-            }
-
-            // Run on load and resize
-            window.addEventListener('load', alignWithHeader);
-            window.addEventListener('resize', alignWithHeader);
-
-            // Render quick question chips with sparkle prefix
-            function renderChips() {
-                chipsTrack.innerHTML = '';
-                quickQuestions.forEach(q => {
-                    const chip = document.createElement('button');
-                    chip.type = 'button';
-                    chip.className = 'lubot-chip';
-                    chip.innerHTML = '<span class="lubot-chip-sparkle">✦</span>' + q;
-                    chip.addEventListener('click', () => handleUserQuery(q));
-                    chipsTrack.appendChild(chip);
-                });
-            }
-
-            // Append a message bubble with sender name and avatar
-            function appendMessage(text, isUser = false, senderName = null, isPersonal = false) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'lubot-message-wrapper ' + (isUser ? 'user' : 'bot');
-
-                if (isUser) {
-                    // User message: sender name + bubble, right-aligned
-                    const nameEl = document.createElement('div');
-                    nameEl.className = 'lubot-sender-name';
-                    nameEl.textContent = 'You';
-                    wrapper.appendChild(nameEl);
-
-                    const div = document.createElement('div');
-                    div.className = 'lubot-message user';
-                    div.innerHTML = text;
-                    wrapper.appendChild(div);
-                } else {
-                    // Bot message: avatar on left, sender name + bubble on right
-                    const avatar = document.createElement('img');
-                    avatar.className = 'lubot-message-avatar';
-                    avatar.src = isPersonal ? 'Assets/lance.png' : 'Assets/lancestudios.png';
-                    avatar.alt = senderName || 'Lu-Bot';
-                    avatar.draggable = false;
-                    // Styles applied via CSS
-
-                    const contentWrapper = document.createElement('div');
-                    contentWrapper.style.display = 'flex';
-                    contentWrapper.style.flexDirection = 'column';
-                    contentWrapper.style.gap = '4px';
-
-                    if (senderName) {
-                        const nameEl = document.createElement('div');
-                        nameEl.className = 'lubot-sender-name';
-                        nameEl.textContent = senderName;
-                        contentWrapper.appendChild(nameEl);
-                    }
-
-                    const div = document.createElement('div');
-                    div.className = 'lubot-message bot';
-                    div.innerHTML = text;
-                    contentWrapper.appendChild(div);
-
-                    wrapper.appendChild(avatar);
-                    wrapper.appendChild(contentWrapper);
-                }
-
-                messagesEl.appendChild(wrapper);
-                scrollToBottom();
-            }
-
-            // Show typing indicator
-            function showTyping() {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'lubot-typing-wrapper';
-                wrapper.id = 'lubot-typing-indicator';
-
-                const avatar = document.createElement('img');
-                avatar.className = 'lubot-message-avatar';
-                avatar.src = 'Assets/lancestudios.png';
-                avatar.alt = 'Lu-Bot';
-                avatar.draggable = false;
-
-                const contentWrapper = document.createElement('div');
-                contentWrapper.style.display = 'flex';
-                contentWrapper.style.flexDirection = 'column';
-                contentWrapper.style.gap = '4px';
-
-                const nameEl = document.createElement('div');
-                nameEl.className = 'lubot-sender-name';
-                nameEl.textContent = 'Lu-Bot';
-                contentWrapper.appendChild(nameEl);
-
-                const div = document.createElement('div');
-                div.className = 'lubot-typing';
-                div.innerHTML = '<span></span><span></span><span></span>';
-                contentWrapper.appendChild(div);
-
-                wrapper.appendChild(avatar);
-                wrapper.appendChild(contentWrapper);
-
-                messagesEl.appendChild(wrapper);
-                scrollToBottom();
-            }
-
-            // Hide typing indicator
-            function hideTyping() {
-                const typing = document.getElementById('lubot-typing-indicator');
-                if (typing) typing.remove();
-            }
-
-            // Scroll messages to bottom
-            function scrollToBottom() {
-                messagesEl.scrollTop = messagesEl.scrollHeight;
-            }
-
-            // Round-robin rotation tracker for each intent
-            const lubotRotationIndex = {};
-
-            // Helper: returns next reply in sequence for a given intent key
-            function getRotatedReply(intentKey, repliesArray) {
-                const idx = lubotRotationIndex[intentKey] || 0;
-                lubotRotationIndex[intentKey] = (idx + 1) % repliesArray.length;
-                return repliesArray[idx];
-            }
-
-            // Get bot response based on keywords - strict whole-word regex with priority order
-            function getBotResponse(query) {
-                // Exact match for preset chip questions (highest priority)
-                if (query === "May kanin na ba, Boseng?") {
-                    return getKaninResponse();
-                }
-                if (query === "How can I contact Lance?") {
-                    return getContactResponse();
-                }
-                if (query === "What tools & tech does he use?") {
-                    return getToolsResponse();
-                }
-                if (query === "What are his best works?") {
-                    return getWorksResponse();
-                }
-                if (query === "Where did he study & intern?") {
-                    return getEducationResponse();
-                }
-                if (query === "What roles is he open for?") {
-                    return getRolesResponse();
-                }
-                if (query === "Who is Lance?") {
-                    return getProfileResponse();
-                }
-
-                const lower = query.toLowerCase();
-
-                // 1. Kanin / Live Status Easter Egg
-                if (/\b(kanin|rice|boseng|gutom|kain|status)\b/i.test(lower)) {
-                    return getKaninResponse();
-                }
-
-                // 2. Contact / Phone / Socials
-                if (/\b(contact|contacts|number|phone|call|text|sms|email|gmail|facebook|github|linkedin|reach|resume|cv)\b/i.test(lower)) {
-                    return getContactResponse();
-                }
-
-                // 3. Tools & Tech Stack
-                if (/\b(tool|tools|tech|stack|software|language|code|coding|photoshop|figma|canva|capcut|obs|propresenter|node|git|github|gemini|chatgpt|claude|deepseek|ai)\b/i.test(lower)) {
-                    return getToolsResponse();
-                }
-
-                // 4. Works / Projects / Gallery
-                if (/\b(works|work|project|projects|portfolio|design|designs|poster|posters|logo|logos|merch|merchandise|gallery|3d)\b/i.test(lower)) {
-                    return getWorksResponse();
-                }
-
-                // 5. Education / Internship / Experience
-                if (/\b(where|saan|school|study|studied|university|qcu|education|intern|internship|ncmb|experience|jpcs|background)\b/i.test(lower)) {
-                    return getEducationResponse();
-                }
-
-                // 6. Roles / Hiring
-                if (/\b(role|roles|hire|hiring|job|open|available|looking|position|freelance|commission)\b/i.test(lower)) {
-                    return getRolesResponse();
-                }
-
-                // 7. Bot Identity ("Sino ka?" / "Who are you?") - PRIORITIZED before profile so "sino ka" triggers Lu-Bot intro
-                if (/\b(sino ka|who are you|ano ka|what are you|lubot|lu-bot|bot|robot|assistant)\b/i.test(lower)) {
-                    return getIdentityResponse();
-                }
-
-                // 8. Who / Profile - Only matches "who is lance", "sino si lance", "about lance", "profile", "bio", "introduce" (not standalone who/sino)
-                if (/\b(who is lance|sino si lance|about lance|profile|bio|introduce)\b/i.test(lower)) {
-                    return getProfileResponse();
-                }
-
-                // 9. Greetings & Kamustahan
-                if (/\b(hi|hello|hey|yo|uy|musta|kamusta|kumusta|morning|afternoon|evening|umaga|hapon|gabi)\b/i.test(lower)) {
-                    return getGreetingResponse();
-                }
-
-                // 10. What Are You Doing / Ganap
-                if (/\b(ginagawa|gawa|doing|wyd|busy|ganap)\b/i.test(lower)) {
-                    return getDoingResponse();
-                }
-
-                // 11. Compliments / Astig / Pogi
-                if (/\b(pogi|gwapo|galing|astig|angas|nice|cool|idol|ganda|lupet|lupit|sheesh|solid)\b/i.test(lower)) {
-                    return getComplimentResponse();
-                }
-
-                // 12. Playful / Tropa Banter / Pang-asar
-                if (/\b(bading|pangit|panget|loko|baliw|ulol|gago|tanga|bobo|kupal|hatdog|trip|uwi|ayoko|boring|crush|jowa|single|libre|utang|pera|gcash|ewan|ambot)\b/i.test(lower)) {
-                    return getPlayfulResponse();
-                }
-
-                // 13. Thank You / Goodbye
-                if (/\b(thanks|thank|salamat|ty|bye|goodbye|paalam|babye|alis|out)\b/i.test(lower)) {
-                    return getThanksResponse();
-                }
-
-                // Fallback - Personal reply from Lance Harvey
-                return getFallbackResponse();
-            }
-
-            // Individual response functions with round-robin rotation (3 variations each)
-            function getKaninResponse() {
-                const statusEl = document.getElementById('hero-status-text');
-                const currentStatus = statusEl ? statusEl.textContent : 'Currently Intern at NCMB';
-                const replies = [
-                    'Checking Lance\'s live status... It currently says: <strong>"' + currentStatus + '"</strong> — mukhang naghahanap pa rin ng kanin si Boseng!',
-                    'Live status update mula kay Lance: <strong>"' + currentStatus + '"</strong>. Sana may nag-abot na ng extra rice diyan! 🍚',
-                    'Eto ang real-time status ni Boseng ngayon: <strong>"' + currentStatus + '"</strong> — active pa rin sa grind!'
-                ];
-                return { text: getRotatedReply('kanin_status', replies), sender: 'Lu-Bot' };
-            }
-
-            function getContactResponse() {
-                const replies = [
-                    'You can reach Lance directly via phone/SMS at <strong>+63 910 251 2362</strong> or email at <strong>borras.lanceharvey.belleca@gmail.com</strong>. You can also connect with him on Facebook (<em>/edu.lanceeborras</em>), LinkedIn (<em>/in/lance-harvey-borras</em>), and GitHub (<em>@lanceeyboo</em>).<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#contact\')">Go to Contacts ↗</button>',
-                    'Madali lang kontakin si Lance! Tawag or text ka sa <strong>+63 910 251 2362</strong>, or mag-send ng email sa <strong>borras.lanceharvey.belleca@gmail.com</strong>. Active din siya sa Facebook, LinkedIn, at GitHub!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#contact\')">Go to Contacts ↗</button>',
-                    'Ready for inquiries si Lance! Save mo na \'to: Mobile <strong>+63 910 251 2362</strong> | Email <strong>borras.lanceharvey.belleca@gmail.com</strong>. Pwede mo ring pindutin ang button sa baba para mag-direct sa Contacts section!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#contact\')">Go to Contacts ↗</button>'
-                ];
-                return { text: getRotatedReply('contact', replies), sender: 'Lu-Bot' };
-            }
-
-            function getToolsResponse() {
-                const replies = [
-                    'For visuals and live media, Lance uses <strong>Photoshop, Figma, Canva, CapCut, OBS Studio, and ProPresenter</strong>. For development, he builds with <strong>HTML, CSS, JavaScript, Node.js, Git/GitHub</strong>, alongside AI tools like <strong>Gemini, ChatGPT, Claude, and DeepSeek</strong>.<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#tools\')">View Tools Section ↗</button>',
-                    'All-around ang toolkit ni Lance! Sa creative & production side: <strong>Photoshop, Figma, Canva, CapCut, at OBS Studio</strong>. Sa web dev naman: <strong>HTML, CSS, JS, Node.js, Git</strong>, plus AI workflows gamit ang <strong>Gemini, Claude, ChatGPT, at DeepSeek</strong>.<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#tools\')">View Tools Section ↗</button>',
-                    'Pinagsasama ni Lance ang design at code—gamit ang <strong>Figma & Photoshop</strong> para sa UI/visuals, at <strong>HTML/CSS/JS, Node.js, at AI tools</strong> para gawing interactive ang bawat website!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#tools\')">View Tools Section ↗</button>'
-                ];
-                return { text: getRotatedReply('tools', replies), sender: 'Lu-Bot' };
-            }
-
-            function getWorksResponse() {
-                const replies = [
-                    'His portfolio covers three main areas: <strong>Visuals</strong> (event posters like Azure, Code Quest 2025, and Occupational Safety), <strong>Merchandise</strong> (JPCS-QCU lanyards, pins, and polo mockups), and <strong>Brands</strong> (official seals for JPCS-QCU, Glory in the Highest Bible School, and Lance Studios). Check out the Work Gallery section to view them in 3D!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Direct to Work Gallery ↗</button>',
-                    'Maraming solid na gawa si Lance—mula sa <strong>JPCS-QCU official seal & lanyards</strong>, event posters gaya ng <strong>Code Quest 2025 at Azure</strong>, hanggang sa interactive web systems! Silipin mo lahat sa 3D Work Gallery.<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Direct to Work Gallery ↗</button>',
-                    'Naka-organize ang works ni Lance sa <strong>Visuals, Merchandise, at Brands</strong>. Pindutin mo lang yung button sa baba para ma-explore mo sila sa 3D gallery!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Direct to Work Gallery ↗</button>'
-                ];
-                return { text: getRotatedReply('works', replies), sender: 'Lu-Bot' };
-            }
-
-            function getEducationResponse() {
-                const replies = [
-                    'He studies BS Computer Science at <strong>Quezon City University</strong> (2023–Present) and completed his Frontend Developer Internship at the <strong>National Conciliation and Mediation Board (NCMB)</strong> in Quezon City. He also served as the Founding Head of the Visual Arts Department for JPCS – QCU Chapter!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#background\')">View Background ↗</button>',
-                    '4th-year BSCS student si Lance sa <strong>Quezon City University (QCU)</strong>, nag-intern bilang Frontend Developer sa <strong>NCMB</strong>, at naging Founding Head din ng Visual Arts Department sa <strong>JPCS – QCU Chapter</strong>!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#background\')">View Background ↗</button>',
-                    'Strong ang background ni Lance sa tech at leadership: BS Computer Science sa <strong>QCU</strong>, Frontend Developer Intern sa <strong>NCMB</strong>, at Visual Arts Department Head sa <strong>JPCS-QCU</strong>.<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#background\')">View Background ↗</button>'
-                ];
-                return { text: getRotatedReply('education_internship', replies), sender: 'Lu-Bot' };
-            }
-
-            function getRolesResponse() {
-                const replies = [
-                    'Lance is currently open for opportunities as a <strong>Graphic Designer</strong>, <strong>Visual Artist</strong>, <strong>UI/UX Designer</strong>, or <strong>Frontend Developer</strong>. Feel free to check the Contact section or download his Resume & Portfolio!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#contact\')">Hire / Contact Lance ↗</button>',
-                    'Open for hire at commissions si Lance! Available siya para sa <strong>Graphic Design, Visual Arts, UI/UX Design, at Frontend Development</strong> roles.<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#contact\')">Hire / Contact Lance ↗</button>',
-                    'Naghahanap ka ba ng creative developer? Available si Lance bilang <strong>UI/UX Designer, Frontend Developer, o Graphic Designer</strong>—message mo na siya sa Contacts!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#contact\')">Hire / Contact Lance ↗</button>'
-                ];
-                return { text: getRotatedReply('roles', replies), sender: 'Lu-Bot' };
-            }
-
-            function getProfileResponse() {
-                const replies = [
-                    '<strong>Lance Harvey B. Borras</strong> is a 4th-year BS Computer Science student at Quezon City University (QCU) and the founder of <strong>Lance Studios</strong>. He blends visual artistry with frontend development—specializing in graphic design, UI/UX, and interactive web experiences.<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#profile\')">View Profile ↗</button>',
-                    'Si <strong>Lance Harvey B. Borras</strong> ay isang multi-disciplinary Visual Artist, UI/UX Designer, at Frontend Developer mula sa QCU—ang utak sa likod ng <strong>Lance Studios</strong>!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#profile\')">View Profile ↗</button>',
-                    'Meet <strong>Lance Harvey</strong>: Computer Science student by day, Visual Artist & Frontend Developer by passion. Pinagsasama niya ang clean code at eye-catching design!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#profile\')">View Profile ↗</button>'
-                ];
-                return { text: getRotatedReply('profile', replies), sender: 'Lu-Bot' };
-            }
-
-            // 8. Greetings & Kamustahan
-            function getGreetingResponse() {
-                const replies = [
-                    'Hello! 👋 Ayos na ayos naman ako, 100% charged ang circuits! Ikaw, kamusta? Feel free to ask me about Lance\'s <strong>works, tools, background, or contact details</strong>!',
-                    'Uy, kamusta! 😄 Sakto ang daan mo sa portfolio ni Lance. Ano gusto mong silipin natin today—yung <strong>3D Work Gallery</strong> o yung <strong>tech & design tools</strong> niya?',
-                    'Hey there! ✨ Ready na ako mag-tour sa\'yo dito sa <strong>Lance Studios</strong>. Tanong ka lang kahit ano tungkol kay Lance o pindutin mo yung quick questions sa baba!'
-                ];
-                return { text: getRotatedReply('greetings', replies), sender: 'Lu-Bot' };
-            }
-
-            // 9. What Are You Doing / Ganap
-            function getDoingResponse() {
-                const replies = [
-                    'Eto, naka-duty 24/7 para i-tour ka sa portfolio ni Lance! Habang si Lance naman ay busy mag-design, mag-code, at maghanap ng kanin. 😄 Ano gusto mong i-check natin—<strong>Works</strong> o <strong>Tools</strong>?',
-                    'Nagbabantay lang ng portfolio habang nagkakape at nag-eedit ng visuals si Lance! ☕ Gusto mo bang ipakita ko sa\'yo yung mga latest projects niya?',
-                    'Chill lang dito sa lower right corner, naghihintay ng mga mag-i-inquire o magha-hire kay Lance! Ikaw, anong hanap mo—<strong>Graphic Design</strong> o <strong>Web Dev</strong>?'
-                ];
-                return { text: getRotatedReply('what_doing', replies), sender: 'Lu-Bot' };
-            }
-
-            // 10. Bot Identity ("Sino ka?" / "Ano ka?")
-            function getIdentityResponse() {
-                const replies = [
-                    'Ako si <strong>Lu-Bot</strong>, ang custom AI assistant ni Lance Harvey dito sa Lance Studios! Naka-program ako para sagutin lahat ng tanong mo tungkol sa skills, projects, at contact info niya.',
-                    'I\'m <strong>Lu-Bot</strong>! 🤖 Digital wingman ako ni Lance dito sa website niya. Pwede mo akong tanungin tungkol sa education, internship, works, o kahit contact number niya.',
-                    'Si <strong>Lu-Bot</strong> \'to—built right into Lance\'s portfolio para hindi mo na kailangang mag-scroll nang matagal para makilala siya!'
-                ];
-                return { text: getRotatedReply('bot_identity', replies), sender: 'Lu-Bot' };
-            }
-
-            // 11. Compliments / Astig / Pogi
-            function getComplimentResponse() {
-                const replies = [
-                    'Sabi na eh, may taste ka! 😎 Agree ako diyan—parehong solid ang visuals at code ni Lance. Gusto mo bang makita yung iba pa niyang gawa sa <strong>Work Gallery</strong>?<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Check Work Gallery ↗</button>',
-                    'Sheesh, maraming salamat! 🔥 Matutuwa si Lance pag nabasa niya \'yan. Silipin mo na rin yung mga designs at seals niya sa <strong>Work Gallery</strong>!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Check Work Gallery ↗</button>',
-                    'Legit \'yan boss! 💯 Pinaghirapan talaga ni Lance bawat pixel at animation dito. Tara, check natin yung <strong>Work Gallery</strong>!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Check Work Gallery ↗</button>'
-                ];
-                return { text: getRotatedReply('compliments', replies), sender: 'Lu-Bot' };
-            }
-
-            // 12. Playful / Tropa Banter / Pang-asar
-            function getPlayfulResponse() {
-                const replies = [
-                    'Hoy grabe ka na boss! 😂 AI lang ako pero marunong din akong masaktan—charot! Kung trip mo lang mang-asar, okay lang basta tingnan mo muna yung <strong>Work Gallery</strong> o i-hire mo na si Lance!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Direct to Work Gallery ↗</button>',
-                    'Aray ko naman pre! 🤣 Walang ganyanan, tropa tayo dito! Bawi ka na lang sa pag-check ng <strong>Work Gallery</strong> ni Lance!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Direct to Work Gallery ↗</button>',
-                    'Huli ka! Nangtitrip ka lang dito sa portfolio eh no? 😆 Sige na, i-browse mo na muna yung mga projects ni Lance bago ka umalis!<br><button class="lubot-action-btn" onclick="lubotNavigateTo(\'#works\')">Direct to Work Gallery ↗</button>'
-                ];
-                return { text: getRotatedReply('banter', replies), sender: 'Lu-Bot' };
-            }
-
-            // 13. Thank You / Goodbye
-            function getThanksResponse() {
-                const replies = [
-                    'Walang anuman! 🙌 Salamat sa pagbisita sa portfolio ni Lance Harvey. Kapag ready ka na mag-collab or mag-hire, nandiyan lang ang <strong>Contacts</strong> button!',
-                    'Anytime boss! ✨ Balik ka ulit dito sa <strong>Lance Studios</strong> ha. Ingat!',
-                    'You\'re very welcome! 😊 Kung may kailangan kang graphic design, UI/UX, or frontend project, message mo lang si Lance anytime!'
-                ];
-                return { text: getRotatedReply('thanks_bye', replies), sender: 'Lu-Bot' };
-            }
-
-            // Fallback - Personal reply from Lance Harvey
-            function getFallbackResponse() {
-                const replies = [
-                    'Hmm, mukhang hindi pa na-train ni Lu-Bot yung sagot diyan! 😅 Pero ako na sasagot—pwede mo akong tanungin tungkol sa <strong>profile, works, tools, education, internship, o contact details</strong> ko, or pindutin mo lang yung mga quick questions sa baba!',
-                    'Ako na muna sasagot dito boss, medyo nag-loading si Lu-Bot sa tanong mo! 😂 Ask ka lang tungkol sa <strong>projects, tech stack, o contact info</strong> ko, or tap the quick chips below!',
-                    'Pass muna si Lu-Bot diyan kaya ako na sumingit! 👋 Kung may specific inquiry ka, i-text mo na lang ako sa <strong>+63 910 251 2362</strong> o i-check yung quick questions sa baba!'
-                ];
-                return { text: getRotatedReply('lance_fallback', replies), sender: 'Lance Harvey', isPersonal: true };
-            }
-
-            // Handle user query (from chips or input)
-            function handleUserQuery(queryText) {
-                if (!queryText || !queryText.trim()) return;
-                const text = queryText.trim();
-
-                // Append user message
-                appendMessage(text, true);
-
-                // Show typing indicator
-                showTyping();
-
-                // Simulate bot thinking delay
-                setTimeout(() => {
-                    hideTyping();
-                    const response = getBotResponse(text);
-                    appendMessage(response.text, false, response.sender, response.isPersonal);
-                }, 450);
-            }
-
-            // Open chat window
-            function openChat() {
-                if (isOpen) return;
-                isOpen = true;
-                windowEl.classList.add('open');
-                btn.setAttribute('aria-expanded', 'true');
-                btn.classList.remove('expanded');
-                if (expandTimer) clearTimeout(expandTimer);
-                if (collapseTimer) clearTimeout(collapseTimer);
-                input.focus();
-            }
-
-            // Close chat window
-            function closeChat() {
-                if (!isOpen) return;
-                isOpen = false;
-                windowEl.classList.remove('open');
-                btn.setAttribute('aria-expanded', 'false');
-                // Restart expand/collapse cycle when chat closes
-                startExpandCycle();
-            }
-
-            // Toggle chat
-            function toggleChat() {
-                if (isOpen) closeChat(); else openChat();
-            }
-
-            // Expand/Collapse cycle: 10s expanded, 10s collapsed
-            function startExpandCycle() {
-                if (expandTimer) clearTimeout(expandTimer);
-                if (collapseTimer) clearTimeout(collapseTimer);
-
-                function doExpand() {
-                    if (isOpen) return;
-                    btn.classList.add('expanded');
-                    collapseTimer = setTimeout(() => {
-                        if (isOpen) return;
-                        btn.classList.remove('expanded');
-                        expandTimer = setTimeout(doExpand, 10000);
-                    }, 10000);
-                }
-
-                // Start with collapsed, expand after 10s
-                btn.classList.remove('expanded');
-                expandTimer = setTimeout(doExpand, 10000);
-            }
-
-            // Navigation helper: close chat and scroll to section
-            window.lubotNavigateTo = function(sectionSelector) {
-                closeChat();
-                const target = document.querySelector(sectionSelector);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            };
-
-            // Toggle expand/shrink chat window
-            function toggleExpandView() {
-                windowEl.classList.toggle('expanded-view');
-                const isExpanded = windowEl.classList.contains('expanded-view');
-                expandBtn.setAttribute('aria-label', isExpanded ? 'Shrink chat' : 'Expand chat');
-                expandBtn.setAttribute('title', isExpanded ? 'Shrink chat' : 'Expand chat');
-                expandBtn.innerHTML = isExpanded
-                    ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>'
-                    : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>';
-            }
-
-            // Carousel navigation
-            function scrollChips(direction) {
-                const scrollAmount = 180;
-                chipsTrack.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-            }
-
-            // Mouse wheel horizontal scroll on chips track
-            chipsWrapper.addEventListener('wheel', (e) => {
-                if (e.deltaY !== 0) {
-                    e.preventDefault();
-                    chipsTrack.scrollLeft += e.deltaY;
-                }
-            }, { passive: false });
-
-            // Initial render
-            renderChips();
-
-            // Pre-populate initial bot greeting
-            appendMessage("Hi! I'm Lu-Bot, Lance's AI Bot. How can I help you today? Pick a question below or type your own!", false, 'Lu-Bot');
-
-            // Event listeners
-            btn.addEventListener('click', toggleChat);
-            closeBtn.addEventListener('click', closeChat);
-            expandBtn.addEventListener('click', toggleExpandView);
-            chipsPrevBtn.addEventListener('click', () => scrollChips(-1));
-            chipsNextBtn.addEventListener('click', () => scrollChips(1));
-
-            // Keyboard support for carousel nav buttons
-            chipsPrevBtn.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollChips(-1); }
-            });
-            chipsNextBtn.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollChips(1); }
-            });
-
-            // Close on Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && isOpen) closeChat();
-            });
-
-            // Form submission
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const text = input.value.trim();
-                if (!text) return;
-                input.value = '';
-                handleUserQuery(text);
-            });
-
-            // Start expand/collapse cycle
-            startExpandCycle();
-        })();
     </script>
+    <script src="yohan.js" defer></script>
 </body>
 </html>
