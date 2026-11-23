@@ -3,3 +3,13 @@ CLAUDE.md
 claude.md
 docs/
 graphify-out/
+
+# VS Code settings
+.vscode/
+
+# OS junk files
+Thumbs.db
+.DS_Store
+
+# Dependencies
+node_modules/
